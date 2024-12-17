@@ -15,7 +15,8 @@ Prerequisites:
 * [[#ESLint]]
 * [[#CSS]]
 * [[#Favicon]]
-
+* [[#Fonts]]
+* [[#Font Awesome]]
 ## Basic setup
 
 1. Create root folder
@@ -386,4 +387,24 @@ import '@fontsource-variable/exo-2'
 p
   font-family: 'Exo 2 Variable'
 </style>
+```
+
+## Font Awesome
+
+30. Install free SVG icons and vue component
+```bash
+npm add @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/free-regular-svg-icons @fortawesome/vue-fontawesome -D
+```
+
+31. Import Font Awesome Icon component and required icons
+```typescript
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+import { faUser } from '@fortawesome/free-solid-svg-icons/faUser'
+import { faHouse } from '@fortawesome/free-solid-svg-icons/faHouse'
+```
+
+32. To use:
+```html
+<FontAwesomeIcon :icon="faUser" />
 ```

@@ -1,0 +1,21 @@
+@use 'colors'
+
+body
+  background-color: #f6f2f0
+  color:#1c2833
+  font-family: 'Exo 2 Variable'
+
+/* Cards */
+
+/* Focusable */
+$outline-width: .25rem
+$outline-style: solid
+
+.focusable
+  outline: colors.$outline $outline-style 0
+
+.focusable:focus
+  @extend .focusable
+  outline: colors.$outline $outline-style $outline-width
+
+$focusable-transition: outline-width 100ms ease-in-out
