@@ -2,6 +2,7 @@
 import GooseButton from '#components/GooseButton.vue'
 import GooseInput from '#components/GooseInput.vue'
 import GooseForm from '#components/GooseForm.vue'
+import GooseCheckbox from '#components/GooseCheckbox.vue'
 import { useLoginStore } from '#stores/useLoginStore.ts'
 import { useRouter } from 'vue-router'
 import { ref, useTemplateRef } from 'vue'
@@ -62,9 +63,12 @@ const router = useRouter(),
         />
 
         <footer>
-          <div>
-            Запомнить меня
-          </div>
+          <GooseCheckbox
+            title="Запомнить меня"
+            name="rememberMe"
+            store-id="loginForm"
+            :disabled
+          />
           <GooseButton
             title="Войти"
             type="submit"
