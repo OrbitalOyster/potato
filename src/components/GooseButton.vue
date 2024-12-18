@@ -14,7 +14,7 @@ const props = defineProps<{
 
 <template>
   <button
-    type="button"
+    :type
     @click="console.log('Ok')"
   >
     <div>
@@ -38,7 +38,6 @@ const props = defineProps<{
   button
     @extend .focusable
     padding: 1rem
-    margin: 1rem
     border: none
     border-radius: .4rem
     font-size: 1.25rem

@@ -43,23 +43,18 @@ router.onError(async (err, to) => {
 router.beforeEach(async (to, from) => {
   console.log(`Navigating from ${from.path} to ${to.path}`)
   /* Error page */
-  if (to.name === 'Error') {
+  if (to.name === 'Error')
     return true
-  }
-  /* Login page */
+  /* Log in status */
   const loggedIn = await useLoginStore().check()
-  console.log({ loggedIn })
-  if (to.name === 'Login') {
-    /* Logged in users get redirected to home page */
+  if (to.name === 'Login')
+    /* Logged in users get redirected from login page to home page */
     return loggedIn ? { name: 'Home' } : true
-  }
   /* Default handler */
   return loggedIn ? true : { name: 'Login' }
 })
 
-router.afterEach((to) => {
-  /* Set document title */
-  document.title = `Gooseberry.js / ${to.meta.title}`
-})
+/* Set document title */
+router.afterEach(to => document.title = `${to.meta.title} - Gooseberry.js`)
 
 export default router
