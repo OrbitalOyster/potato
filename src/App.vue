@@ -3,7 +3,5 @@ import './assets/style.sass'
 </script>
 
 <template>
-  <Suspense>
-    <RouterView />
-  </Suspense>
+  <RouterView />
 </template>

@@ -96,7 +96,7 @@ const router = useRouter(),
     display: flex
     flex-direction: column
     gap: 1rem
-    width: 600px
+    width: fit-content
     height: fit-content
     padding: 1rem
 
@@ -135,5 +135,4 @@ const router = useRouter(),
     display: flex
     align-items: center
     justify-content: space-between
-
 </style>
