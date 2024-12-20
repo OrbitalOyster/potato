@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import GooseButton from '#components/GooseButton.vue'
-import GooseInput from '#components/GooseInput.vue'
-import GooseForm from '#components/GooseForm.vue'
 import GooseCheckbox from '#components/GooseCheckbox.vue'
+import GooseForm from '#components/GooseForm.vue'
+import GooseInput from '#components/GooseInput.vue'
+import { ref } from 'vue'
 import { useLoginStore } from '#stores/useLoginStore.ts'
 import { useRouter } from 'vue-router'
-import { ref, useTemplateRef } from 'vue'
 
 interface ILoginFormCheck {
   username: string
@@ -39,9 +39,9 @@ const router = useRouter(),
         <header>
           <div class="title">
             <h1>Gooseberry.js</h1>
-            <h2>Последний шанс снять бахиллы</h2>
+            <h2>Последний шанс снять бахилы</h2>
           </div>
-          <img src="/goose.png" />
+          <img src="/goose.png">
         </header>
 
         <GooseInput
@@ -71,10 +71,12 @@ const router = useRouter(),
           />
           <GooseButton
             title="Войти"
-            type="submit"
+            icon="fa-right-to-bracket"
+            :loading="disabled"
+            :disabled
+            submit
           />
         </footer>
-
       </main>
     </GooseForm>
   </div>

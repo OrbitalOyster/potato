@@ -12,7 +12,7 @@ const props = defineProps<{
   }>(),
   store = useFormStore(props.storeId)
 
-function toggle(params) {
+function toggle() {
   store.inputs[props.name] = !store.inputs[props.name]
 }
 
@@ -33,7 +33,6 @@ store.inputs[props.name] = props.checked || false
       :id="`${storeId}-${props.name}`"
       type="button"
       :disabled
-      class="active:bg-emerald-500"
       @click="toggle"
     >
       <div
@@ -62,23 +61,29 @@ store.inputs[props.name] = props.checked || false
     align-items: center
 
   button
+    @extend .form-input
     @extend .focusable
     position: relative
-    border: 1px solid black
-    border-radius: .4rem
-    width: 1.5rem
-    height: 1.5rem
+    padding: 0
+    width: 1.75rem
+    height: 1.75rem
     cursor: pointer
-    transition: style.$focusable-transition
+    transition: background-color 100ms ease-in-out, style.$focusable-transition
+
+  button:active:enabled
+    background-color: colors.$active
 
   .mark
     position: absolute
-    top: .2rem
-    left: .2rem
+    top: .33rem
+    left: .33rem
     width: 1rem
     height: 1rem
-    background-color: colors.$active
-    border-radius: .3rem
+    background-color: colors.$primary
+    border-radius: 25%
+
+  button:disabled .mark
+    background-color: colors.$disabled-primary
 
   label
     user-select: none

@@ -3,6 +3,9 @@ import type { MyFormCheck } from '#stores/useFormStore.ts'
 import { ref } from 'vue'
 import { useFormStore } from '#stores/useFormStore.ts'
 
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+
 const props = defineProps<{
     name: string
     value?: string
@@ -40,6 +43,15 @@ store.inputs[props.name] = props.value ?? ''
     <label>
       {{ placeholder }}
     </label>
+    <div class="icons">
+      <font-awesome-icon
+        v-if="password"
+        :icon="passwordHidden ? faEye : faEyeSlash"
+        size="xl"
+        class="eye"
+        @click="passwordHidden = !passwordHidden"
+      />
+    </div>
   </div>
 </template>
 
@@ -53,15 +65,17 @@ store.inputs[props.name] = props.value ?? ''
     position: relative
 
   input
+    @extend .form-input
     @extend .focusable
     width: 100%
     height: 2rem
+    color: colors.$text
     padding: .25rem
     padding-left: 1rem
-    background-color: #FBFCFC
-    border: 1px solid #D5D8DC
-    border-radius: .4rem
     transition: style.$focusable-transition
+
+  input:disabled
+    color: colors.$disabled-primary
 
   input[placeholder]
     padding-top: 1.5rem
@@ -88,4 +102,12 @@ store.inputs[props.name] = props.value ?? ''
   input:not(:empty) + label
     transform: translateY(calc(-70%)) scale(.9)
 
+  .icons
+    position: absolute
+    right: .5rem
+
+  .eye
+    width: 2.5rem
+    height: 1.5rem
+    cursor: pointer
 </style>
