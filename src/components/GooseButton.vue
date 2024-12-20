@@ -22,7 +22,7 @@ const props = defineProps<{
       <FontAwesomeIcon
         v-if="icon || loading"
         :class="loading && 'fa-pulse'"
-        :icon="loading ? faSpinner : icon"
+        :icon="loading ? faSpinner : icon!"
         size="lg"
       />
     </div>
@@ -31,16 +31,17 @@ const props = defineProps<{
 
 <style scoped lang="sass">
   @use '../assets/style'
+  @use '../assets/borders'
   @use '../assets/colors'
 
-  $transition-params: 50ms ease-in-out
+  $transition-params: 100ms ease-in-out
   $transition-colors: background-color $transition-params
 
   button
     @extend .focusable
     padding: .75rem
     border: none
-    border-radius: .25rem
+    border-radius: borders.$radius
     font-size: 1.25rem
     color: colors.$button
     background-color: colors.$primary
@@ -50,16 +51,16 @@ const props = defineProps<{
     user-select: none
 
   button:enabled
-    filter: drop-shadow(colors.$primary-shadow 0 .24rem .1rem)
+    filter: drop-shadow(colors.$button-shadow 0 .16rem .1rem)
 
   button:hover:enabled
     transform: translateY(-.1rem)
-    filter: drop-shadow(colors.$primary-shadow 0 .39rem .2rem)
+    filter: drop-shadow(colors.$button-shadow 0 .28rem .2rem)
 
   button:active:enabled
     background-color: colors.$active
     transform: translateY(0)
-    filter: drop-shadow(colors.$primary-shadow 0 .24rem .1rem)
+    filter: drop-shadow(colors.$button-shadow 0 .16rem .1rem)
 
   button:disabled
     color: colors.$disabled
@@ -70,5 +71,5 @@ const props = defineProps<{
     height: 2rem
     align-items: center
     gap: .75rem
-    filter: drop-shadow(colors.$primary-shadow 0 0 .1rem)
+    filter: drop-shadow(colors.$button-shadow 0 0 .1rem)
 </style>

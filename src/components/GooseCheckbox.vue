@@ -49,8 +49,9 @@ store.inputs[props.name] = props.checked || false
 </template>
 
 <style scoped lang="sass">
-  @use '../assets/style'
+  @use '../assets/borders'
   @use '../assets/colors'
+  @use '../assets/style'
 
   input
     display: none
@@ -75,12 +76,12 @@ store.inputs[props.name] = props.checked || false
 
   .mark
     position: absolute
-    top: .33rem
-    left: .33rem
-    width: 1rem
-    height: 1rem
+    top: .38rem
+    left: .38rem
+    width: .9rem
+    height: .9rem
     background-color: colors.$primary
-    border-radius: 25%
+    border-radius: borders.$radius
 
   button:disabled .mark
     background-color: colors.$disabled-primary

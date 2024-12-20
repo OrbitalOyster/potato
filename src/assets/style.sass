@@ -2,7 +2,7 @@
 @use 'borders'
 
 body
-  background-color: #f6f2f0
+  background-color: #F6F2F0
   color: colors.$text
   font-family: 'Exo 2 Variable'
 
@@ -10,27 +10,27 @@ body
 .card
   background-color: colors.$card
   border: borders.$card
-  border-radius: .4rem
+  border-radius: borders.$radius
   filter: drop-shadow(rgba(0,0,0,.25) 0 .1rem .1rem)
 
 /* Form inputs */
 .form-input
   background-color: colors.$input-background
   border: 1px solid colors.$input-border
-  border-radius: .25rem
+  border-radius: borders.$radius
 
 .form-input:disabled
   background-color: colors.$input-disabled
   border: 1px solid colors.$input-disabled
 
 form.validated
-  .form-input.invalid:not(:disabled)
-    background-color: #FDEDEC
-    border: 1px solid #F1948A
-
   .form-input.valid:not(:disabled)
-    background-color: #EAFAF1
-    border: 1px solid #82E0AA
+    background-color: colors.$input-valid-background 
+    border: 1px solid colors.$input-valid-border
+
+  .form-input.invalid:not(:disabled)
+    background-color: colors.$input-invalid-background
+    border: 1px solid colors.$input-invalid-border
 
 /* Focusable */
 $outline-width: .35rem
@@ -42,6 +42,6 @@ $outline-style: solid
 .focusable:focus
   @extend .focusable
   outline: colors.$outline $outline-style $outline-width
+  border-color: colors.$outline
 
 $focusable-transition: outline-width 100ms ease-in-out
-

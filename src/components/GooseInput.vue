@@ -1,10 +1,9 @@
 <script setup lang="ts">
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import type { MyFormCheck } from '#stores/useFormStore.ts'
 import { ref } from 'vue'
 import { useFormStore } from '#stores/useFormStore.ts'
-
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
 const props = defineProps<{
     name: string
@@ -15,6 +14,7 @@ const props = defineProps<{
     password?: boolean
     disabled?: boolean
     placeholder?: string
+    autocomplete?: string
   }>(),
   store = useFormStore(props.storeId),
 
@@ -38,6 +38,7 @@ store.inputs[props.name] = props.value ?? ''
       :placeholder
       :disabled
       :type="password && passwordHidden ? 'password' : 'text'"
+      :autocomplete
       @input="store.validate"
     >
     <label>
@@ -87,7 +88,7 @@ store.inputs[props.name] = props.value ?? ''
   label
     position: absolute
     left: 1rem
-    color: #979A9A
+    color: colors.$input-label
     user-select: none
     pointer-events: none
     transition: transform 100ms ease-in-out

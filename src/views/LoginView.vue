@@ -51,6 +51,7 @@ const router = useRouter(),
           placeholder="Имя пользователя"
           :disabled
           autofocus
+          autocomplete="username"
         />
 
         <GooseInput
@@ -60,6 +61,7 @@ const router = useRouter(),
           placeholder="Пароль"
           :disabled
           password
+          autocomplete="password"
         />
 
         <footer>
