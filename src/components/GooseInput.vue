@@ -1,20 +1,20 @@
 <script setup lang="ts">
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import type { MyFormCheck } from '#stores/useFormStore.ts'
+import type { FormCheck } from '#stores/useFormStore.ts'
 import { ref } from 'vue'
 import { useFormStore } from '#stores/useFormStore.ts'
 
 const props = defineProps<{
-    name: string
-    value?: string
-    storeId: string
-    checks?: MyFormCheck[]
-    autofocus?: boolean
-    password?: boolean
-    disabled?: boolean
-    placeholder?: string
     autocomplete?: string
+    autofocus?: boolean
+    checks?: FormCheck[]
+    disabled?: boolean
+    name: string
+    password?: boolean
+    placeholder?: string
+    storeId: string
+    value?: string
   }>(),
   store = useFormStore(props.storeId),
 

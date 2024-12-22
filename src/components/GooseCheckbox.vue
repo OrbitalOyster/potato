@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import type { MyFormCheck } from '#stores/useFormStore.ts'
+import type { FormCheck } from '#stores/useFormStore.ts'
 import { useFormStore } from '#stores/useFormStore.ts'
 
 const props = defineProps<{
-    name: string
-    title: string
     checked?: boolean
+    checks?: FormCheck[]
     disabled?: boolean
+    name: string
     storeId: string
-    checks?: MyFormCheck[]
+    title: string
   }>(),
   store = useFormStore(props.storeId)
 
@@ -57,37 +57,36 @@ store.inputs[props.name] = props.checked || false
     display: none
 
   .wrapper
+    align-items: center
     display: flex
     gap: .5rem
-    align-items: center
 
   button
     @extend .form-input
     @extend .focusable
-    position: relative
-    padding: 0
-    width: 1.75rem
-    height: 1.75rem
     cursor: pointer
+    height: 1.75rem
+    padding: 0
+    position: relative
     transition: background-color 100ms ease-in-out, style.$focusable-transition
+    width: 1.75rem
 
   button:active:enabled
     background-color: colors.$active
 
   .mark
-    position: absolute
-    top: .38rem
-    left: .38rem
-    width: .9rem
-    height: .9rem
     background-color: colors.$primary
     border-radius: borders.$radius
+    height: .9rem
+    left: .38rem
+    position: absolute
+    top: .38rem
+    width: .9rem
 
   button:disabled .mark
     background-color: colors.$disabled-primary
 
   label
-    user-select: none
     cursor: pointer
-
+    user-select: none
 </style>

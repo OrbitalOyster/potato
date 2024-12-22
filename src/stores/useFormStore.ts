@@ -1,11 +1,34 @@
 import { defineStore } from 'pinia'
 
-export type MyFormCheck = 'required' | 'lessThanTo' | 'moreThanFrom'
+export type FormCheck = 'required' | 'lessThanTo' | 'moreThanFrom'
+
+type Inputs = Record<string, string | boolean>
 
 interface IState {
   errors: Record<string, string>
-  inputs: Record<string, string | boolean>
-  checks: Record<string, MyFormCheck[]>
+  inputs: Inputs
+  checks: Record<string, FormCheck[]>
+}
+
+function checkInput(key: string, check: FormCheck, inputs: Inputs) {
+  const rawValue = inputs[key]
+  switch (check) {
+    case 'required':
+      return rawValue === '' ? 'Required' : ''
+    case 'lessThanTo': {
+      const value = Number(rawValue),
+        to = Number(inputs['to'])
+      return value >= to ? 'Must be less than to' : ''
+    }
+    case 'moreThanFrom': {
+      const value = Number(rawValue),
+        from = Number(inputs['from'])
+      return value <= from ? 'Must be more than from' : ''
+    }
+    default:
+      /* Should not get here */
+      return ''
+  }
 }
 
 export const useFormStore = (id: string) => defineStore(id, {
@@ -15,34 +38,16 @@ export const useFormStore = (id: string) => defineStore(id, {
     checks: {},
   }),
   actions: {
-    checkInput(key: string, check: MyFormCheck) {
-      const rawValue = this.inputs[key]
-      switch (check) {
-        case 'required':
-          return rawValue === '' ? 'Required' : ''
-        case 'lessThanTo': {
-          const value = Number(rawValue),
-            to = Number(this.inputs['to'])
-          return value >= to ? 'Must be less than to' : ''
-        }
-        case 'moreThanFrom': {
-          const value = Number(rawValue),
-            from = Number(this.inputs['from'])
-          return value <= from ? 'Must be more than from' : ''
-        }
-        default:
-          /* Should not get here */
-          return ''
-      }
-    },
+    checkInput,
     validate() {
       /* For every input */
       Object.keys(this.inputs).forEach((key) => {
         const checks = this.checks[key]
-        /* For every check */
+        const inputs = this.inputs
+        /* For every check (if any) */
         checks?.every((check) => {
-          this.errors[key] = this.checkInput(key, check)
-          return this.errors[key] === ''
+          this.errors[key] = this.checkInput(key, check, inputs)
+          return !this.errors[key]
         })
       })
     },

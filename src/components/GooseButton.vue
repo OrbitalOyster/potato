@@ -1,16 +1,14 @@
 <script setup lang="ts">
-
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 const props = defineProps<{
-    title: string
     icon?: string
-    submit?: boolean
     loading?: boolean
+    submit?: boolean
+    title: string
   }>(),
   type = props.submit ? 'submit' : 'button'
-
 </script>
 
 <template>
@@ -35,41 +33,44 @@ const props = defineProps<{
   @use '../assets/colors'
 
   $transition-params: 100ms ease-in-out
+
   $transition-colors: background-color $transition-params
+  $transition-filter: filter $transition-params
+  $transition-transform: transform $transition-params
 
   button
     @extend .focusable
-    padding: .75rem
-    border: none
-    border-radius: borders.$radius
-    font-size: 1.25rem
-    color: colors.$button
     background-color: colors.$primary
-    transform: translateY(0)
-    transition: $transition-colors, style.$focusable-transition, filter $transition-params, transform $transition-params
+    border-radius: borders.$radius
+    border: none
+    color: colors.$button
     cursor: pointer
+    font-size: 1.25rem
+    padding: .75rem
+    transform: translateY(0)
+    transition: style.$focusable-transition, $transition-colors, $transition-filter, $transition-transform
     user-select: none
 
   button:enabled
     filter: drop-shadow(colors.$button-shadow 0 .16rem .1rem)
 
   button:hover:enabled
-    transform: translateY(-.1rem)
     filter: drop-shadow(colors.$button-shadow 0 .28rem .2rem)
+    transform: translateY(-.1rem)
 
   button:active:enabled
     background-color: colors.$active
-    transform: translateY(0)
     filter: drop-shadow(colors.$button-shadow 0 .16rem .1rem)
+    transform: translateY(0)
 
   button:disabled
-    color: colors.$disabled
     background-color: colors.$disabled-primary
+    color: colors.$disabled
 
   div
-    display: flex
-    height: 2rem
     align-items: center
-    gap: .75rem
+    display: flex
     filter: drop-shadow(colors.$button-shadow 0 0 .1rem)
+    gap: .75rem
+    height: 2rem
 </style>
