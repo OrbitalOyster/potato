@@ -2,17 +2,12 @@
 import { onMounted, ref } from 'vue'
 import { useFormStore } from '#stores/useFormStore.ts'
 
-const emits = defineEmits(['submit']),
-  props = defineProps<{
+const props = defineProps<{
     id: string
   }>(),
+  emits = defineEmits(['submit']),
   store = useFormStore(props.id),
-  validated = ref('')
-
-function onSubmit() {
-  emits('submit', store.isValid() ? store.inputs : null)
-  validated.value = 'validated'
-}
+  validated = ref(false)
 
 onMounted(() => store.validate())
 </script>
@@ -20,8 +15,8 @@ onMounted(() => store.validate())
 <template>
   <form
     novalidate
-    :class="validated"
-    @submit.prevent="onSubmit"
+    :class="validated ? 'validated' : ''"
+    @submit.prevent="emits('submit', store.isValid() ? store.inputs : null); validated = true"
   >
     <slot />
   </form>

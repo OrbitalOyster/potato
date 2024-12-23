@@ -9,15 +9,15 @@ body
 /* Cards */
 .card
   background-color: colors.$card
-  border: borders.$card
   border-radius: borders.$radius
+  border: borders.$card
   filter: drop-shadow(rgba(0,0,0,.25) 0 .1rem .1rem)
 
 /* Form inputs */
 .form-input
   background-color: colors.$input-background
-  border: 1px solid colors.$input-border
   border-radius: borders.$radius
+  border: 1px solid colors.$input-border
 
 .form-input:disabled
   background-color: colors.$input-disabled
@@ -33,15 +33,12 @@ form.validated
     border: 1px solid colors.$input-invalid-border
 
 /* Focusable */
-$outline-width: .35rem
+$outline-width: .25rem
 $outline-style: solid
 
 .focusable
   outline: colors.$outline $outline-style 0
 
 .focusable:focus
-  @extend .focusable
-  outline: colors.$outline $outline-style $outline-width
   border-color: colors.$outline
-
-$focusable-transition: outline-width 100ms ease-in-out
+  outline: colors.$outline $outline-style $outline-width

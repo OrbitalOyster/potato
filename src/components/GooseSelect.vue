@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { autoUpdate, hide, size, useFloating } from '@floating-ui/vue'
 import { ref, useTemplateRef, watch } from 'vue'
-import type { FormCheck } from '#stores/formStore.ts'
+import type { FormCheck } from '#stores/useFormStore.ts'
 import { useFormStore } from '#stores/useFormStore.ts'
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -42,7 +42,7 @@ const props = defineProps<{
   },
   wrap = (value: number, direction: number) =>
     (value + direction + props.options.length) % props.options.length,
-  // eslint-disable-next-line no-useless-assignment
+
   keyScroll = (direction: number) => {
     /* Edge case - nothing selected */
     selectedIndex.value ??= (direction > 0 ? -1 : 0)
@@ -53,7 +53,7 @@ const props = defineProps<{
   },
   target = useTemplateRef('target'),
   floating = useTemplateRef('floating'),
-  // eslint-disable-next-line no-useless-assignment
+
   { floatingStyles, isPositioned } = useFloating(target, floating, {
     placement,
     open: active,
@@ -72,10 +72,10 @@ const props = defineProps<{
     ],
     whileElementsMounted: autoUpdate,
   })
+
 watch(isPositioned, (opened) => {
-  if (opened) {
+  if (opened)
     scrollToSelected(true)
-  }
 },
 )
 store.checks[props.name] = props.checks ?? []
@@ -105,26 +105,20 @@ store.inputs[props.name] = ''
     >
       {{ store.inputs[props.name] }}
     </div>
-    <label class="form-input-label">
+    <label>
       {{ placeholder }}
     </label>
     <div class="input-icons">
-      <div
-        class="text-slate-500 transition-[transform]"
-        :class="{ 'rotate-180': active }"
-      >
-        <FontAwesomeIcon
-          :icon="faChevronDown"
-          size="xl"
-        />
-      </div>
+      <FontAwesomeIcon
+        :icon="faChevronDown"
+        size="xl"
+      />
     </div>
     <Transition name="fade">
       <ul
         v-if="active"
         ref="floating"
         tabindex="0"
-        class="card absolute mt-2 z-50 overflow-y-auto"
         :style="floatingStyles"
         @focus="target?.focus()"
       >
@@ -132,8 +126,7 @@ store.inputs[props.name] = ''
           v-for="(option, i) in options"
           ref="optionsRef"
           :key="i"
-          class="p-2 cursor-pointer select-none"
-          :class="selectedIndex === i && 'bg-slate-200' || 'hover:bg-slate-100'"
+          :class="selectedIndex === i && 'selected'"
           @click="setValue(i); active = false"
         >
           {{ option }}
@@ -144,7 +137,9 @@ store.inputs[props.name] = ''
 </template>
 
 <style lang="sass" scoped>
+  @use '../assets/colors'
   @use '../assets/style'
+  @use '../assets/transitions'
 
   .wrapper
     display: flex
@@ -158,27 +153,60 @@ store.inputs[props.name] = ''
     @extend .focusable
     @extend .form-input
 
-    display: flex
     align-items: center
-    width: 100%
-    padding: .5rem
-    height: 3rem
-    user-select: none
     cursor: pointer
-
-  .form-input-label
-    position: absolute
-    top: 1rem
-    left: 1rem
+    display: flex
+    height: 2rem
+    padding: 1.5rem 1rem .25rem 1rem
     user-select: none
+    width: 100%
+    transition: transitions.$focusable, transitions.$colors
+
+  label
+    color: colors.$input-label
+    left: 1rem
     pointer-events: none
+    position: absolute
+    top: 1.25rem
+    transform-origin: left
+    user-select: none
+    transition: transitions.$transform
 
   /* Shrink and translate label if:
    * - input is focused
    * - placeholder not shown
    * - input is not empty */
-  .form-input[placeholder]:focus + .form-input-label,
-  .form-input[placeholder]:not(:placeholder-shown) + .form-input-label,
-  .form-input:not(:empty) + .form-input-label
-    transform: translateY(calc(-50%)) scale(.8)
+  .form-input[placeholder]:focus + label,
+  .form-input[placeholder]:not(:placeholder-shown) + label,
+  .form-input:not(:empty) + label
+    transform: translateY(calc(-70%)) scale(.9)
+
+  .input-icons
+    align-items: center
+    display: inline-flex
+    height: 100%
+    pointer-events: none
+    position: absolute
+    right: 1rem
+    user-select: none
+
+  ul
+    @extend .card
+    margin-top: .5rem
+    overflow-y: auto
+    padding: 0
+    position: absolute
+    z-index: 99
+
+  li
+    display: block
+    padding: 1rem
+    cursor: pointer
+    user-select: none
+
+  li:hover
+    background-color: #EAECEE
+
+  li.selected
+    background-color: #D5D8DC
 </style>

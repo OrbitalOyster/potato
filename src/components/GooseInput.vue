@@ -17,7 +17,6 @@ const props = defineProps<{
     value?: string
   }>(),
   store = useFormStore(props.storeId),
-
   passwordHidden = ref(true)
 
 store.checks[props.name] = props.checks ?? []
@@ -59,21 +58,21 @@ store.inputs[props.name] = props.value ?? ''
 <style scoped lang="sass">
   @use '../assets/colors'
   @use '../assets/style'
+  @use '../assets/transitions'
 
   .wrapper
-    display: flex
     align-items: center
+    display: flex
     position: relative
 
   input
     @extend .form-input
     @extend .focusable
-    width: 100%
-    height: 2rem
     color: colors.$text
-    padding: .25rem
-    padding-left: 1rem
-    transition: style.$focusable-transition
+    height: 2rem
+    padding: .25rem 1rem .25rem 1rem
+    transition: transitions.$focusable, transitions.$colors
+    width: 100%
 
   input:disabled
     color: colors.$disabled-primary
@@ -86,13 +85,13 @@ store.inputs[props.name] = props.value ?? ''
 
   /* Shrinkable label */
   label
-    position: absolute
-    left: 1rem
     color: colors.$input-label
-    user-select: none
+    left: 1rem
     pointer-events: none
-    transition: transform 100ms ease-in-out
+    position: absolute
     transform-origin: left
+    transition: transitions.$transform
+    user-select: none
 
   /* Shrink and translate label if:
    * - input is focused
@@ -108,7 +107,7 @@ store.inputs[props.name] = props.value ?? ''
     right: .5rem
 
   .eye
-    width: 2.5rem
-    height: 1.5rem
     cursor: pointer
+    height: 1.5rem
+    width: 2.5rem
 </style>

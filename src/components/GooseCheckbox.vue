@@ -52,6 +52,7 @@ store.inputs[props.name] = props.checked || false
   @use '../assets/borders'
   @use '../assets/colors'
   @use '../assets/style'
+  @use '../assets/transitions'
 
   input
     display: none
@@ -66,9 +67,8 @@ store.inputs[props.name] = props.checked || false
     @extend .focusable
     cursor: pointer
     height: 1.75rem
-    padding: 0
     position: relative
-    transition: background-color 100ms ease-in-out, style.$focusable-transition
+    transition: transitions.$focusable, transitions.$colors
     width: 1.75rem
 
   button:active:enabled

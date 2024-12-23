@@ -15,7 +15,7 @@ const props = defineProps<{
   <button
     :type
   >
-    <div>
+    <div class="wrapper">
       {{ title }}
       <FontAwesomeIcon
         v-if="icon || loading"
@@ -28,15 +28,10 @@ const props = defineProps<{
 </template>
 
 <style scoped lang="sass">
-  @use '../assets/style'
   @use '../assets/borders'
   @use '../assets/colors'
-
-  $transition-params: 100ms ease-in-out
-
-  $transition-colors: background-color $transition-params
-  $transition-filter: filter $transition-params
-  $transition-transform: transform $transition-params
+  @use '../assets/style'
+  @use '../assets/transitions'
 
   button
     @extend .focusable
@@ -48,7 +43,7 @@ const props = defineProps<{
     font-size: 1.25rem
     padding: .75rem
     transform: translateY(0)
-    transition: style.$focusable-transition, $transition-colors, $transition-filter, $transition-transform
+    transition: transitions.$focusable, transitions.$colors, transitions.$filter, transitions.$transform
     user-select: none
 
   button:enabled
@@ -67,7 +62,7 @@ const props = defineProps<{
     background-color: colors.$disabled-primary
     color: colors.$disabled
 
-  div
+  .wrapper
     align-items: center
     display: flex
     filter: drop-shadow(colors.$button-shadow 0 0 .1rem)

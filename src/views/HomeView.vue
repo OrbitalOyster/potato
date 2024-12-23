@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import GooseSelect from '#components/GooseSelect.vue'
 import GooseForm from '#components/GooseForm.vue'
+import GooseInput from '#components/GooseInput.vue'
+import GooseSelect from '#components/GooseSelect.vue'
 
 const options = [
   '1 Macao',
@@ -27,11 +28,12 @@ const options = [
 </script>
 
 <template>
-  <div>
+  <main>
     <p>Home</p>
     <GooseForm
       id="mySampleForm"
     >
+      <GooseInput placeholder="From" name="sampleInput" store-id="mySampleForm" />
       <GooseSelect
         name="selectInput"
         store-id="mySampleForm"
@@ -40,5 +42,10 @@ const options = [
         :options
       />
     </GooseForm>
-  </div>
+  </main>
 </template>
+
+<style lang="sass" scoped>
+  main
+    padding: 1rem
+</style>
