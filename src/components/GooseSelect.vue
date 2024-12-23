@@ -144,7 +144,7 @@ store.inputs[props.name] = ''
 
   .wrapper
     display: flex
-    justify-items: center
+    align-items: center
     position: relative
 
   input
@@ -167,7 +167,6 @@ store.inputs[props.name] = ''
     left: 1rem
     pointer-events: none
     position: absolute
-    top: 1.25rem
     transform-origin: left
     transition: transitions.$transform
     user-select: none

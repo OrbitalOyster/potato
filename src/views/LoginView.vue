@@ -15,18 +15,18 @@ interface ILoginFormCheck {
 
 const router = useRouter(),
   loginStore = useLoginStore(),
-  disabled = ref(false),
+  disabled = ref(false)
 
-  auth = async (formCheck: ILoginFormCheck | null) => {
-    if (!formCheck)
-      return
-    disabled.value = true
-    if (await loginStore.auth(formCheck.username, formCheck.password, formCheck.rememberMe))
-      await router.push('/')
-    else
-      console.log('failed')
-    disabled.value = false
-  }
+async function auth(formCheck: ILoginFormCheck | null) {
+  if (!formCheck)
+    return
+  disabled.value = true
+  if (await loginStore.auth(formCheck.username, formCheck.password, formCheck.rememberMe))
+    await router.push('/')
+  else
+    console.log('failed')
+  disabled.value = false
+}
 </script>
 
 <template>
@@ -43,7 +43,6 @@ const router = useRouter(),
           </div>
           <img src="/goose.png">
         </header>
-
         <GooseInput
           name="username"
           store-id="loginForm"
@@ -53,7 +52,6 @@ const router = useRouter(),
           autofocus
           autocomplete="username"
         />
-
         <GooseInput
           name="password"
           store-id="loginForm"
@@ -63,7 +61,6 @@ const router = useRouter(),
           password
           autocomplete="password"
         />
-
         <footer>
           <GooseCheckbox
             title="Запомнить меня"
