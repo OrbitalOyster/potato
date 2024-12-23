@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { autoUpdate, hide, size, useFloating } from '@floating-ui/vue'
 import { ref, useTemplateRef, watch } from 'vue'
-import type { FormCheck } from '#stores/useFormStore.ts'
-import { useFormStore } from '#stores/useFormStore.ts'
-
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import type { FormCheck } from '#stores/useFormStore.ts'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { useFormStore } from '#stores/useFormStore.ts'
 
 const props = defineProps<{
     checks?: FormCheck[]
@@ -17,67 +16,68 @@ const props = defineProps<{
   }>(),
   store = useFormStore(props.storeId),
   active = ref(false),
-  optionsRef = useTemplateRef('optionsRef'),
-  placement = 'bottom',
-  maxDistanceToBottom = 32,
-  minHeight = 128,
   selectedIndex = ref<null | number>(null),
-  scrollToSelected = (instant: boolean) => {
-    if (selectedIndex.value !== null) {
-      const highlightedElement = optionsRef.value?.[selectedIndex.value],
-        behavior = instant ? 'instant' : 'smooth'
-      highlightedElement?.scrollIntoView({ behavior, block: 'center' })
-    }
-  },
-  setValue = (value: number | null) => {
-    selectedIndex.value = value
-    /* Resetting value? */
-    if (value === null) {
-      store.inputs[props.name] = ''
-    }
-    else {
-      store.inputs[props.name] = props.options[value]
-    }
-    store.validate()
-  },
-  wrap = (value: number, direction: number) =>
-    (value + direction + props.options.length) % props.options.length,
-
-  keyScroll = (direction: number) => {
-    /* Edge case - nothing selected */
-    selectedIndex.value ??= (direction > 0 ? -1 : 0)
-    setValue(wrap(selectedIndex.value, direction))
-    if (active.value) {
-      scrollToSelected(false)
-    }
-  },
+  optionsRef = useTemplateRef('optionsRef'),
   target = useTemplateRef('target'),
-  floating = useTemplateRef('floating'),
+  floating = useTemplateRef('floating')
 
-  { floatingStyles, isPositioned } = useFloating(target, floating, {
-    placement,
-    open: active,
-    middleware: [
-      size({
-        apply({ availableHeight, rects, elements }) {
-          const maxHeight = Math.max(minHeight, availableHeight - maxDistanceToBottom),
-            { width } = rects.reference
-          Object.assign(elements.floating.style, {
-            maxHeight: `${maxHeight.toString()}px`,
-            width: `${width.toString()}px`,
-          })
-        },
-      }),
-      hide(),
-    ],
-    whileElementsMounted: autoUpdate,
-  })
+/* Fine tuning */
+const placement = 'bottom',
+  maxDistanceToBottom = 32,
+  minHeight = 128
 
-watch(isPositioned, (opened) => {
-  if (opened)
-    scrollToSelected(true)
-},
-)
+/* Floating UI bollocks */
+const { floatingStyles, isPositioned } = useFloating(target, floating, {
+  placement,
+  open: active,
+  middleware: [
+    size({
+      apply({ availableHeight, rects, elements }) {
+        const maxHeight = Math.max(minHeight, availableHeight - maxDistanceToBottom),
+          { width } = rects.reference
+        Object.assign(elements.floating.style, {
+          maxHeight: `${maxHeight.toString()}px`,
+          width: `${width.toString()}px`,
+        })
+      },
+    }),
+    hide(),
+  ],
+  whileElementsMounted: autoUpdate,
+})
+
+function wrap(value: number, direction: number) {
+  return (value + direction + props.options.length) % props.options.length
+}
+
+function setValue(value: number | null) {
+  selectedIndex.value = value
+  /* Resetting value? */
+  if (value === null || !props.options[value] /* Should not happen */)
+    store.inputs[props.name] = ''
+  else
+    store.inputs[props.name] = props.options[value]
+  store.validate()
+}
+
+function keyScroll(direction: number) {
+  /* Edge case - nothing selected */
+  selectedIndex.value ??= (direction > 0 ? -1 : 0)
+  setValue(wrap(selectedIndex.value, direction))
+  if (active.value)
+    scrollToSelected(false)
+}
+
+function scrollToSelected(instant: boolean) {
+  if (selectedIndex.value !== null) {
+    const highlightedElement = optionsRef.value?.[selectedIndex.value],
+      behavior = instant ? 'instant' : 'smooth'
+    highlightedElement?.scrollIntoView({ behavior, block: 'center' })
+  }
+}
+
+watch(isPositioned, opened => opened && scrollToSelected(true))
+
 store.checks[props.name] = props.checks ?? []
 store.inputs[props.name] = ''
 </script>
@@ -110,6 +110,7 @@ store.inputs[props.name] = ''
     </label>
     <div class="input-icons">
       <FontAwesomeIcon
+        class="chevron"
         :icon="faChevronDown"
         size="xl"
       />
@@ -152,15 +153,14 @@ store.inputs[props.name] = ''
   .target
     @extend .focusable
     @extend .form-input
-
     align-items: center
     cursor: pointer
     display: flex
     height: 2rem
     padding: 1.5rem 1rem .25rem 1rem
+    transition: transitions.$focusable, transitions.$colors
     user-select: none
     width: 100%
-    transition: transitions.$focusable, transitions.$colors
 
   label
     color: colors.$input-label
@@ -169,8 +169,8 @@ store.inputs[props.name] = ''
     position: absolute
     top: 1.25rem
     transform-origin: left
-    user-select: none
     transition: transitions.$transform
+    user-select: none
 
   /* Shrink and translate label if:
    * - input is focused
@@ -190,6 +190,10 @@ store.inputs[props.name] = ''
     right: 1rem
     user-select: none
 
+  .chevron
+    transform: v-bind("active ? 'rotate(180deg)' : 'rotate(0)'")
+    transition: transitions.$transform
+
   ul
     @extend .card
     margin-top: .5rem
@@ -199,9 +203,9 @@ store.inputs[props.name] = ''
     z-index: 99
 
   li
+    cursor: pointer
     display: block
     padding: 1rem
-    cursor: pointer
     user-select: none
 
   li:hover

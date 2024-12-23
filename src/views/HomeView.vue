@@ -33,7 +33,14 @@ const options = [
     <GooseForm
       id="mySampleForm"
     >
-      <GooseInput placeholder="From" name="sampleInput" store-id="mySampleForm" />
+      <GooseInput
+        placeholder="From"
+        name="sampleInput"
+        store-id="mySampleForm"
+      />
+
+      <hr>
+
       <GooseSelect
         name="selectInput"
         store-id="mySampleForm"

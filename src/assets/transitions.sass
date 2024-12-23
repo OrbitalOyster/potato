@@ -5,3 +5,9 @@ $colors: background-color $time $function
 $filter: filter $time $function
 $focusable: outline-width $time $function
 $transform: transform $time $function
+
+.fade-enter-active, .fade-leave-active
+  transition: opacity $time $function
+
+.fade-enter-from, .fade-leave-to
+  opacity: 0
