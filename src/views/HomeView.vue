@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import GooseButton from '#components/GooseButton.vue'
 import GooseForm from '#components/GooseForm.vue'
 import GooseInput from '#components/GooseInput.vue'
+import GoosePopover from '#components/GoosePopover.vue'
 import GooseSelect from '#components/GooseSelect.vue'
+import GooseTree from '#components/GooseTree.vue'
 
 const options = [
   '1 Macao',
@@ -38,9 +41,7 @@ const options = [
         name="sampleInput"
         store-id="mySampleForm"
       />
-
       <hr>
-
       <GooseSelect
         name="selectInput"
         store-id="mySampleForm"
@@ -48,6 +49,20 @@ const options = [
         :checks="['required']"
         :options
       />
+      <hr>
+      <GoosePopover
+        has-arrow
+        click-toggle
+        placement="right"
+      >
+        <GooseButton title="Click me" />
+        <template #popover>
+          <div style="padding: 1rem">
+            Hello World!
+          </div>
+        </template>
+      </GoosePopover>
+      <hr>
     </GooseForm>
   </main>
 </template>
