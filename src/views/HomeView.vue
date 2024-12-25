@@ -63,6 +63,7 @@ const options = [
         </template>
       </GoosePopover>
       <hr>
+      <GooseTree />
     </GooseForm>
   </main>
 </template>
