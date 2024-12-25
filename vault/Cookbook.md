@@ -1,8 +1,8 @@
-*Date: 13/12/2024*
+*Date: 25/12/2024*
 
 Prerequisites:
 - node.js (v23.4.0)
-- npm (v10.9.2)
+- npm (v11.0.0)
 
 ## Table of contents
 
@@ -29,7 +29,8 @@ cd potato
 ```json
 {
   "name": "potato",
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "type": "module"
 }
 ```
 
@@ -37,7 +38,7 @@ cd potato
 
 3. Install vite
 ```bash
-npm add vite@6.0.3 -ED
+npm add vite@6.0.5 -ED
 ```
 
 `-E` saves exact package version (no "^" specifier)
@@ -166,7 +167,7 @@ Typescript v5.7.2 is incompatible with vue ([bug ticket](https://github.com/vuej
 
 14. Install typescript@5.6.3, vue type checking tool and recommended typescript config for vue
 ```bash
-npm add typescript@5.6.3 vue-tsc@2.1.10 @vue/tsconfig@0.7.0 -ED
+npm add typescript@5.6.3 vue-tsc@2.2.0 @vue/tsconfig@0.7.0 -ED
 ```
 
 [@vue/tsconfig github](https://github.com/vuejs/tsconfig)
@@ -265,7 +266,7 @@ console.log(import.meta.env.VITE_FOO) /* Hello */
   * eslint stylistic plugin ([github](https://github.com/eslint-stylistic/eslint-stylistic))
 
 ```bash
-npm add eslint@9.16.0 @vue/eslint-config-typescript@14.1.4 eslint-plugin-vue@9.32.0 eslint-plugin-import@2.31.0 eslint-import-resolver-typescript@3.7.0 @stylistic/eslint-plugin@2.12.1 -ED
+npm add eslint@9.17.0 @vue/eslint-config-typescript@14.1.4 eslint-plugin-vue@9.32.0 eslint-plugin-import@2.31.0 eslint-import-resolver-typescript@3.7.0 @stylistic/eslint-plugin@2.12.1 -ED
 ```
 
 20. Create `eslint.config.mjs` file, enable recommended rules
