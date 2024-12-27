@@ -28,6 +28,28 @@ const options = [
   '19 Montserrat',
   '20 Morocco',
 ]
+
+const tree = [{
+  title: 'Org1', sub: [
+    { title: 'Org1.1', sub: [
+      { title: 'Org1.1.1' },
+    ] },
+  ] }, {
+  title: 'Org2', sub: [
+
+  ] }, {
+  title: 'Org3', sub: [
+    { title: 'Org3.1' },
+    { title: 'Org3.2' },
+    { title: 'Org3.3', sub: [
+      { title: 'Org3.3.1' },
+      { title: 'Org3.3.2' },
+      { title: 'Org3.3.3' },
+      { title: 'Org3.3.4' },
+    ] },
+    { title: 'Org3.4' },
+  ] },
+]
 </script>
 
 <template>
@@ -63,7 +85,11 @@ const options = [
         </template>
       </GoosePopover>
       <hr>
-      <GooseTree />
+      <div class="card">
+        <GooseTree
+          :tree
+        />
+      </div>
     </GooseForm>
   </main>
 </template>
