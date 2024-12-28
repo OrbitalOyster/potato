@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
-import { useTemplateRef, ref, toRef } from 'vue'
+import { toRef } from 'vue'
 
 interface Leaf {
   title: string
@@ -21,17 +21,16 @@ const tree = toRef(props.tree)
   <div class="wrapper">
     <ul>
       <li
-        v-for="(leaf, i) in tree"
-        :key="i"
+        v-for="leaf in tree"
       >
         <div class="title">
           <FontAwesomeIcon
+            v-if="leaf.sub?.length"
             class="chevron"
             :class="leaf.active && 'active'"
             :icon="faChevronRight"
             size="sm"
-            v-if="leaf.sub?.length"
-            @click="leaf.active = !leaf.active; console.log(leaf)"
+            @click="leaf.active = !leaf.active"
           />
           {{ leaf.title }}
         </div>
@@ -58,37 +57,29 @@ const tree = toRef(props.tree)
     position: relative
 
   ul
-    margin-top: .5rem
+    margin-top: .0rem
     overflow-y: auto
-    padding: 0
+    padding: .0rem
 
   li
     display: block
-    padding: .5rem .75rem .2rem 1.75rem
+    padding: .5rem .75rem .0rem 1.75rem
     user-select: none
 
   .title
     display: flex
     align-items: center
+    height: 1.5rem
 
   .chevron
     cursor: pointer
     position: absolute
-    left: .1rem 
-    border: 1px solid transparent
-    border-radius: 1rem
+    left: .1rem
     width: 1rem
     height: 1rem
-    padding: .1rem
+    padding: .0rem
     transition: transform 100ms
-
-  .chevron:hover
-    background-color: #EAECEE
 
   .active
     transform: rotate(90deg)
-
-  .hidden
-    display: none
-
 </style>
