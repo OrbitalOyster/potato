@@ -14,7 +14,6 @@ const props = defineProps<{
 }>()
 
 const tree = toRef(props.tree)
-
 </script>
 
 <template>

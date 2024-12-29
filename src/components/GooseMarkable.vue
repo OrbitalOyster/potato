@@ -1,30 +1,36 @@
 <script setup lang="ts">
-  const props = defineProps<{
-    title: string 
-    mark: string
-  }>()  
+import { toRef, watch } from 'vue'
 
-  const found = props.title.search(props.mark);
-  let s1 = props.title
-  let p = props.title
-  let s2 = ''
-  let status = false
+const props = defineProps<{
+  title: string
+  needle: string
+}>()
 
+let s1, p, s2, status
+
+function update(needle) {
+  const found = props.title.indexOf(needle)
   if (found !== -1) {
     status = true
-    s1 = props.title.slice(0, found) 
-    p = props.mark
-    s2 = props.title.slice(found + props.mark.length)
+    s1 = props.title.slice(0, found)
+    p = needle
+    s2 = props.title.slice(found + needle.length)
   }
+  else {
+    status = false
+    s1 = props.title
+    p = s2 = ''
+  }
+}
 
+watch(props, newProps => update(newProps.needle))
+update(props.needle)
+
+defineExpose({status})
 </script>
 
 <template>
   <p>
-    {{ s1 }}
-    <mark v-if="status">
-      {{ p }} 
-    </mark>
-    {{ s2 }}
+    {{ s1 }}<mark v-if="status">{{ p }}</mark>{{ s2 }}
   </p>
 </template>

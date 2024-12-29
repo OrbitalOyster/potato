@@ -6,6 +6,7 @@ import GooseMarkable from '#components/GooseMarkable.vue'
 import GoosePopover from '#components/GoosePopover.vue'
 import GooseSelect from '#components/GooseSelect.vue'
 import GooseTree from '#components/GooseTree.vue'
+import { ref, watch } from 'vue'
 
 const options = [
   '1 Macao',
@@ -51,6 +52,9 @@ const tree = [{
     { title: 'Org3.4' },
   ] },
 ]
+
+const s = ref('ipsum')
+
 </script>
 
 <template>
@@ -86,9 +90,10 @@ const tree = [{
         </template>
       </GoosePopover>
       <hr>
-      <GooseMarkable 
+      <input v-model="s">
+      <GooseMarkable
         title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
-        mark="bogus"
+        :needle="s"
       />
       <hr>
       <div class="card">
