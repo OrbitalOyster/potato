@@ -53,6 +53,7 @@ const tree = [{
   ] },
 ]
 
+const s0 = ref('foo')
 const s = ref('ipsum')
 
 </script>
@@ -65,7 +66,12 @@ const s = ref('ipsum')
     >
       <GooseInput
         placeholder="From"
-        name="sampleInput"
+        name="sampleInput1"
+        store-id="mySampleForm"
+      />
+      <hr>
+      <GooseInput
+        name="sampleInput2"
         store-id="mySampleForm"
       />
       <hr>

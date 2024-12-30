@@ -40,7 +40,7 @@ store.inputs[props.name] = props.value ?? ''
       :autocomplete
       @input="store.validate"
     >
-    <label>
+    <label v-if="placeholder" >
       {{ placeholder }}
     </label>
     <div class="icons">
