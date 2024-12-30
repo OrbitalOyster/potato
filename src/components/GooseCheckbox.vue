@@ -7,10 +7,10 @@ const props = defineProps<{
     checks?: FormCheck[]
     disabled?: boolean
     name: string
-    storeId: string
+    formId: string
     title: string
   }>(),
-  store = useFormStore(props.storeId)
+  store = useFormStore(props.formId)
 
 function toggle() {
   store.inputs[props.name] = !store.inputs[props.name]
@@ -30,7 +30,7 @@ store.inputs[props.name] = props.checked || false
     class="wrapper"
   >
     <button
-      :id="`${storeId}-${props.name}`"
+      :id="`${formId}-${props.name}`"
       type="button"
       :disabled
       @click="toggle"
@@ -41,7 +41,7 @@ store.inputs[props.name] = props.checked || false
       />
     </button>
     <label
-      :for="`${storeId}-${props.name}`"
+      :for="`${formId}-${props.name}`"
     >
       {{ title }}
     </label>

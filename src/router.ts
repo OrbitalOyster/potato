@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import ErrorView from '#views/ErrorView.vue'
 import HomeView from '#views/HomeView.vue'
 import LoginView from '#views/LoginView.vue'
-import { useLoginStore } from '#stores/useLoginStore.ts'
+import { useUserStore } from '#stores/useUserStore.ts'
 
 /* Typings */
 declare module 'vue-router' {
@@ -46,7 +46,7 @@ router.beforeEach(async (to, from) => {
   if (to.name === 'Error')
     return true
   /* Log in status */
-  const loggedIn = await useLoginStore().check()
+  const loggedIn = await useUserStore().check()
   if (to.name === 'Login')
     /* Logged in users get redirected from login page to home page */
     return loggedIn ? { name: 'Home' } : true

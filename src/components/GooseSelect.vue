@@ -12,9 +12,9 @@ const props = defineProps<{
     name: string
     options: string[]
     placeholder: string
-    storeId: string
+    formId: string
   }>(),
-  store = useFormStore(props.storeId),
+  store = useFormStore(props.formId),
   active = ref(false),
   selectedIndex = ref<null | number>(null),
   optionsRef = useTemplateRef('optionsRef'),

@@ -67,17 +67,17 @@ const s = ref('ipsum')
       <GooseInput
         placeholder="From"
         name="sampleInput1"
-        store-id="mySampleForm"
+        form-id="mySampleForm"
       />
       <hr>
       <GooseInput
         name="sampleInput2"
-        store-id="mySampleForm"
+        form-id="mySampleForm"
       />
       <hr>
       <GooseSelect
         name="selectInput"
-        store-id="mySampleForm"
+        form-id="mySampleForm"
         placeholder="Select something"
         :checks="['required']"
         :options

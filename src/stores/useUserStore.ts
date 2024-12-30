@@ -2,7 +2,7 @@ import type { AxiosResponse } from 'axios'
 import axios from 'axios'
 import { defineStore } from 'pinia'
 
-interface ILoginStore {
+interface IUserStore {
   username: null | string
   role: null | string
 }
@@ -18,8 +18,8 @@ const authEndpoint = import.meta.env.VITE_AUTH_API,
 if (!authEndpoint)
   throw new Error('Missing auth endpoint')
 
-const useLoginStore = defineStore('login', {
-  state: (): ILoginStore => ({
+const useUserStore = defineStore('user', {
+  state: (): IUserStore => ({
     username: null,
     role: null,
   }),
@@ -62,4 +62,4 @@ const useLoginStore = defineStore('login', {
   },
 })
 
-export { useLoginStore }
+export { useUserStore }

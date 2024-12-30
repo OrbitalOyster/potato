@@ -13,10 +13,10 @@ const props = defineProps<{
     name: string
     password?: boolean
     placeholder?: string
-    storeId: string
+    formId: string
     value?: string
   }>(),
-  store = useFormStore(props.storeId),
+  store = useFormStore(props.formId),
   passwordHidden = ref(true)
 
 store.checks[props.name] = props.checks ?? []

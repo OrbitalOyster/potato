@@ -4,7 +4,7 @@ import GooseCheckbox from '#components/GooseCheckbox.vue'
 import GooseForm from '#components/GooseForm.vue'
 import GooseInput from '#components/GooseInput.vue'
 import { ref } from 'vue'
-import { useLoginStore } from '#stores/useLoginStore.ts'
+import { useUserStore } from '#stores/useUserStore.ts'
 import { useRouter } from 'vue-router'
 
 interface ILoginFormCheck {
@@ -14,14 +14,14 @@ interface ILoginFormCheck {
 }
 
 const router = useRouter(),
-  loginStore = useLoginStore(),
+  userStore = useUserStore(),
   disabled = ref(false)
 
 async function auth(formCheck: ILoginFormCheck | null) {
   if (!formCheck)
     return
   disabled.value = true
-  if (await loginStore.auth(formCheck.username, formCheck.password, formCheck.rememberMe))
+  if (await userStore.auth(formCheck.username, formCheck.password, formCheck.rememberMe))
     await router.push('/')
   else
     console.log('failed')
@@ -45,7 +45,7 @@ async function auth(formCheck: ILoginFormCheck | null) {
         </header>
         <GooseInput
           name="username"
-          store-id="loginForm"
+          form-id="loginForm"
           :checks="['required']"
           placeholder="Имя пользователя"
           :disabled
@@ -54,7 +54,7 @@ async function auth(formCheck: ILoginFormCheck | null) {
         />
         <GooseInput
           name="password"
-          store-id="loginForm"
+          form-id="loginForm"
           :checks="['required']"
           placeholder="Пароль"
           :disabled
@@ -65,7 +65,7 @@ async function auth(formCheck: ILoginFormCheck | null) {
           <GooseCheckbox
             title="Запомнить меня"
             name="rememberMe"
-            store-id="loginForm"
+            form-id="loginForm"
             :disabled
           />
           <GooseButton
