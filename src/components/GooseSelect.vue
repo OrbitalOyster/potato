@@ -175,9 +175,9 @@ store.inputs[props.name] = ''
    * - input is focused
    * - placeholder not shown
    * - input is not empty */
-  .form-input[placeholder]:focus + label,
-  .form-input[placeholder]:not(:placeholder-shown) + label,
-  .form-input:not(:empty) + label
+  .target[placeholder]:focus + label,
+  .target[placeholder]:not(:placeholder-shown) + label,
+  .target:not(:empty) + label
     transform: translateY(calc(-70%)) scale(.9)
 
   .input-icons

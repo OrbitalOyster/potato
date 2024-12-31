@@ -2,7 +2,7 @@
 import GooseButton from '#components/GooseButton.vue'
 import GooseCheckbox from '#components/GooseCheckbox.vue'
 import GooseForm from '#components/GooseForm.vue'
-import GooseInput from '#components/GooseInput.vue'
+import GooseFormInput from '#components/GooseFormInput.vue'
 import { ref } from 'vue'
 import { useUserStore } from '#stores/useUserStore.ts'
 import { useRouter } from 'vue-router'
@@ -43,7 +43,7 @@ async function auth(formCheck: ILoginFormCheck | null) {
           </div>
           <img src="/goose.png">
         </header>
-        <GooseInput
+        <GooseFormInput
           name="username"
           form-id="loginForm"
           :checks="['required']"
@@ -52,7 +52,7 @@ async function auth(formCheck: ILoginFormCheck | null) {
           autofocus
           autocomplete="username"
         />
-        <GooseInput
+        <GooseFormInput
           name="password"
           form-id="loginForm"
           :checks="['required']"

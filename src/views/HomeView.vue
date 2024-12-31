@@ -2,6 +2,7 @@
 import GooseButton from '#components/GooseButton.vue'
 import GooseForm from '#components/GooseForm.vue'
 import GooseInput from '#components/GooseInput.vue'
+import GooseFormInput from '#components/GooseFormInput.vue'
 import GooseMarkable from '#components/GooseMarkable.vue'
 import GoosePopover from '#components/GoosePopover.vue'
 import GooseSelect from '#components/GooseSelect.vue'
@@ -64,16 +65,23 @@ const s = ref('ipsum')
     <GooseForm
       id="mySampleForm"
     >
-      <GooseInput
+      <GooseFormInput
         placeholder="From"
         name="sampleInput1"
         form-id="mySampleForm"
       />
       <hr>
-      <GooseInput
+      <GooseFormInput
         name="sampleInput2"
         form-id="mySampleForm"
       />
+      <hr>
+      <GooseInput
+        name="sampleInput2"
+        password
+        v-model="s0"
+      />
+      <p>{{s0}}</p>
       <hr>
       <GooseSelect
         name="selectInput"

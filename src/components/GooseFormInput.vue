@@ -1,19 +1,26 @@
 <script setup lang="ts">
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import type { FormCheck } from '#stores/useFormStore.ts'
 import { ref } from 'vue'
+import { useFormStore } from '#stores/useFormStore.ts'
 
 const props = defineProps<{
     autocomplete?: string
     autofocus?: boolean
+    checks?: FormCheck[]
     disabled?: boolean
     name: string
     password?: boolean
     placeholder?: string
+    formId: string
     value?: string
   }>(),
-  passwordHidden = ref(true),
-  model = defineModel()
+  store = useFormStore(props.formId),
+  passwordHidden = ref(true)
+
+store.checks[props.name] = props.checks ?? []
+store.inputs[props.name] = props.value ?? ''
 </script>
 
 <template>
@@ -21,13 +28,17 @@ const props = defineProps<{
     class="wrapper"
   >
     <input
-      v-model="model"
-      :autocomplete
-      :autofocus
-      :disabled
+      v-model="store.inputs[props.name]"
+      :class="[
+        store.errors[props.name] ? 'invalid' : 'valid',
+      ]"
       :name
+      :autofocus
       :placeholder
+      :disabled
       :type="password && passwordHidden ? 'password' : 'text'"
+      :autocomplete
+      @input="store.validate"
     >
     <label v-if="placeholder" >
       {{ placeholder }}
