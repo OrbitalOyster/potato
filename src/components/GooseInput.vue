@@ -3,17 +3,19 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { ref } from 'vue'
 
-const props = defineProps<{
-    autocomplete?: string
-    autofocus?: boolean
-    disabled?: boolean
-    name: string
-    password?: boolean
-    placeholder?: string
-    value?: string
-  }>(),
-  passwordHidden = ref(true),
-  model = defineModel()
+defineProps<{
+  autocomplete?: string
+  autofocus?: boolean
+  disabled?: boolean
+  name?: string
+  password?: boolean
+  placeholder?: string
+  value?: string
+  valid?: boolean
+}>()
+
+const passwordHidden = ref(true),
+  model = defineModel({ type: String })
 </script>
 
 <template>
@@ -24,12 +26,13 @@ const props = defineProps<{
       v-model="model"
       :autocomplete
       :autofocus
+      :class="valid && valid === true ? 'invalid' : 'valid'"
       :disabled
       :name
       :placeholder
       :type="password && passwordHidden ? 'password' : 'text'"
     >
-    <label v-if="placeholder" >
+    <label v-if="placeholder">
       {{ placeholder }}
     </label>
     <div class="icons">

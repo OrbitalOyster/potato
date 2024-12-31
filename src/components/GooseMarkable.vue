@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { toRef, watch } from 'vue'
+import { watch } from 'vue'
 
 const props = defineProps<{
   title: string
   needle: string
 }>()
 
-let s1, p, s2, status
+let s1 = '', p = '', s2 = '', status = false
 
-function update(needle) {
+function update(needle: string) {
   const found = props.title.indexOf(needle)
   if (found !== -1) {
     status = true
@@ -26,7 +26,7 @@ function update(needle) {
 watch(props, newProps => update(newProps.needle))
 update(props.needle)
 
-defineExpose({status})
+defineExpose({ status })
 </script>
 
 <template>

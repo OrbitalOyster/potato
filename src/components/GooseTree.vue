@@ -20,7 +20,8 @@ const tree = toRef(props.tree)
   <div class="wrapper">
     <ul>
       <li
-        v-for="leaf in tree"
+        v-for="leaf, i in tree"
+        :key="i"
       >
         <div class="title">
           <FontAwesomeIcon
