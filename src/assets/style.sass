@@ -13,6 +13,17 @@ body
   border: borders.$card
   filter: drop-shadow(rgba(0,0,0,.25) 0 .1rem .1rem)
 
+/* Focusable */
+$outline-width: .25rem
+$outline-style: solid
+
+.focusable
+  outline: colors.$outline $outline-style 0
+
+.focusable:focus
+  border-color: colors.$outline
+  outline: colors.$outline $outline-style $outline-width
+
 /* Form inputs */
 .form-input
   background-color: colors.$input-background
@@ -31,14 +42,3 @@ form.validated
   .form-input.invalid:not(:disabled)
     background-color: colors.$input-invalid-background
     border: 1px solid colors.$input-invalid-border
-
-/* Focusable */
-$outline-width: .25rem
-$outline-style: solid
-
-.focusable
-  outline: colors.$outline $outline-style 0
-
-.focusable:focus
-  border-color: colors.$outline
-  outline: colors.$outline $outline-style $outline-width

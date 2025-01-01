@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import { faEye, faEyeSlash, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { ref } from 'vue'
+
+type Validation = 'valid' | 'invalid'
 
 defineProps<{
   autocomplete?: string
@@ -10,8 +12,7 @@ defineProps<{
   name?: string
   password?: boolean
   placeholder?: string
-  value?: string
-  valid?: boolean
+  validation?: Validation
 }>()
 
 const passwordHidden = ref(true),
@@ -26,7 +27,8 @@ const passwordHidden = ref(true),
       v-model="model"
       :autocomplete
       :autofocus
-      :class="valid && valid === true ? 'invalid' : 'valid'"
+      class="focusable form-input"
+      :class="validation"
       :disabled
       :name
       :placeholder
@@ -36,6 +38,11 @@ const passwordHidden = ref(true),
       {{ placeholder }}
     </label>
     <div class="icons">
+      <font-awesome-icon
+        v-if="validation === 'invalid'"
+        :icon="faTriangleExclamation"
+        size="xl"
+      />
       <font-awesome-icon
         v-if="password"
         :icon="passwordHidden ? faEye : faEyeSlash"
@@ -49,7 +56,6 @@ const passwordHidden = ref(true),
 
 <style scoped lang="sass">
   @use '../assets/colors'
-  @use '../assets/style'
   @use '../assets/transitions'
 
   .wrapper
@@ -58,8 +64,6 @@ const passwordHidden = ref(true),
     position: relative
 
   input
-    @extend .form-input
-    @extend .focusable
     color: colors.$text
     height: 2rem
     padding: .25rem 1rem .25rem 1rem
@@ -97,6 +101,9 @@ const passwordHidden = ref(true),
   .icons
     position: absolute
     right: .5rem
+
+  .fa-triangle-exclamation
+    color: red
 
   .eye
     cursor: pointer

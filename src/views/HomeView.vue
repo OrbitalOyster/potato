@@ -78,8 +78,6 @@ const s = ref('ipsum')
       <hr>
       <GooseInput
         v-model="s0"
-        name="sampleInput2"
-        password
       />
       <p>{{ s0 }}</p>
       <hr>
