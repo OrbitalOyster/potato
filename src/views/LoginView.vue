@@ -83,25 +83,26 @@ async function auth(formCheck: ILoginFormCheck | null) {
 
 <style scoped lang="sass">
   .fs
-    display: flex
     align-items: center
+    display: flex
+    height: 100vh
     justify-content: center
     width: 100vw
-    height: 100vh
 
   main
     display: flex
     flex-direction: column
     gap: 1rem
-    width: fit-content
     height: fit-content
+    min-width: 32rem
     padding: 1rem
+    width: fit-content
 
   header
-    display: flex
     align-items: center
-    justify-content: space-between
+    display: flex
     gap: 1rem
+    justify-content: space-between
 
   .title
     display: flex
@@ -109,19 +110,19 @@ async function auth(formCheck: ILoginFormCheck | null) {
     gap: .5rem
 
   h1
-    margin: .0rem
     font-size: 2rem
     font-weight: 500
+    margin: .0rem
 
   h2
-    margin: .0rem
     font-size: 1rem
     font-weight: 500
+    margin: .0rem
 
   img
-    width: 4rem
-    height: 4rem
     border-radius: 100%
+    height: 4rem
+    width: 4rem
 
   .inputs
     display: flex
@@ -129,7 +130,7 @@ async function auth(formCheck: ILoginFormCheck | null) {
     gap: 1rem
 
   footer
-    display: flex
     align-items: center
+    display: flex
     justify-content: space-between
 </style>

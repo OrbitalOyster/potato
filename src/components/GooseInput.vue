@@ -102,14 +102,12 @@ const passwordHidden = ref(true),
     transform: translateY(calc(-70%)) scale(.9)
 
   .icons
+    display: flex
     position: absolute
     right: .5rem
-
-  form:not(.validated) .fa-triangle-exclamation
-    color: red
 
   .eye
     cursor: pointer
     height: 1.5rem
-    width: 2.5rem
+    width: 2rem
 </style>

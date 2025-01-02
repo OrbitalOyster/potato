@@ -24,9 +24,6 @@ $outline-style: solid
   border-color: colors.$outline
   outline: colors.$outline $outline-style $outline-width
 
-.alert-icon
-  display: none
-
 /* Form inputs */
 .form-input
   background-color: colors.$input-background
@@ -37,9 +34,16 @@ $outline-style: solid
   background-color: colors.$input-disabled
   border: 1px solid colors.$input-disabled
 
-form.validated
+/* Alert icons are hidden by default */
+.alert-icon
+  display: none
+  color: #e74c3c
+  width: 2rem
+
+/* Validation formatting only shows up in validated elements */
+.validated
   .alert-icon
-    display: inline
+    display: block
 
   .form-input.valid:not(:disabled)
     background-color: colors.$input-valid-background 

@@ -76,9 +76,12 @@ const s = ref('ipsum')
         form-id="mySampleForm"
       />
       <hr>
-      <GooseInput
-        v-model="s0"
-      />
+      <div class="validated">
+        <GooseInput
+          v-model="s0"
+          validation="invalid"
+        />
+      </div>
       <p>{{ s0 }}</p>
       <hr>
       <GooseSelect
