@@ -13,6 +13,7 @@ defineProps<{
   password?: boolean
   placeholder?: string
   validation?: Validation
+  error?: string
 }>()
 
 const passwordHidden = ref(true),
@@ -38,11 +39,13 @@ const passwordHidden = ref(true),
       {{ placeholder }}
     </label>
     <div class="icons">
-      <font-awesome-icon
-        v-if="validation === 'invalid'"
-        :icon="faTriangleExclamation"
-        size="xl"
-      />
+      <div v-if="validation === 'invalid'" class="alert-icon">
+        <font-awesome-icon
+          :icon="faTriangleExclamation"
+          size="xl"
+          :title="error"
+        />
+      </div>
       <font-awesome-icon
         v-if="password"
         :icon="passwordHidden ? faEye : faEyeSlash"
@@ -102,7 +105,7 @@ const passwordHidden = ref(true),
     position: absolute
     right: .5rem
 
-  .fa-triangle-exclamation
+  form:not(.validated) .fa-triangle-exclamation
     color: red
 
   .eye

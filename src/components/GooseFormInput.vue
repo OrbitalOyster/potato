@@ -26,6 +26,7 @@ store.inputs[props.name] = props.value ?? ''
     :autocomplete
     :autofocus
     :disabled
+    :error = "store.errors[props.name]"
     :name
     :password
     :placeholder
