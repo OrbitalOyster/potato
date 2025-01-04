@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { arrow, autoUpdate, flip, hide, offset, shift, size, useFloating } from '@floating-ui/vue'
+import { arrow, autoPlacement, autoUpdate, hide, offset, shift, size, useFloating } from '@floating-ui/vue'
 import { computed, ref, useTemplateRef } from 'vue'
 import type { Placement } from '@floating-ui/utils'
 
 const props = defineProps<{
     hasArrow?: boolean
     clickToggle?: boolean
-    placement: Placement
+    hoverToggle?: boolean
+    placement?: Placement
   }>(),
   active = ref(false),
   target = useTemplateRef('target'),
@@ -15,16 +16,15 @@ const props = defineProps<{
 
 const minSize = 256,
   offsetValue = props.hasArrow ? 16 : 2
-
 /* Floating UI */
 const { floatingStyles, middlewareData } = useFloating(target, floating, {
   open: active,
   placement: props.placement,
   middleware: [
     offset({ mainAxis: offsetValue }),
-    flip(),
-    shift({ padding: 16 }),
-    arrow({ element: arrowRef, padding: 4 }),
+    !props.placement && autoPlacement(),
+    shift(),
+    arrow({ element: arrowRef, padding: 16 }),
     size({
       apply({ availableWidth, availableHeight, elements }) {
         Object.assign(elements.floating.style, {
@@ -72,7 +72,9 @@ defineExpose({ toggle, active })
   <div
     ref="target"
     class="target"
-    @click="props.clickToggle && toggle()"
+    @click="clickToggle && toggle()"
+    @mouseover="active = hoverToggle ? true : active"
+    @mouseleave="active = hoverToggle ? false : active"
   >
     <slot />
   </div>
@@ -81,10 +83,15 @@ defineExpose({ toggle, active })
       v-if="active"
       ref="floating"
       class="floating"
-      :style="floatingStyles"
+      :style="{
+        ...floatingStyles,
+        visibility: middlewareData.hide?.referenceHidden
+        ? 'hidden'
+        : 'visible'
+      }"
     >
       <div
-        v-if="props.hasArrow"
+        v-if="hasArrow"
         ref="arrowRef"
         :style="arrowStyle"
         class="arrow"
@@ -109,16 +116,17 @@ defineExpose({ toggle, active })
     background-color: colors.$card
     border-left: borders.$card
     border-top: borders.$card
-    clip-path: polygon(0% 0%, 100% 0%, 0% 100%, 0% 0%)
-    height: 16px
+    clip-path: polygon(0% 0%, 125% 0%, 0% 125%, 0% 0%)
+    height: 1rem
     position: absolute
-    width: 16px
+    width: 1rem
 
   .floating
     @extend .card
     left: 0
     position: absolute
     top: 0
+    z-index: 99
 
   .popover
     height: inherit

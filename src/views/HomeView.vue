@@ -80,6 +80,7 @@ const s = ref('ipsum')
         <GooseInput
           v-model="s0"
           validation="invalid"
+          error="Invalid input here"
         />
       </div>
       <p>{{ s0 }}</p>
@@ -95,7 +96,7 @@ const s = ref('ipsum')
       <GoosePopover
         has-arrow
         click-toggle
-        placement="right"
+        placement="top"
       >
         <GooseButton title="Click me" />
         <template #popover>

@@ -2,6 +2,7 @@
 import { faEye, faEyeSlash, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { ref } from 'vue'
+import GoosePopover from '#components/GoosePopover.vue'
 
 type Validation = 'valid' | 'invalid'
 
@@ -39,13 +40,24 @@ const passwordHidden = ref(true),
       {{ placeholder }}
     </label>
     <div class="icons">
-      <div v-if="validation === 'invalid'" class="alert-icon">
-        <font-awesome-icon
-          :icon="faTriangleExclamation"
-          size="xl"
-          :title="error"
-        />
-      </div>
+
+      <GoosePopover
+        has-arrow
+        click-toggle
+      >
+        <div v-if="validation === 'invalid'" class="alert-icon">
+          <font-awesome-icon
+            :icon="faTriangleExclamation"
+            size="xl"
+          />
+        </div>
+        <template #popover>
+          <p style="padding: .5rem; margin: .5rem">
+            {{ error }} 
+          </p>
+        </template>
+      </GoosePopover>
+
       <font-awesome-icon
         v-if="password"
         :icon="passwordHidden ? faEye : faEyeSlash"
