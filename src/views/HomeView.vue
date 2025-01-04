@@ -112,8 +112,9 @@ const s = ref('ipsum')
         :needle="s"
       />
       <hr>
-      <div class="card">
+      <div class="card" style="padding: 1rem">
         <GooseTree
+          searchable
           :tree
         />
       </div>

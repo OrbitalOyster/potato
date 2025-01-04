@@ -58,6 +58,8 @@ const passwordHidden = ref(true),
         </template>
       </GoosePopover>
 
+      <slot name="extra-icon"/>
+
       <font-awesome-icon
         v-if="password"
         :icon="passwordHidden ? faEye : faEyeSlash"
@@ -69,7 +71,7 @@ const passwordHidden = ref(true),
   </div>
 </template>
 
-<style scoped lang="sass">
+<style lang="sass" scoped>
   @use '../assets/colors'
   @use '../assets/transitions'
 

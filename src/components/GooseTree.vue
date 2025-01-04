@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
-import { toRef } from 'vue'
+import { faChevronRight, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { ref, toRef } from 'vue'
+import GooseInput from '#components/GooseInput.vue'
 
 interface Leaf {
   title: string
@@ -11,13 +12,23 @@ interface Leaf {
 
 const props = defineProps<{
   tree: Leaf[]
+  searchable?: boolean
 }>()
 
 const tree = toRef(props.tree)
+const searchString = ref('')
 </script>
 
 <template>
-  <div class="wrapper">
+  <div class="wrapper-tree">
+    <GooseInput v-if="searchable" v-model="searchString">
+      <template #extra-icon>
+        <FontAwesomeIcon
+          :icon="faMagnifyingGlass"
+          size="sm"
+        />
+      </template>
+    </GooseInput>
     <ul>
       <li
         v-for="leaf, i in tree"
@@ -53,11 +64,17 @@ const tree = toRef(props.tree)
   @use '../assets/style'
   @use '../assets/transitions'
 
-  .wrapper
+  /*
+     TODO: Renaming it to "wrapper" cocks up styling, why?
+   */
+  .wrapper-tree
+    display: flex
+    flex-direction: column
     position: relative
+    gap: .5rem
 
   ul
-    margin-top: .0rem
+    margin: .0rem
     overflow-y: auto
     padding: .0rem
 
