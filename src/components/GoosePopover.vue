@@ -15,7 +15,7 @@ const props = defineProps<{
   arrowRef = useTemplateRef('arrowRef')
 
 const minSize = 256,
-  offsetValue = props.hasArrow ? 16 : 2
+  offsetValue = props.hasArrow ? 12 : 2
 /* Floating UI */
 const { floatingStyles, middlewareData } = useFloating(target, floating, {
   open: active,
@@ -49,7 +49,7 @@ const arrowStyle = computed(
       leftOffset = side === 'left' ? 1 : 0,
       topOffset = side === 'top' ? 1 : 0,
       middlewareArrow = middlewareData.value.arrow,
-      arrowOffset = 9.5 
+      arrowOffset = 7
     return {
       transform: `rotate(${rotation.toString()}deg)`,
       left: middlewareArrow?.x || middlewareArrow?.x === 0
@@ -117,9 +117,9 @@ defineExpose({ toggle, active })
     border-left: borders.$card
     border-top: borders.$card
     clip-path: polygon(0% 0%, 125% 0%, 0% 125%, 0% 0%)
-    height: 16px
+    height: 12px
     position: absolute
-    width: 16px
+    width: 12px
 
   .floating
     @extend .card
