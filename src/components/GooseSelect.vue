@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { autoUpdate, hide, size, useFloating } from '@floating-ui/vue'
+import { autoUpdate, flip, offset, size, useFloating } from '@floating-ui/vue'
 import { ref, useTemplateRef, watch } from 'vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import type { FormCheck } from '#stores/useFormStore.ts'
@@ -23,17 +23,20 @@ const props = defineProps<{
 
 /* Fine tuning */
 const placement = 'bottom',
-  maxDistanceToBottom = 32,
-  minHeight = 128
+  maxDistanceToEdge = 16,
+  minHeight = 128,
+  offsetValue = 8
 
 /* Floating UI bollocks */
 const { floatingStyles, isPositioned } = useFloating(target, floating, {
-  placement,
   open: active,
+  placement,
   middleware: [
+    offset({ mainAxis: offsetValue }),
+    flip(),
     size({
       apply({ availableHeight, rects, elements }) {
-        const maxHeight = Math.max(minHeight, availableHeight - maxDistanceToBottom),
+        const maxHeight = Math.max(minHeight, availableHeight - maxDistanceToEdge),
           { width } = rects.reference
         Object.assign(elements.floating.style, {
           maxHeight: `${maxHeight.toString()}px`,
@@ -41,7 +44,6 @@ const { floatingStyles, isPositioned } = useFloating(target, floating, {
         })
       },
     }),
-    hide(),
   ],
   whileElementsMounted: autoUpdate,
 })
@@ -195,9 +197,9 @@ store.inputs[props.name] = ''
 
   ul
     @extend .card
-    margin-top: .5rem
     overflow-y: auto
     padding: 0
+    margin: 0
     position: absolute
     z-index: 99
 

@@ -15,7 +15,8 @@ const props = defineProps<{
   arrowRef = useTemplateRef('arrowRef')
 
 const minSize = 256,
-  offsetValue = props.hasArrow ? 12 : 2
+  offsetValue = props.hasArrow ? 14 : 2
+
 /* Floating UI */
 const { floatingStyles, middlewareData } = useFloating(target, floating, {
   open: active,
