@@ -49,7 +49,7 @@ const arrowStyle = computed(
       leftOffset = side === 'left' ? 1 : 0,
       topOffset = side === 'top' ? 1 : 0,
       middlewareArrow = middlewareData.value.arrow,
-      arrowOffset = 9
+      arrowOffset = 9.5 
     return {
       transform: `rotate(${rotation.toString()}deg)`,
       left: middlewareArrow?.x || middlewareArrow?.x === 0
@@ -117,9 +117,9 @@ defineExpose({ toggle, active })
     border-left: borders.$card
     border-top: borders.$card
     clip-path: polygon(0% 0%, 125% 0%, 0% 125%, 0% 0%)
-    height: 1rem
+    height: 16px
     position: absolute
-    width: 1rem
+    width: 16px
 
   .floating
     @extend .card

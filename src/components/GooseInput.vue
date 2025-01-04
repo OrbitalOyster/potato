@@ -43,7 +43,7 @@ const passwordHidden = ref(true),
 
       <GoosePopover
         has-arrow
-        click-toggle
+        hover-toggle
       >
         <div v-if="validation === 'invalid'" class="alert-icon">
           <font-awesome-icon
