@@ -30,7 +30,7 @@ defineExpose({ status })
 </script>
 
 <template>
-  <p>
+  <div>
     {{ s1 }}<mark v-if="status">{{ p }}</mark>{{ s2 }}
-  </p>
+  </div>
 </template>

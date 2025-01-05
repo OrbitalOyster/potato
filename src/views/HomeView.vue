@@ -6,7 +6,7 @@ import GooseFormInput from '#components/GooseFormInput.vue'
 import GooseMarkable from '#components/GooseMarkable.vue'
 import GoosePopover from '#components/GoosePopover.vue'
 import GooseSelect from '#components/GooseSelect.vue'
-import GooseTree from '#components/GooseTree.vue'
+import GooseTreeRoot from '#components/GooseTreeRoot.vue'
 import { ref, watch } from 'vue'
 
 const options = [
@@ -113,7 +113,7 @@ const s = ref('ipsum')
       />
       <hr>
       <div class="card" style="padding: 1rem">
-        <GooseTree
+        <GooseTreeRoot
           searchable
           :tree
         />
