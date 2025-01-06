@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faChevronRight, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-import { ref, toRef } from 'vue'
+import { defineEmits, ref, watch } from 'vue'
 import GooseInput from '#components/GooseInput.vue'
 import GooseMarkable from '#components/GooseMarkable.vue'
 
@@ -9,6 +9,7 @@ interface Leaf {
   title: string
   sub?: Leaf[]
   active?: boolean
+  matched?: boolean
 }
 
 const props = defineProps<{
@@ -16,7 +17,13 @@ const props = defineProps<{
   searchString?: string
 }>()
 
-const tree = toRef(props.tree)
+const emit = defineEmits(['update']); 
+
+function onUpdate(ind: number, matched: boolean) {
+  props.tree[ind].matched = matched
+  emit('update', props.tree.filter(l => l.matched).length)
+}
+
 </script>
 
 <template>
@@ -26,6 +33,11 @@ const tree = toRef(props.tree)
         v-for="leaf, i in tree"
         :key="i"
       >
+
+        <div :style="{
+          display: leaf.matched ? 'block' : 'none'
+        }">
+
         <div class="title">
           <FontAwesomeIcon
             v-if="leaf.sub?.length"
@@ -38,19 +50,24 @@ const tree = toRef(props.tree)
           <GooseMarkable 
             :title="leaf.title"
             :needle="searchString"
+            @update="e => onUpdate(i, e)"
           />
         </div>
         <Transition name="fade">
           <div
-            v-if="leaf.active"
+            v-if="leaf.active || searchString !== ''"
           >
             <GooseTree
               v-if="leaf.sub?.length"
               :tree="leaf.sub"
               :searchString="searchString"
+              @update="e => onUpdate(i, e)"
             />
           </div>
         </Transition>
+
+        </div>
+
       </li>
     </ul>
   </div>
@@ -73,7 +90,7 @@ const tree = toRef(props.tree)
 
   li
     display: block
-    padding: .5rem .75rem .0rem 1.75rem
+    padding: .0rem .75rem .0rem 1.75rem
     user-select: none
 
   .title
