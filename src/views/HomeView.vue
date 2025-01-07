@@ -1,13 +1,13 @@
 <script setup lang="ts">
+import { ref, watch } from 'vue'
 import GooseButton from '#components/GooseButton.vue'
 import GooseForm from '#components/GooseForm.vue'
-import GooseInput from '#components/GooseInput.vue'
 import GooseFormInput from '#components/GooseFormInput.vue'
+import GooseInput from '#components/GooseInput.vue'
 import GooseMarkable from '#components/GooseMarkable.vue'
 import GoosePopover from '#components/GoosePopover.vue'
 import GooseSelect from '#components/GooseSelect.vue'
 import GooseTreeRoot from '#components/GooseTreeRoot.vue'
-import { ref, watch } from 'vue'
 
 const options = [
   '1 Macao',
@@ -112,7 +112,10 @@ const s = ref('ipsum')
         :needle="s"
       />
       <hr>
-      <div class="card" style="padding: 1rem">
+      <div
+        class="card"
+        style="padding: 1rem"
+      >
         <GooseTreeRoot
           searchable
           :tree

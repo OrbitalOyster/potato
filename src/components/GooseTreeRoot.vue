@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faChevronRight, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { ref, toRef } from 'vue'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import GooseInput from '#components/GooseInput.vue'
 import GooseTree from '#components/GooseTree.vue'
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
 interface Leaf {
   title: string
@@ -22,7 +22,10 @@ const searchString = ref('')
 
 <template>
   <div class="wrapper-tree">
-    <GooseInput v-if="searchable" v-model="searchString">
+    <GooseInput
+      v-if="searchable"
+      v-model="searchString"
+    >
       <template #extra-icon>
         <FontAwesomeIcon
           :icon="faMagnifyingGlass"
@@ -30,9 +33,9 @@ const searchString = ref('')
         />
       </template>
     </GooseInput>
-    <GooseTree 
+    <GooseTree
       :tree
-      :searchString
+      :search-string
     />
   </div>
 </template>

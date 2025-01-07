@@ -4,8 +4,8 @@ import GooseCheckbox from '#components/GooseCheckbox.vue'
 import GooseForm from '#components/GooseForm.vue'
 import GooseFormInput from '#components/GooseFormInput.vue'
 import { ref } from 'vue'
-import { useUserStore } from '#stores/useUserStore.ts'
 import { useRouter } from 'vue-router'
+import { useUserStore } from '#stores/useUserStore.ts'
 
 interface ILoginFormCheck {
   username: string

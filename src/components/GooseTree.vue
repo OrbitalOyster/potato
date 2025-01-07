@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faChevronRight, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-import { defineEmits, ref, watch } from 'vue'
-import GooseInput from '#components/GooseInput.vue'
 import GooseMarkable from '#components/GooseMarkable.vue'
+import { defineEmits } from 'vue'
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 interface Leaf {
   title: string
   sub?: Leaf[]
-  active?: boolean
+  toggled?: boolean
   matched?: boolean
 }
 
@@ -17,73 +16,64 @@ const props = defineProps<{
   searchString?: string
 }>()
 
-const emit = defineEmits(['update']); 
+const emit = defineEmits(['update'])
 
 function onUpdate(ind: number, matched: boolean) {
+  if (!props.tree[ind])
+    throw new Error('Major screwup')
+
   props.tree[ind].matched = matched
+
+  /* Toggle leaf on match */
+  if (props.searchString && matched)
+    props.tree[ind].toggled = true
+
   emit('update', props.tree.filter(l => l.matched).length)
 }
 
 </script>
 
 <template>
-  <div class="wrapper-tree">
-    <ul>
-      <li
-        v-for="leaf, i in tree"
-        :key="i"
-      >
-
-        <div :style="{
-          display: leaf.matched ? 'block' : 'none'
-        }">
-
+  <ul>
+    <li
+      v-for="leaf, i in tree"
+      :key="i"
+    >
+      <div :style="{ display: leaf.matched ? 'block' : 'none' }">
         <div class="title">
           <FontAwesomeIcon
             v-if="leaf.sub?.length"
-            class="chevron"
-            :class="leaf.active && 'active'"
+            :class="{ chevron: true, toggled: leaf.toggled }"
             :icon="faChevronRight"
             size="sm"
-            @click="leaf.active = !leaf.active"
+            @click="leaf.toggled = !leaf.toggled"
           />
-          <GooseMarkable 
+          <GooseMarkable
             :title="leaf.title"
-            :needle="searchString"
+            :needle="searchString || ''"
             @update="e => onUpdate(i, e)"
           />
         </div>
-        <Transition name="fade">
-          <div
-            v-if="leaf.active || searchString !== ''"
-          >
-            <GooseTree
-              v-if="leaf.sub?.length"
-              :tree="leaf.sub"
-              :searchString="searchString"
-              @update="e => onUpdate(i, e)"
-            />
-          </div>
-        </Transition>
 
+        <div :style="{ display: leaf.toggled ? 'block': 'none' }">
+          <GooseTree
+            v-if="leaf.sub?.length"
+            :tree="leaf.sub"
+            :search-string
+            @update="e => onUpdate(i, e)"
+          />
         </div>
-
-      </li>
-    </ul>
-  </div>
+      </div>
+    </li>
+  </ul>
 </template>
 
 <style lang="sass" scoped>
   @use '../assets/style'
   @use '../assets/transitions'
 
-  /*
-     TODO: Renaming it to "wrapper" cocks up styling, why?
-   */
-  .wrapper-tree
-    position: relative
-
   ul
+    position: relative
     margin: .0rem
     overflow-y: auto
     padding: .0rem
@@ -94,19 +84,19 @@ function onUpdate(ind: number, matched: boolean) {
     user-select: none
 
   .title
-    display: flex
     align-items: center
-    height: 1.5rem
+    display: flex
+    height: 2rem
 
   .chevron
     cursor: pointer
-    position: absolute
-    left: .1rem
-    width: 1rem
     height: 1rem
+    left: .1rem
     padding: .0rem
+    position: absolute
     transition: transform 100ms
+    width: 1rem
 
-  .active
+  .toggled
     transform: rotate(90deg)
 </style>

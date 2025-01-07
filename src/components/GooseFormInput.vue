@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import GooseInput from '#components/GooseInput.vue'
 import type { FormCheck } from '#stores/useFormStore.ts'
+import GooseInput from '#components/GooseInput.vue'
 import { useFormStore } from '#stores/useFormStore.ts'
 
 const props = defineProps<{
@@ -26,7 +26,7 @@ store.inputs[props.name] = props.value ?? ''
     :autocomplete
     :autofocus
     :disabled
-    :error = "store.errors[props.name]"
+    :error="store.errors[props.name]"
     :name
     :password
     :placeholder

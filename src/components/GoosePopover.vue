@@ -87,8 +87,8 @@ defineExpose({ toggle, active })
       :style="{
         ...floatingStyles,
         visibility: middlewareData.hide?.referenceHidden
-        ? 'hidden'
-        : 'visible'
+          ? 'hidden'
+          : 'visible'
       }"
     >
       <div

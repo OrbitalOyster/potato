@@ -6,7 +6,7 @@ const props = defineProps<{
   needle: string
 }>()
 
-const emit = defineEmits(['update']); 
+const emit = defineEmits(['update'])
 
 let s1 = '', p = '', s2 = '', status = false
 
