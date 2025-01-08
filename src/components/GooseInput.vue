@@ -10,15 +10,15 @@ defineProps<{
   autocomplete?: string
   autofocus?: boolean
   disabled?: boolean
+  error?: string
   name?: string
   password?: boolean
   placeholder?: string
   validation?: Validation
-  error?: string
 }>()
 
 const passwordHidden = ref(true),
-  model = defineModel({ type: String })
+  model = defineModel<string>()
 </script>
 
 <template>
@@ -29,8 +29,7 @@ const passwordHidden = ref(true),
       v-model="model"
       :autocomplete
       :autofocus
-      class="focusable form-input"
-      :class="validation"
+      :class="['focusable', 'form-input', validation]"
       :disabled
       :name
       :placeholder

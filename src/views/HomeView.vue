@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import GooseButton from '#components/GooseButton.vue'
 import GooseForm from '#components/GooseForm.vue'
 import GooseFormInput from '#components/GooseFormInput.vue'
 import GooseInput from '#components/GooseInput.vue'
+import GooseCheckbox from '#components/GooseCheckbox.vue'
 import GooseMarkable from '#components/GooseMarkable.vue'
 import GoosePopover from '#components/GoosePopover.vue'
 import GooseSelect from '#components/GooseSelect.vue'
@@ -56,6 +57,7 @@ const tree = [{
 
 const s0 = ref('foo')
 const s = ref('ipsum')
+const cb = ref(true)
 
 </script>
 
@@ -106,11 +108,7 @@ const s = ref('ipsum')
         </template>
       </GoosePopover>
       <hr>
-      <input v-model="s">
-      <GooseMarkable
-        title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
-        :needle="s"
-      />
+      <GooseCheckbox name="testCheckbox" v-model="cb"/> 
       <hr>
       <div
         class="card"

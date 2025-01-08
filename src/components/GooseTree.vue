@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import GooseMarkable from '#components/GooseMarkable.vue'
-import { defineEmits } from 'vue'
+import { defineEmits, ref } from 'vue'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
-interface Leaf {
+import GooseCheckbox from '#components/GooseCheckbox.vue'
+
+export interface Leaf {
   title: string
   sub?: Leaf[]
   toggled?: boolean
-  matched?: boolean
 }
 
 const props = defineProps<{
@@ -16,19 +17,21 @@ const props = defineProps<{
   searchString?: string
 }>()
 
+const matches = ref(Array(props.tree.length).fill(true))
+
 const emit = defineEmits(['update'])
 
 function onUpdate(ind: number, matched: boolean) {
   if (!props.tree[ind])
     throw new Error('Major screwup')
 
-  props.tree[ind].matched = matched
+  matches.value[ind] = matched
 
   /* Toggle leaf on match */
   if (props.searchString && matched)
     props.tree[ind].toggled = true
 
-  emit('update', props.tree.filter(l => l.matched).length)
+  emit('update', matches.value.filter(l => l).length)
 }
 
 </script>
@@ -39,7 +42,7 @@ function onUpdate(ind: number, matched: boolean) {
       v-for="leaf, i in tree"
       :key="i"
     >
-      <div :style="{ display: leaf.matched ? 'block' : 'none' }">
+      <div :style="{ display: matches[i] ? 'block' : 'none' }">
         <div class="title">
           <FontAwesomeIcon
             v-if="leaf.sub?.length"
@@ -53,6 +56,7 @@ function onUpdate(ind: number, matched: boolean) {
             :needle="searchString || ''"
             @update="e => onUpdate(i, e)"
           />
+          <!--          <GooseCheckbox /> -->
         </div>
 
         <div :style="{ display: leaf.toggled ? 'block': 'none' }">
@@ -86,7 +90,7 @@ function onUpdate(ind: number, matched: boolean) {
   .title
     align-items: center
     display: flex
-    height: 2rem
+    height: 2.5rem
 
   .chevron
     cursor: pointer

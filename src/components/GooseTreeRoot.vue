@@ -3,13 +3,8 @@ import { ref, toRef } from 'vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import GooseInput from '#components/GooseInput.vue'
 import GooseTree from '#components/GooseTree.vue'
+import type { Leaf } from '#components/GooseTree.vue'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-
-interface Leaf {
-  title: string
-  sub?: Leaf[]
-  active?: boolean
-}
 
 const props = defineProps<{
   tree: Leaf[]

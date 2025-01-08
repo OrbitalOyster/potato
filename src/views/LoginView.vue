@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import GooseButton from '#components/GooseButton.vue'
-import GooseCheckbox from '#components/GooseCheckbox.vue'
+import GooseFormCheckbox from '#components/GooseFormCheckbox.vue'
 import GooseForm from '#components/GooseForm.vue'
 import GooseFormInput from '#components/GooseFormInput.vue'
 import { ref } from 'vue'
@@ -44,36 +44,36 @@ async function auth(formCheck: ILoginFormCheck | null) {
           <img src="/goose.png">
         </header>
         <GooseFormInput
-          name="username"
-          form-id="loginForm"
           :checks="['required']"
-          placeholder="Имя пользователя"
           :disabled
-          autofocus
           autocomplete="username"
+          autofocus
+          form-id="loginForm"
+          name="username"
+          placeholder="Имя пользователя"
         />
         <GooseFormInput
-          name="password"
-          form-id="loginForm"
           :checks="['required']"
-          placeholder="Пароль"
           :disabled
-          password
           autocomplete="password"
+          form-id="loginForm"
+          name="password"
+          password
+          placeholder="Пароль"
         />
         <footer>
-          <GooseCheckbox
-            title="Запомнить меня"
-            name="rememberMe"
-            form-id="loginForm"
+          <GooseFormCheckbox
             :disabled
+            form-id="loginForm"
+            name="rememberMe"
+            title="Запомнить меня"
           />
           <GooseButton
-            title="Войти"
-            icon="fa-right-to-bracket"
-            :loading="disabled"
             :disabled
+            :loading="disabled"
+            icon="fa-right-to-bracket"
             submit
+            title="Войти"
           />
         </footer>
       </main>

@@ -1,17 +1,24 @@
 <script setup lang="ts">
-defineProps<{
-  checked?: boolean
-  disabled?: boolean
-  name: string
-  title?: string
-}>()
+import type { FormCheck } from '#stores/useFormStore.ts'
+import { useFormStore } from '#stores/useFormStore.ts'
 
-const model = defineModel<boolean>()
+const props = defineProps<{
+    checked?: boolean
+    checks?: FormCheck[]
+    disabled?: boolean
+    formId: string
+    name: string
+    title?: string
+  }>(),
+  store = useFormStore(props.formId)
+
+store.checks[props.name] = props.checks ?? []
+store.inputs[props.name] = props.checked || false
 </script>
 
 <template>
   <input
-    v-model="model"
+    v-model="store.inputs[name]"
     type="checkbox"
     :name
   >
@@ -19,19 +26,19 @@ const model = defineModel<boolean>()
     class="wrapper"
   >
     <button
-      :id="name"
+      :id="`${formId}-${name}`"
       :disabled
       type="button"
-      @click="model = !model"
+      @click="store.inputs[name] = !store.inputs[name]"
     >
       <div
-        v-if="model"
+        v-if="store.inputs[name]"
         class="mark"
       />
     </button>
     <label
       v-if="title"
-      :for="name"
+      :for="`${formId}-${name}`"
     >
       {{ title }}
     </label>

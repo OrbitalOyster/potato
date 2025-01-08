@@ -15,7 +15,7 @@ onMounted(() => store.validate())
 <template>
   <form
     novalidate
-    :class="validated ? 'validated' : ''"
+    :class="{ validated }"
     @submit.prevent="emits('submit', store.isValid() ? store.inputs : null); validated = true"
   >
     <slot />
