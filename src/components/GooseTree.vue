@@ -18,6 +18,7 @@ const props = defineProps<{
 }>()
 
 const matches = ref(Array(props.tree.length).fill(true))
+const checks = ref(Array(props.tree.length).fill(false))
 
 const emit = defineEmits(['update'])
 
@@ -51,12 +52,12 @@ function onUpdate(ind: number, matched: boolean) {
             size="sm"
             @click="leaf.toggled = !leaf.toggled"
           />
+          <GooseCheckbox v-model="checks[i]" name="bogus"/>
           <GooseMarkable
             :title="leaf.title"
             :needle="searchString || ''"
             @update="e => onUpdate(i, e)"
           />
-          <!--          <GooseCheckbox /> -->
         </div>
 
         <div :style="{ display: leaf.toggled ? 'block': 'none' }">
@@ -84,12 +85,13 @@ function onUpdate(ind: number, matched: boolean) {
 
   li
     display: block
-    padding: .0rem .75rem .0rem 1.75rem
+    padding: .0rem .0rem .0rem 1.75rem
     user-select: none
 
   .title
     align-items: center
     display: flex
+    gap: .5rem
     height: 2.5rem
 
   .chevron

@@ -16,21 +16,19 @@ const searchString = ref('')
 </script>
 
 <template>
-  <div class="wrapper-tree">
-    <GooseInput
-      v-if="searchable"
-      v-model="searchString"
-    >
-      <template #extra-icon>
-        <FontAwesomeIcon
-          :icon="faMagnifyingGlass"
-          size="sm"
-        />
-      </template>
-    </GooseInput>
-    <GooseTree
-      :tree
-      :search-string
-    />
-  </div>
+  <GooseInput
+    v-if="searchable"
+    v-model="searchString"
+  >
+    <template #extra-icon>
+      <FontAwesomeIcon
+        :icon="faMagnifyingGlass"
+        size="lg"
+      />
+    </template>
+  </GooseInput>
+  <GooseTree
+    :tree
+    :search-string
+  />
 </template>
