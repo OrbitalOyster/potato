@@ -1,12 +1,12 @@
 <script setup lang="ts">
-defineProps<{
+
+const props = defineProps<{
   disabled?: boolean
   name: string
   title?: string
-  checked?: boolean
 }>()
 
-const model = defineModel<boolean>()
+const model = defineModel<boolean | null>()
 </script>
 
 <template>
@@ -25,7 +25,7 @@ const model = defineModel<boolean>()
       @click="model = !model"
     >
       <div
-        v-if="model"
+        v-if="model !== false"
         class="mark"
       />
     </button>
@@ -67,10 +67,10 @@ const model = defineModel<boolean>()
   .mark
     background-color: colors.$primary
     border-radius: borders.$radius
-    height: .9rem
+    height: v-bind("model === null ? '.55rem' : '.9rem'")
     left: .38rem
     position: absolute
-    top: .38rem
+    top: v-bind("model === null ? '.55rem' : '.38rem'")
     width: .9rem
 
   button:disabled .mark

@@ -110,6 +110,7 @@ const cb = ref(true)
       <GooseCheckbox
         v-model="cb"
         name="testCheckbox"
+        title="click me"
       />
       <hr>
       <div
