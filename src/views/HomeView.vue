@@ -5,7 +5,6 @@ import GooseForm from '#components/GooseForm.vue'
 import GooseFormInput from '#components/GooseFormInput.vue'
 import GooseInput from '#components/GooseInput.vue'
 import GooseCheckbox from '#components/GooseCheckbox.vue'
-import GooseMarkable from '#components/GooseMarkable.vue'
 import GoosePopover from '#components/GoosePopover.vue'
 import GooseSelect from '#components/GooseSelect.vue'
 import GooseTreeRoot from '#components/GooseTreeRoot.vue'
@@ -108,7 +107,10 @@ const cb = ref(true)
         </template>
       </GoosePopover>
       <hr>
-      <GooseCheckbox name="testCheckbox" v-model="cb"/> 
+      <GooseCheckbox
+        v-model="cb"
+        name="testCheckbox"
+      />
       <hr>
       <div
         class="card"

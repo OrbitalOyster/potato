@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import GooseButton from '#components/GooseButton.vue'
-import GooseFormCheckbox from '#components/GooseFormCheckbox.vue'
 import GooseForm from '#components/GooseForm.vue'
+import GooseFormCheckbox from '#components/GooseFormCheckbox.vue'
 import GooseFormInput from '#components/GooseFormInput.vue'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'

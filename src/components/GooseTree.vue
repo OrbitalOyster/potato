@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { defineEmits, ref } from 'vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import GooseMarkable from '#components/GooseMarkable.vue'
-import { defineEmits, ref } from 'vue'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 import GooseCheckbox from '#components/GooseCheckbox.vue'
@@ -52,7 +52,10 @@ function onUpdate(ind: number, matched: boolean) {
             size="sm"
             @click="leaf.toggled = !leaf.toggled"
           />
-          <GooseCheckbox v-model="checks[i]" name="bogus"/>
+          <GooseCheckbox
+            v-model="checks[i]"
+            name="bogus"
+          />
           <GooseMarkable
             :title="leaf.title"
             :needle="searchString || ''"

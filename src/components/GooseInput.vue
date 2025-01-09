@@ -15,6 +15,7 @@ defineProps<{
   password?: boolean
   placeholder?: string
   validation?: Validation
+  icon?: object
 }>()
 
 const passwordHidden = ref(true),
@@ -59,7 +60,11 @@ const passwordHidden = ref(true),
         </template>
       </GoosePopover>
 
-      <slot name="extra-icon" />
+      <FontAwesomeIcon
+        v-if="icon"
+        :icon="icon"
+        size="lg"
+      />
 
       <font-awesome-icon
         v-if="password"

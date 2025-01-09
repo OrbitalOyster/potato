@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, toRef } from 'vue'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import GooseInput from '#components/GooseInput.vue'
 import GooseTree from '#components/GooseTree.vue'
 import type { Leaf } from '#components/GooseTree.vue'
@@ -19,14 +18,8 @@ const searchString = ref('')
   <GooseInput
     v-if="searchable"
     v-model="searchString"
-  >
-    <template #extra-icon>
-      <FontAwesomeIcon
-        :icon="faMagnifyingGlass"
-        size="lg"
-      />
-    </template>
-  </GooseInput>
+    :icon="faMagnifyingGlass"
+  />
   <GooseTree
     :tree
     :search-string
