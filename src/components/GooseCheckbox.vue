@@ -1,9 +1,9 @@
 <script setup lang="ts">
-defineProps<{
-  checked?: boolean
+const props = defineProps<{
   disabled?: boolean
   name: string
   title?: string
+  checked?: boolean
 }>()
 
 const model = defineModel<boolean>()
