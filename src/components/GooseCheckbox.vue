@@ -11,18 +11,18 @@ const model = defineModel<boolean | null>()
 
 <template>
   <input
-    v-model="model"
-    type="checkbox"
     :name
+    type="checkbox"
+    v-model="model"
   >
   <div
     class="wrapper"
   >
     <button
-      :id="name"
       :disabled
-      type="button"
+      :id="name"
       @click="model = !model"
+      type="button"
     >
       <div
         v-if="model !== false"
