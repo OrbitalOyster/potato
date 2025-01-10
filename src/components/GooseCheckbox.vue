@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineEmits, nextTick } from 'vue'
+import { nextTick } from 'vue'
 
 defineProps<{
   disabled?: boolean
