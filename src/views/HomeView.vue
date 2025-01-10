@@ -56,7 +56,7 @@ const tree = [{
 
 const s0 = ref('foo')
 const s = ref('ipsum')
-const cb = ref(true)
+const cb = ref(null)
 
 </script>
 

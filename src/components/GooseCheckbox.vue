@@ -1,28 +1,36 @@
 <script setup lang="ts">
+import { defineEmits, nextTick } from 'vue'
 
-const props = defineProps<{
+defineProps<{
   disabled?: boolean
   name: string
   title?: string
 }>()
 
-const model = defineModel<boolean | null>()
+const model = defineModel<boolean | null>(),
+  emit = defineEmits(['update'])
+
+async function onClick() {
+  model.value = !model.value
+  await nextTick() /* Gotta wait for DOM */
+  emit('update', model.value)
+}
 </script>
 
 <template>
   <input
+    v-model="model"
     :name
     type="checkbox"
-    v-model="model"
   >
   <div
     class="wrapper"
   >
     <button
-      :disabled
       :id="name"
-      @click="model = !model"
+      :disabled
       type="button"
+      @click="onClick"
     >
       <div
         v-if="model !== false"

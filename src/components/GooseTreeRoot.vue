@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, toRef } from 'vue'
+import { ref } from 'vue'
 import GooseInput from '#components/GooseInput.vue'
 import GooseTree from '#components/GooseTree.vue'
 import type { Leaf } from '#components/GooseTree.vue'
@@ -10,7 +10,6 @@ const props = defineProps<{
   searchable?: boolean
 }>()
 
-const tree = toRef(props.tree)
 const searchString = ref('')
 </script>
 

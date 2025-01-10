@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { defineEmits, ref } from 'vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import GooseCheckbox from '#components/GooseCheckbox.vue'
 import GooseMarkable from '#components/GooseMarkable.vue'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
-
-import GooseCheckbox from '#components/GooseCheckbox.vue'
 
 export interface Leaf {
   title: string
@@ -13,28 +12,40 @@ export interface Leaf {
 }
 
 const props = defineProps<{
-  tree: Leaf[]
-  searchString?: string
-}>()
+    tree: Leaf[]
+    searchString?: string
+  }>(),
+  emit = defineEmits(['match', 'check'])
 
-const matches = ref(Array(props.tree.length).fill(true))
-const checks = ref(Array(props.tree.length).fill(false))
+const l = props.tree.length
+const toggles = ref(Array(l).fill(false)),
+  matches = ref(Array(l).fill(true)),
+  checks = ref(Array(l).fill(false))
 
-const emit = defineEmits(['update'])
-
-function onUpdate(ind: number, matched: boolean) {
-  if (!props.tree[ind])
+function onMatch(i: number, value: boolean) {
+  /* stfu, eslint */
+  if (!props.tree[i])
     throw new Error('Major screwup')
-
-  matches.value[ind] = matched
-
+  matches.value[i] = value
   /* Toggle leaf on match */
-  if (props.searchString && matched)
-    props.tree[ind].toggled = true
-
-  emit('update', matches.value.filter(l => l).length)
+  if (props.searchString && value)
+    toggles.value[i] = true
+  emit('match', matches.value.filter(l => l).length)
 }
 
+function onCheck(i: number, value: boolean) {
+  checks.value[i] = value
+
+  /* Everything checked */
+  if (checks.value.every(c => c === true))
+    emit('check', true)
+  /* Nothing checked */
+  else if (checks.value.every(c => c === false))
+    emit('check', false)
+  /* So-so */
+  else
+    emit('check', null)
+}
 </script>
 
 <template>
@@ -47,28 +58,30 @@ function onUpdate(ind: number, matched: boolean) {
         <div class="title">
           <FontAwesomeIcon
             v-if="leaf.sub?.length"
-            :class="{ chevron: true, toggled: leaf.toggled }"
+            :class="{ chevron: true, toggled: toggles[i] }"
             :icon="faChevronRight"
             size="sm"
-            @click="leaf.toggled = !leaf.toggled"
+            @click="toggles[i] = !toggles[i]"
           />
           <GooseCheckbox
             v-model="checks[i]"
             name="bogus"
+            @update="e => onCheck(i, e)"
           />
           <GooseMarkable
-            :title="leaf.title"
             :needle="searchString || ''"
-            @update="e => onUpdate(i, e)"
+            :title="leaf.title"
+            @update="e => onMatch(i, e)"
           />
         </div>
 
-        <div :style="{ display: leaf.toggled ? 'block': 'none' }">
+        <div :style="{ display: toggles[i] ? 'block': 'none' }">
           <GooseTree
             v-if="leaf.sub?.length"
-            :tree="leaf.sub"
             :search-string
-            @update="e => onUpdate(i, e)"
+            :tree="leaf.sub"
+            @match="e => onMatch(i, e)"
+            @check="e => onCheck(i, e)"
           />
         </div>
       </div>
