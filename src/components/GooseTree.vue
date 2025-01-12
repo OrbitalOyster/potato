@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import GooseCheckbox from '#components/GooseCheckbox.vue'
 import GooseMarkable from '#components/GooseMarkable.vue'
@@ -12,6 +12,7 @@ export interface Leaf {
 }
 
 const props = defineProps<{
+    checked: boolean | null
     tree: Leaf[]
     searchString?: string
   }>(),
@@ -20,7 +21,7 @@ const props = defineProps<{
 const l = props.tree.length
 const toggles = ref(Array(l).fill(false)),
   matches = ref(Array(l).fill(true)),
-  checks = ref(Array(l).fill(false))
+  checks = ref(Array(l).fill(props.checked))
 
 function onMatch(i: number, value: boolean) {
   /* stfu, eslint */
@@ -35,7 +36,6 @@ function onMatch(i: number, value: boolean) {
 
 function onCheck(i: number, value: boolean) {
   checks.value[i] = value
-
   /* Everything checked */
   if (checks.value.every(c => c === true))
     emit('check', true)
@@ -43,9 +43,17 @@ function onCheck(i: number, value: boolean) {
   else if (checks.value.every(c => c === false))
     emit('check', false)
   /* So-so */
-  else
+  else {
     emit('check', null)
+  }
 }
+
+watch(() => props.checked, (e) => {
+  if (e !== null)
+    for (let i = 0; i < l; i++)
+      checks.value[i] = e
+})
+
 </script>
 
 <template>
@@ -74,12 +82,12 @@ function onCheck(i: number, value: boolean) {
             @update="e => onMatch(i, e)"
           />
         </div>
-
         <div :style="{ display: toggles[i] ? 'block': 'none' }">
           <GooseTree
             v-if="leaf.sub?.length"
             :search-string
             :tree="leaf.sub"
+            :checked="checks[i]"
             @match="e => onMatch(i, e)"
             @check="e => onCheck(i, e)"
           />

@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import ErrorView from '#views/ErrorView.vue'
+import ClientError from '#views/ClientError.vue'
 import HomeView from '#views/HomeView.vue'
 import LoginView from '#views/LoginView.vue'
+import TestView from '#views/TestView.vue'
 import { useUserStore } from '#stores/useUserStore.ts'
 
 /* Typings */
@@ -13,25 +14,31 @@ declare module 'vue-router' {
 
 /* Routes */
 const routes = [{
-    component: LoginView,
-    name: 'Login',
-    path: '/login',
-    meta: { title: 'Вход' },
-  }, {
-    component: HomeView,
-    name: 'Home',
-    path: '/',
-    meta: { title: 'Главная' },
-  }, {
-    component: ErrorView,
-    name: 'Error',
-    path: '/error',
-    meta: { title: 'Ошибка' },
-  }],
-  router = createRouter({
-    history: createWebHistory(),
-    routes,
-  })
+  component: LoginView,
+  name: 'Login',
+  path: '/login',
+  meta: { title: 'Вход' },
+}, {
+  component: HomeView,
+  name: 'Home',
+  path: '/',
+  meta: { title: 'Главная' },
+}, {
+  component: TestView,
+  name: 'Test',
+  path: '/test',
+  meta: { title: 'Test' },
+}, {
+  component: ClientError,
+  name: 'Error',
+  path: '/error',
+  meta: { title: 'Ошибка' },
+}]
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+})
 
 /* Error handler */
 router.onError(async (err, to) => {
