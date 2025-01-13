@@ -75,10 +75,10 @@ async function onClick() {
   .mark
     background-color: colors.$primary
     border-radius: borders.$radius
-    height: v-bind("model === null ? '.55rem' : '.9rem'")
-    left: .38rem
+    height: v-bind("model === null ? '.35rem' : '.9rem'")
+    left: .35rem
     position: absolute
-    top: v-bind("model === null ? '.55rem' : '.38rem'")
+    top: v-bind("model === null ? '.65rem' : '.35rem'")
     width: .9rem
 
   button:disabled .mark
