@@ -40,6 +40,7 @@ const passwordHidden = ref(true),
       {{ placeholder }}
     </label>
     <div class="icons">
+      <!-- Validation error icon -->
       <GoosePopover
         has-arrow
         hover-toggle
@@ -48,25 +49,25 @@ const passwordHidden = ref(true),
           v-if="validation === 'invalid'"
           class="alert-icon"
         >
-          <font-awesome-icon
+          <FontAwesomeIcon
             :icon="faTriangleExclamation"
             size="xl"
           />
         </div>
         <template #popover>
-          <p style="padding: .5rem; margin: .5rem">
+          <p class="validation-message">
             {{ error }}
           </p>
         </template>
       </GoosePopover>
-
+      <!-- Custom icon -->
       <FontAwesomeIcon
         v-if="icon"
         :icon="icon"
         size="lg"
       />
-
-      <font-awesome-icon
+      <!-- Password show/hide icon -->
+      <FontAwesomeIcon
         v-if="password"
         :icon="passwordHidden ? faEye : faEyeSlash"
         size="xl"
@@ -125,6 +126,10 @@ const passwordHidden = ref(true),
     display: flex
     position: absolute
     right: .5rem
+
+  .validation-message
+    padding: .5rem
+    margin: .5rem
 
   .eye
     cursor: pointer

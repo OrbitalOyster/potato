@@ -94,18 +94,21 @@ const cb = ref(null)
         :options
       />
       <hr>
-      <GoosePopover
-        has-arrow
-        click-toggle
-        placement="top"
-      >
-        <GooseButton title="Click me" />
-        <template #popover>
-          <div style="padding: 1rem">
-            Hello World!
-          </div>
-        </template>
-      </GoosePopover>
+      <div style="display: flex; gap: 1rem">
+        <GoosePopover
+          has-arrow
+          click-toggle
+          placement="top"
+        >
+          <GooseButton title="Click me" />
+          <template #popover>
+            <div style="padding: 1rem">
+              Hello World!
+            </div>
+          </template>
+        </GoosePopover>
+        <GooseButton title="Alert" />
+        </div>
       <hr>
       <GooseCheckbox
         v-model="cb"

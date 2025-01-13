@@ -3,6 +3,8 @@ import GooseButton from '#components/GooseButton.vue'
 import GooseForm from '#components/GooseForm.vue'
 import GooseFormCheckbox from '#components/GooseFormCheckbox.vue'
 import GooseFormInput from '#components/GooseFormInput.vue'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faCopyright } from '@fortawesome/free-regular-svg-icons'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '#stores/useUserStore.ts'
@@ -31,53 +33,61 @@ async function auth(formCheck: ILoginFormCheck | null) {
 
 <template>
   <div class="fs">
-    <GooseForm
-      id="loginForm"
-      @submit="auth"
-    >
-      <main class="card">
-        <header>
-          <div class="title">
-            <h1>Gooseberry.js</h1>
-            <h2>Последний шанс снять бахилы</h2>
-          </div>
-          <img src="/goose.png">
-        </header>
-        <GooseFormInput
-          :checks="['required']"
-          :disabled
-          autocomplete="username"
-          autofocus
-          form-id="loginForm"
-          name="username"
-          placeholder="Имя пользователя"
-        />
-        <GooseFormInput
-          :checks="['required']"
-          :disabled
-          autocomplete="password"
-          form-id="loginForm"
-          name="password"
-          password
-          placeholder="Пароль"
-        />
-        <footer>
-          <GooseFormCheckbox
+    <div class="wrapper">
+      <GooseForm
+        id="loginForm"
+        @submit="auth"
+      >
+        <main class="card">
+          <header>
+            <div class="title">
+              <h1>Gooseberry.js</h1>
+              <h2>Последний шанс снять бахилы</h2>
+            </div>
+            <img src="/goose.png">
+          </header>
+          <GooseFormInput
+            :checks="['required']"
             :disabled
+            autocomplete="username"
+            autofocus
             form-id="loginForm"
-            name="rememberMe"
-            title="Запомнить меня"
+            name="username"
+            placeholder="Имя пользователя"
           />
-          <GooseButton
+          <GooseFormInput
+            :checks="['required']"
             :disabled
-            :loading="disabled"
-            icon="fa-right-to-bracket"
-            submit
-            title="Войти"
+            autocomplete="password"
+            form-id="loginForm"
+            name="password"
+            password
+            placeholder="Пароль"
           />
-        </footer>
-      </main>
-    </GooseForm>
+          <footer>
+            <GooseFormCheckbox
+              :disabled
+              form-id="loginForm"
+              name="rememberMe"
+              title="Запомнить меня"
+            />
+            <GooseButton
+              :disabled
+              :loading="disabled"
+              icon="fa-right-to-bracket"
+              submit
+              title="Войти"
+            />
+          </footer>
+        </main>
+      </GooseForm>
+      <div class="copyright">
+        <span>
+          <FontAwesomeIcon :icon="faCopyright" />
+          {{ new Date().getFullYear() }}
+        </span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -85,6 +95,7 @@ async function auth(formCheck: ILoginFormCheck | null) {
   .fs
     align-items: center
     display: flex
+    flex-direction: column
     height: 100vh
     justify-content: center
     width: 100vw
@@ -133,4 +144,10 @@ async function auth(formCheck: ILoginFormCheck | null) {
     align-items: center
     display: flex
     justify-content: space-between
+
+  .copyright
+    display: flex
+    justify-content: end
+    padding: .75rem
+
 </style>
