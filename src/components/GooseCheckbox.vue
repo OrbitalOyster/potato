@@ -23,18 +23,16 @@ async function onClick() {
     :name
     type="checkbox"
   >
-  <div
-    class="wrapper"
-  >
+  <div class="wrapper">
     <button
       :id="name"
       :disabled
       type="button"
       @click="onClick"
     >
-    <div
-      class="mark"
-    />
+      <div
+        class="mark"
+      />
     </button>
     <label
       v-if="title"

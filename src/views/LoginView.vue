@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import GooseButton from '#components/GooseButton.vue'
 import GooseForm from '#components/GooseForm.vue'
 import GooseFormCheckbox from '#components/GooseFormCheckbox.vue'
 import GooseFormInput from '#components/GooseFormInput.vue'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faCopyright } from '@fortawesome/free-regular-svg-icons'
 import { faRightToBracket } from '@fortawesome/free-solid-svg-icons'
 import { ref } from 'vue'

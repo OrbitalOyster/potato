@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import GooseInput from '#components/GooseInput.vue'
 import GooseTree from '#components/GooseTree.vue'
 import type { Leaf } from '#components/GooseTree.vue'
+import { ref } from 'vue'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
 defineProps<{
@@ -19,16 +19,11 @@ function checkAll() {
 </script>
 
 <template>
-  <button
-    type="button"
-    @click="checkAll"
-  >
-    check
-  </button>
   <GooseInput
     v-if="searchable"
     v-model="searchString"
     :icon="faMagnifyingGlass"
+    style="padding-bottom: 1rem"
   />
   <GooseTree
     :tree
@@ -36,3 +31,6 @@ function checkAll() {
     :search-string
   />
 </template>
+
+<style lang="sass" scoped>
+</style>

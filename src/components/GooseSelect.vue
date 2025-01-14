@@ -95,7 +95,7 @@ store.inputs[props.name] = ''
     >
     <div
       ref="target"
-      class="target"
+      class="focusable form-input target"
       :class="store.errors[props.name] ? 'invalid' : 'valid'"
       :tabindex="disabled ? -1 : 0"
       @blur="e => active = active && e.relatedTarget === floating"
@@ -129,7 +129,7 @@ store.inputs[props.name] = ''
           v-for="(option, i) in options"
           ref="optionsRef"
           :key="i"
-          :class="selectedIndex === i && 'selected'"
+          :class="{ selected: selectedIndex === i }"
           @click="setValue(i); active = false"
         >
           {{ option }}
@@ -153,8 +153,6 @@ store.inputs[props.name] = ''
     display: none
 
   .target
-    @extend .focusable
-    @extend .form-input
     align-items: center
     cursor: pointer
     display: flex

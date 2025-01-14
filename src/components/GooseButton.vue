@@ -14,12 +14,13 @@ const props = defineProps<{
 <template>
   <button
     :type
+    class="focusable"
   >
     <div class="wrapper">
       {{ title }}
       <FontAwesomeIcon
         v-if="icon || loading"
-        :class="loading && 'fa-pulse'"
+        :class="{ 'fa-pulse': loading }"
         :icon="loading ? faSpinner : icon!"
         size="lg"
       />
@@ -34,16 +35,15 @@ const props = defineProps<{
   @use '../assets/transitions'
 
   button
-    @extend .focusable
     background-color: colors.$primary
     border-radius: borders.$radius
     border: none
     color: colors.$button
     cursor: pointer
     font-size: 1.25rem
-    padding: .75rem
     transform: translateY(0)
     transition: transitions.$focusable, transitions.$colors, transitions.$filter, transitions.$transform
+    height: 3.5rem
     user-select: none
 
   button:enabled
@@ -67,5 +67,6 @@ const props = defineProps<{
     display: flex
     filter: drop-shadow(colors.$button-shadow 0 0 .1rem)
     gap: .75rem
-    height: 2rem
+    padding-left: 1rem
+    padding-right: 1rem
 </style>

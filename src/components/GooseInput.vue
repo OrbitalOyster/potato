@@ -11,11 +11,11 @@ defineProps<{
   autofocus?: boolean
   disabled?: boolean
   error?: string
+  icon?: object
   name?: string
   password?: boolean
   placeholder?: string
   validation?: Validation
-  icon?: object
 }>()
 
 const passwordHidden = ref(true),
@@ -23,9 +23,7 @@ const passwordHidden = ref(true),
 </script>
 
 <template>
-  <div
-    class="wrapper"
-  >
+  <div class="wrapper">
     <input
       v-model="model"
       :autocomplete

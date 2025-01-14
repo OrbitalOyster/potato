@@ -83,7 +83,7 @@ defineExpose({ toggle, active })
     <div
       v-if="active"
       ref="floating"
-      class="floating"
+      class="card floating"
       :style="{
         ...floatingStyles,
         visibility: middlewareData.hide?.referenceHidden
@@ -124,7 +124,6 @@ defineExpose({ toggle, active })
     width: 12px
 
   .floating
-    @extend .card
     left: 0
     position: absolute
     top: 0

@@ -116,7 +116,7 @@ watch(() => props.checked, (e) => {
     align-items: center
     display: flex
     gap: .5rem
-    height: 2.5rem
+    height: 3rem
 
   .chevron
     cursor: pointer

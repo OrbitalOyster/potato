@@ -64,14 +64,13 @@ const confirmModal = useTemplateRef('confirmModal')
 </script>
 
 <template>
-  
   <GooseConfirm
-      ref="confirmModal"
-      title="Are you sure you want to log out?"
-      @submit="console.log('modal ok')"
+    ref="confirmModal"
+    title="Are you sure you want to log out?"
+    @submit="console.log('modal ok')"
   />
 
-  <main>
+  <div>
     <p>Home</p>
     <GooseForm
       id="mySampleForm"
@@ -117,8 +116,11 @@ const confirmModal = useTemplateRef('confirmModal')
             </div>
           </template>
         </GoosePopover>
-        <GooseButton title="Alert" @click="confirmModal?.show"/>
-        </div>
+        <GooseButton
+          title="Alert"
+          @click="confirmModal?.show"
+        />
+      </div>
       <hr>
       <GooseCheckbox
         v-model="cb"
@@ -136,10 +138,8 @@ const confirmModal = useTemplateRef('confirmModal')
         />
       </div>
     </GooseForm>
-  </main>
+  </div>
 </template>
 
 <style lang="sass" scoped>
-  main
-    padding: 1rem
 </style>
