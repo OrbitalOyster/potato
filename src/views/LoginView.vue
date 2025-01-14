@@ -5,6 +5,7 @@ import GooseFormCheckbox from '#components/GooseFormCheckbox.vue'
 import GooseFormInput from '#components/GooseFormInput.vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faCopyright } from '@fortawesome/free-regular-svg-icons'
+import { faRightToBracket } from '@fortawesome/free-solid-svg-icons'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '#stores/useUserStore.ts'
@@ -74,7 +75,7 @@ async function auth(formCheck: ILoginFormCheck | null) {
             <GooseButton
               :disabled
               :loading="disabled"
-              icon="fa-right-to-bracket"
+              :icon="faRightToBracket"
               submit
               title="Войти"
             />
@@ -92,14 +93,6 @@ async function auth(formCheck: ILoginFormCheck | null) {
 </template>
 
 <style scoped lang="sass">
-  .fs
-    align-items: center
-    display: flex
-    flex-direction: column
-    height: 100vh
-    justify-content: center
-    width: 100vw
-
   main
     display: flex
     flex-direction: column
@@ -149,5 +142,4 @@ async function auth(formCheck: ILoginFormCheck | null) {
     display: flex
     justify-content: end
     padding: .75rem
-
 </style>

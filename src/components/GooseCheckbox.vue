@@ -32,10 +32,9 @@ async function onClick() {
       type="button"
       @click="onClick"
     >
-      <div
-        v-if="model !== false"
-        class="mark"
-      />
+    <div
+      class="mark"
+    />
     </button>
     <label
       v-if="title"
@@ -61,13 +60,15 @@ async function onClick() {
     gap: .5rem
 
   button
-    @extend .form-input
     @extend .focusable
+    @extend .form-input
+    box-sizing: content-box
     cursor: pointer
-    height: 1.75rem
+    height: 2rem
+    padding: 0
     position: relative
     transition: transitions.$focusable, transitions.$colors
-    width: 1.75rem
+    width: 2rem
 
   button:active:enabled
     background-color: colors.$active
@@ -75,11 +76,13 @@ async function onClick() {
   .mark
     background-color: colors.$primary
     border-radius: borders.$radius
-    height: v-bind("model === null ? '.35rem' : '.9rem'")
-    left: .35rem
+    height: v-bind("model === null ? '.4rem' : '1rem'")
+    left: .5rem
     position: absolute
-    top: v-bind("model === null ? '.65rem' : '.35rem'")
-    width: .9rem
+    top: v-bind("model === null ? '.8rem' : '.5rem'")
+    width: 1rem
+    transition: height .1s ease-in-out, top .1s ease-in-out, scale .1s ease-in-out
+    scale: v-bind("model === false ? '0%' : '100%'")
 
   button:disabled .mark
     background-color: colors.$disabled-primary

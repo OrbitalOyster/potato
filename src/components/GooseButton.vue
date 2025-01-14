@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 const props = defineProps<{
-    icon?: string
+    icon?: object
     loading?: boolean
     submit?: boolean
     title: string

@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, useTemplateRef } from 'vue'
 import GooseButton from '#components/GooseButton.vue'
+import GooseConfirm from '#components/GooseConfirm.vue'
 import GooseForm from '#components/GooseForm.vue'
 import GooseFormInput from '#components/GooseFormInput.vue'
 import GooseInput from '#components/GooseInput.vue'
@@ -58,9 +59,18 @@ const s0 = ref('foo')
 const s = ref('ipsum')
 const cb = ref(null)
 
+const confirmModal = useTemplateRef('confirmModal')
+
 </script>
 
 <template>
+  
+  <GooseConfirm
+      ref="confirmModal"
+      title="Are you sure you want to log out?"
+      @submit="console.log('modal ok')"
+  />
+
   <main>
     <p>Home</p>
     <GooseForm
@@ -107,7 +117,7 @@ const cb = ref(null)
             </div>
           </template>
         </GoosePopover>
-        <GooseButton title="Alert" />
+        <GooseButton title="Alert" @click="confirmModal?.show"/>
         </div>
       <hr>
       <GooseCheckbox
