@@ -31,7 +31,6 @@ const props = defineProps<{
 <style scoped lang="sass">
   @use '../assets/borders'
   @use '../assets/colors'
-  @use '../assets/style'
   @use '../assets/transitions'
 
   button

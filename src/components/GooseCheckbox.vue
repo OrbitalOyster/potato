@@ -27,6 +27,7 @@ async function onClick() {
     <button
       :id="name"
       :disabled
+      class="focusable form-input"
       type="button"
       @click="onClick"
     >
@@ -46,7 +47,6 @@ async function onClick() {
 <style scoped lang="sass">
   @use '../assets/borders'
   @use '../assets/colors'
-  @use '../assets/style'
   @use '../assets/transitions'
 
   input
@@ -58,8 +58,6 @@ async function onClick() {
     gap: .5rem
 
   button
-    @extend .focusable
-    @extend .form-input
     box-sizing: content-box
     cursor: pointer
     height: 2rem

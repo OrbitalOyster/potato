@@ -70,8 +70,7 @@ const confirmModal = useTemplateRef('confirmModal')
     @submit="console.log('modal ok')"
   />
 
-  <div>
-    <p>Home</p>
+  <div style="padding: 2rem">
     <GooseForm
       id="mySampleForm"
     >
