@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { faCheck, faMultiply, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
+import { nextTick, ref, useTemplateRef } from 'vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import GooseButton from '#components/GooseButton.vue'
-import { nextTick, ref, useTemplateRef } from 'vue'
 import { useFocusTrap } from '@vueuse/integrations/useFocusTrap'
 
 defineProps<{

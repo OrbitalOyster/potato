@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 
 export type FormCheck = 'required' | 'lessThanTo' | 'moreThanFrom'
 
-type Inputs = Record<string, string | boolean>
+type Inputs = Record<string, string | boolean | null>
 
 interface StoreState {
   errors: Record<string, string>
@@ -14,7 +14,7 @@ function checkInput(key: string, check: FormCheck, inputs: Inputs) {
   const rawValue = inputs[key]
   switch (check) {
     case 'required':
-      return rawValue === '' ? 'Required' : ''
+      return !rawValue ? 'Required' : ''
     case 'lessThanTo': {
       const value = Number(rawValue),
         to = Number(inputs['to'])

@@ -4,7 +4,6 @@ import GooseCheckbox from '#components/GooseCheckbox.vue'
 import { useFormStore } from '#stores/useFormStore.ts'
 
 const props = defineProps<{
-    checked?: boolean
     checks?: FormCheck[]
     disabled?: boolean
     formId: string
@@ -14,12 +13,12 @@ const props = defineProps<{
   store = useFormStore(props.formId)
 
 store.checks[props.name] = props.checks ?? []
-store.inputs[props.name] = props.checked || false
+store.inputs[props.name] = false
 </script>
 
 <template>
   <GooseCheckbox
-    v-model="store.inputs[props.name] as boolean"
+    v-model="store.inputs[props.name]"
     :disabled
     :name
     :title

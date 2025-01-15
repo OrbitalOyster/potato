@@ -12,12 +12,10 @@ const props = defineProps<{
     password?: boolean
     placeholder?: string
     formId: string
-    value?: string
   }>(),
   store = useFormStore(props.formId)
 
 store.checks[props.name] = props.checks ?? []
-store.inputs[props.name] = props.value ?? ''
 </script>
 
 <template>
