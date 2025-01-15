@@ -10,7 +10,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '#stores/useUserStore.ts'
 
-interface ILoginFormCheck {
+interface LoginFormCheck {
   username: string
   password: string
   rememberMe: boolean
@@ -20,7 +20,7 @@ const router = useRouter(),
   userStore = useUserStore(),
   disabled = ref(false)
 
-async function auth(formCheck: ILoginFormCheck | null) {
+async function auth(formCheck: LoginFormCheck | null) {
   if (!formCheck)
     return
   disabled.value = true
@@ -34,7 +34,7 @@ async function auth(formCheck: ILoginFormCheck | null) {
 
 <template>
   <div class="fs">
-    <div class="wrapper">
+    <div>
       <GooseForm
         id="loginForm"
         @submit="auth"

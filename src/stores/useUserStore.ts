@@ -2,12 +2,12 @@ import type { AxiosResponse } from 'axios'
 import axios from 'axios'
 import { defineStore } from 'pinia'
 
-interface IUserStore {
+interface UserStore {
   username: null | string
   role: null | string
 }
 
-interface IAuthResponse {
+interface AuthResponse {
   username: string
   role: string
 }
@@ -19,7 +19,7 @@ if (!authEndpoint)
   throw new Error('Missing auth endpoint')
 
 const useUserStore = defineStore('user', {
-  state: (): IUserStore => ({
+  state: (): UserStore => ({
     username: null,
     role: null,
   }),
@@ -29,7 +29,7 @@ const useUserStore = defineStore('user', {
       /* Already logged in */
       if (this.username)
         return true
-      const res: AxiosResponse<IAuthResponse | null>
+      const res: AxiosResponse<AuthResponse | null>
         = await axios.get(`${authEndpoint}/check`, axiosOptions)
       /* Invalid token */
       if (res.data === null)
@@ -40,7 +40,7 @@ const useUserStore = defineStore('user', {
     },
     /* Logs user in */
     async auth(username: string, password: string, rememberMe: boolean) {
-      const res: AxiosResponse<IAuthResponse | null> = await axios.post(
+      const res: AxiosResponse<AuthResponse | null> = await axios.post(
         `${authEndpoint}/auth`, {
           username,
           password,

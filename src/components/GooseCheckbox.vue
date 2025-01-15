@@ -23,7 +23,7 @@ async function onClick() {
     :name
     type="checkbox"
   >
-  <div class="wrapper">
+  <div style="align-items: center; display: flex; gap: .5rem">
     <button
       :id="name"
       :disabled
@@ -31,7 +31,7 @@ async function onClick() {
       type="button"
       @click="onClick"
     >
-      <div
+      <span
         class="mark"
       />
     </button>
@@ -51,11 +51,6 @@ async function onClick() {
 
   input
     display: none
-
-  .wrapper
-    align-items: center
-    display: flex
-    gap: .5rem
 
   button
     box-sizing: content-box

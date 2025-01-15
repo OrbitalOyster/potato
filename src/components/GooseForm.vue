@@ -10,13 +10,18 @@ const props = defineProps<{
   validated = ref(false)
 
 onMounted(() => store.validate())
+
+function onSubmit() {
+  emits('submit', store.isValid() ? store.inputs : null)
+  validated.value = true
+}
 </script>
 
 <template>
   <form
     novalidate
     :class="{ validated }"
-    @submit.prevent="emits('submit', store.isValid() ? store.inputs : null); validated = true"
+    @submit.prevent="onSubmit"
   >
     <slot />
   </form>

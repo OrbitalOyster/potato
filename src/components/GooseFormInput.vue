@@ -30,7 +30,7 @@ store.inputs[props.name] = props.value ?? ''
     :name
     :password
     :placeholder
-    :validation="store.errors[props.name] ? 'invalid' : 'valid'"
+    :validity="store.errors[props.name] ? 'invalid' : 'valid'"
     @input="store.validate"
   />
 </template>

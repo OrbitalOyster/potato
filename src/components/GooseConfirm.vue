@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { nextTick, ref, useTemplateRef } from 'vue'
-import GooseButton from '#components/GooseButton.vue'
-import { useFocusTrap } from '@vueuse/integrations/useFocusTrap'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faCheck, faMultiply, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import GooseButton from '#components/GooseButton.vue'
+import { nextTick, ref, useTemplateRef } from 'vue'
+import { useFocusTrap } from '@vueuse/integrations/useFocusTrap'
 
 defineProps<{
   title: string
@@ -26,7 +26,7 @@ async function show() {
   activate()
 }
 
-function hide(params) {
+function hide() {
   active.value = false
   deactivate()
 }
@@ -43,16 +43,15 @@ defineExpose({ show })
       >
         <div
           ref="dialog"
-          class="card dialog"
+          class="card"
+          style="padding: 1rem"
         >
           <div class="message">
             <FontAwesomeIcon
               :icon="faTriangleExclamation"
               size="3x"
             />
-            <p class="title">
-              {{ title }}
-            </p>
+            {{ title }}
           </div>
           <footer>
             <GooseButton
@@ -76,21 +75,15 @@ defineExpose({ show })
   @use '../assets/colors'
   @use '../assets/transitions'
 
-  .dialog
-    padding: 1rem
-
   .message
     align-items: center
     display: flex
     flex-direction: row
-    gap: 1rem
-    padding-bottom: 1.5rem
+    gap: 2rem
+    padding: 1rem
 
   .fa-triangle-exclamation
     color: colors.$warning
-
-  p.title
-    padding: .5rem
 
   footer
     display: flex

@@ -4,7 +4,7 @@ export type FormCheck = 'required' | 'lessThanTo' | 'moreThanFrom'
 
 type Inputs = Record<string, string | boolean>
 
-interface IState {
+interface StoreState {
   errors: Record<string, string>
   inputs: Inputs
   checks: Record<string, FormCheck[]>
@@ -32,7 +32,7 @@ function checkInput(key: string, check: FormCheck, inputs: Inputs) {
 }
 
 export const useFormStore = (id: string) => defineStore(id, {
-  state: (): IState => ({
+  state: (): StoreState => ({
     errors: {},
     inputs: {},
     checks: {},

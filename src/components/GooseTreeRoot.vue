@@ -2,8 +2,8 @@
 import GooseInput from '#components/GooseInput.vue'
 import GooseTree from '#components/GooseTree.vue'
 import type { Leaf } from '#components/GooseTree.vue'
-import { ref } from 'vue'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { ref } from 'vue'
 
 defineProps<{
   tree: Leaf[]
@@ -12,10 +12,6 @@ defineProps<{
 
 const searchString = ref('')
 const checked = ref(false)
-
-function checkAll() {
-  checked.value = !checked.value
-}
 </script>
 
 <template>

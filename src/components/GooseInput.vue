@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import GoosePopover from '#components/GoosePopover.vue'
 import { ref } from 'vue'
 
-type Validation = 'valid' | 'invalid'
+type Validity = 'valid' | 'invalid'
 
 defineProps<{
   autocomplete?: string
@@ -15,11 +15,11 @@ defineProps<{
   name?: string
   password?: boolean
   placeholder?: string
-  validation?: Validation
+  validity?: Validity
 }>()
 
-const passwordHidden = ref(true),
-  model = defineModel<string>()
+const model = defineModel<string>(),
+  passwordHidden = ref(true)
 </script>
 
 <template>
@@ -28,7 +28,7 @@ const passwordHidden = ref(true),
       v-model="model"
       :autocomplete
       :autofocus
-      :class="['focusable', 'form-input', validation]"
+      :class="['focusable', 'form-input', validity]"
       :disabled
       :name
       :placeholder
@@ -44,7 +44,7 @@ const passwordHidden = ref(true),
         hover-toggle
       >
         <div
-          v-if="validation === 'invalid'"
+          v-if="validity === 'invalid'"
           class="alert-icon"
         >
           <FontAwesomeIcon
