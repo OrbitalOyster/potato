@@ -13,12 +13,11 @@ const props = defineProps<{
   store = useFormStore(props.formId)
 
 store.checks[props.name] = props.checks ?? []
-store.inputs[props.name] = false
 </script>
 
 <template>
   <GooseCheckbox
-    v-model="store.inputs[props.name]"
+    v-model="store.inputs[props.name] as boolean | null"
     :disabled
     :name
     :title
