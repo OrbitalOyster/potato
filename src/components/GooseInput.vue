@@ -23,7 +23,7 @@ const model = defineModel<string>({ default: '' }),
 </script>
 
 <template>
-  <div class="wrapper">
+  <div style="align-items: center; display: flex; position: relative">
     <input
       v-model="model"
       :autocomplete
@@ -79,11 +79,6 @@ const model = defineModel<string>({ default: '' }),
 <style lang="sass" scoped>
   @use '../assets/colors'
   @use '../assets/transitions'
-
-  .wrapper
-    align-items: center
-    display: flex
-    position: relative
 
   input
     color: colors.$text

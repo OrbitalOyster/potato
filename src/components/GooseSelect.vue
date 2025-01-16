@@ -85,9 +85,7 @@ store.inputs[props.name] = ''
 </script>
 
 <template>
-  <div
-    class="wrapper"
-  >
+  <div style="align-items: center; display: flex; position: relative">
     <input
       v-model="store.inputs[props.name]"
       :name
@@ -95,8 +93,7 @@ store.inputs[props.name] = ''
     >
     <div
       ref="target"
-      class="focusable form-input target"
-      :class="store.errors[props.name] ? 'invalid' : 'valid'"
+      :class="['focusable', 'form-input', 'target', store.errors[props.name] ? 'invalid' : 'valid']"
       :tabindex="disabled ? -1 : 0"
       @blur="e => active = active && e.relatedTarget === floating"
       @click="active = !active"
@@ -143,11 +140,6 @@ store.inputs[props.name] = ''
   @use '../assets/colors'
   @use '../assets/style'
   @use '../assets/transitions'
-
-  .wrapper
-    display: flex
-    align-items: center
-    position: relative
 
   input
     display: none
