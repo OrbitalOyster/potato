@@ -10,7 +10,7 @@ import GoosePopover from '#components/GoosePopover.vue'
 import GooseSelect from '#components/GooseSelect.vue'
 import GooseTreeRoot from '#components/GooseTreeRoot.vue'
 
-const options = [
+const items = [
   '1 Macao',
   '2 Madagascar',
   '3 Malawi',
@@ -77,12 +77,12 @@ const confirmModal = useTemplateRef('confirmModal')
       <GooseFormInput
         placeholder="From"
         name="sampleInput1"
-        form-id="mySampleForm"
+        form="mySampleForm"
       />
       <hr>
       <GooseFormInput
         name="sampleInput2"
-        form-id="mySampleForm"
+        form="mySampleForm"
       />
       <hr>
       <div class="validated">
@@ -96,10 +96,10 @@ const confirmModal = useTemplateRef('confirmModal')
       <hr>
       <GooseSelect
         name="selectInput"
-        form-id="mySampleForm"
+        form="mySampleForm"
         placeholder="Select something"
         :checks="['required']"
-        :options
+        :items
       />
       <hr>
       <div style="display: flex; gap: 1rem">

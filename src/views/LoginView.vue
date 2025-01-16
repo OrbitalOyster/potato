@@ -52,7 +52,7 @@ async function auth(formCheck: LoginFormCheck | null) {
             :disabled
             autocomplete="username"
             autofocus
-            form-id="loginForm"
+            form="loginForm"
             name="username"
             placeholder="Имя пользователя"
           />
@@ -60,7 +60,7 @@ async function auth(formCheck: LoginFormCheck | null) {
             :checks="['required']"
             :disabled
             autocomplete="password"
-            form-id="loginForm"
+            form="loginForm"
             name="password"
             password
             placeholder="Пароль"
@@ -68,7 +68,7 @@ async function auth(formCheck: LoginFormCheck | null) {
           <footer>
             <GooseFormCheckbox
               :disabled
-              form-id="loginForm"
+              form="loginForm"
               name="rememberMe"
               title="Запомнить меня"
             />

@@ -10,14 +10,14 @@ const props = defineProps<{
     checks?: FormCheck[]
     disabled?: boolean
     name: string
-    options: string[]
+    items: string[]
     placeholder: string
-    formId: string
+    form: string
   }>(),
-  store = useFormStore(props.formId),
+  store = useFormStore(props.form),
   active = ref(false),
   selectedIndex = ref<null | number>(null),
-  optionsRef = useTemplateRef('optionsRef'),
+  itemsRef = useTemplateRef('itemsRef'),
   target = useTemplateRef('target'),
   floating = useTemplateRef('floating')
 
@@ -49,16 +49,16 @@ const { floatingStyles, isPositioned } = useFloating(target, floating, {
 })
 
 function wrap(value: number, direction: number) {
-  return (value + direction + props.options.length) % props.options.length
+  return (value + direction + props.items.length) % props.items.length
 }
 
 function setValue(value: number | null) {
   selectedIndex.value = value
   /* Resetting value? */
-  if (value === null || !props.options[value] /* Should not happen */)
+  if (value === null || !props.items[value] /* Should not happen */)
     store.inputs[props.name] = ''
   else
-    store.inputs[props.name] = props.options[value]
+    store.inputs[props.name] = props.items[value]
   store.validate()
 }
 
@@ -72,7 +72,7 @@ function keyScroll(direction: number) {
 
 function scrollToSelected(instant: boolean) {
   if (selectedIndex.value !== null) {
-    const highlightedElement = optionsRef.value?.[selectedIndex.value],
+    const highlightedElement = itemsRef.value?.[selectedIndex.value],
       behavior = instant ? 'instant' : 'smooth'
     highlightedElement?.scrollIntoView({ behavior, block: 'center' })
   }
@@ -123,8 +123,8 @@ store.inputs[props.name] = ''
         @focus="target?.focus()"
       >
         <li
-          v-for="(option, i) in options"
-          ref="optionsRef"
+          v-for="(option, i) in items"
+          ref="itemsRef"
           :key="i"
           :class="{ selected: selectedIndex === i }"
           @click="setValue(i); active = false"

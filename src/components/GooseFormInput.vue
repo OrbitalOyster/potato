@@ -8,12 +8,12 @@ const props = defineProps<{
     autofocus?: boolean
     checks?: FormCheck[]
     disabled?: boolean
-    formId: string
+    form: string
     name: string
     password?: boolean
     placeholder?: string
   }>(),
-  store = useFormStore(props.formId)
+  store = useFormStore(props.form)
 
 if (!store.inputs[props.name])
   store.inputs[props.name] = ''

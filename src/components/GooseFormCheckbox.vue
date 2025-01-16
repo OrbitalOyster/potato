@@ -6,11 +6,11 @@ import { useFormStore } from '#stores/useFormStore.ts'
 const props = defineProps<{
     checks?: FormCheck[]
     disabled?: boolean
-    formId: string
+    form: string
     name: string
     title?: string
   }>(),
-  store = useFormStore(props.formId)
+  store = useFormStore(props.form)
 
 store.checks[props.name] = props.checks ?? []
 </script>
