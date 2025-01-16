@@ -7,7 +7,7 @@ defineProps<{
   title?: string
 }>()
 
-const model = defineModel<boolean | null>(),
+const model = defineModel<boolean | null>({ default: false }),
   emit = defineEmits(['update'])
 
 async function onClick() {

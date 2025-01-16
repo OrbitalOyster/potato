@@ -23,7 +23,7 @@ const { floatingStyles, middlewareData } = useFloating(target, floating, {
   placement: props.placement,
   middleware: [
     offset({ mainAxis: offsetValue }),
-    !props.placement && autoPlacement(),
+    autoPlacement({ allowedPlacements: [props.placement ?? 'top'] }),
     shift(),
     arrow({ element: arrowRef, padding: 16 }),
     size({

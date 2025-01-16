@@ -18,7 +18,7 @@ defineProps<{
   validity?: Validity
 }>()
 
-const model = defineModel<string>(),
+const model = defineModel<string>({ default: '' }),
   passwordHidden = ref(true)
 </script>
 
