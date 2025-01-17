@@ -3,7 +3,7 @@ import GooseInput from '#components/GooseInput.vue'
 import GooseTree from '#components/GooseTree.vue'
 import type { Leaf } from '#components/GooseTree.vue'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-import { ref, onBeforeMount } from 'vue'
+import { ref, reactive, toRef, onBeforeMount } from 'vue'
 
 const props = defineProps<{
   tree: Leaf[]
@@ -28,6 +28,11 @@ function parseMasterModel(tree, master) {
 
 parseMasterModel(props.tree, masterModel.value)
 
+console.log(1, masterModel)
+const rt = toRef(props.tree)
+console.log(2, rt)
+
+
 </script>
 
 <template>
@@ -39,15 +44,15 @@ parseMasterModel(props.tree, masterModel.value)
   />
   <GooseTree
     :tree
-    :checked
+    :checked="checked || false"
     :search-string
-    v-model="masterModel"
+    v-model="rt"
   />
   <!--
   <p>{{ leafChecks }}</p>
   <p>{{ branchChecks }}</p>
   -->
-  <p>{{ masterModel }}</p>
+  <p>{{ rt }}</p>
   <pre>{{ JSON.stringify(masterModel, 0, 1) }}</pre>
 </template>
 

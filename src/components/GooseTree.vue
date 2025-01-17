@@ -81,7 +81,7 @@ watch(() => props.checked, (e) => {
       <div :style="{ display: leaf.match ? 'block' : 'none' }">
         <div class="title">
           <FontAwesomeIcon
-            v-if="leaf.leaf === false"
+            v-if="leaf.sub"
             :class="{ chevron: true, toggled: leaf.toggled }"
             :icon="faChevronRight"
             size="sm"
@@ -100,7 +100,7 @@ watch(() => props.checked, (e) => {
           -->
 
           <GooseCheckbox
-            v-if="!leaf.leaf"
+            v-if="leaf.sub"
             v-model="leaf.checked"
             name="branch"
             @update="e => onLeafCheck(leaf, e)"
@@ -117,7 +117,7 @@ watch(() => props.checked, (e) => {
           -->
 
           <GooseCheckbox
-            v-if="leaf.leaf"
+            v-if="!leaf.sub"
             v-model="leaf.checked"
             name="leaf.id"
             @update="e => onLeafCheck(leaf, e)"
@@ -131,7 +131,7 @@ watch(() => props.checked, (e) => {
         </div>
         <div :style="{ display: leaf.toggled ? 'block': 'none' }">
           <GooseTree
-            v-if="leaf.leaf === false"
+            v-if="leaf.sub"
             :search-string
             :checked="leaf.checked"
             @match="e => onMatch(key, e)"

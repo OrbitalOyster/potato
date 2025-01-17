@@ -34,22 +34,22 @@ const items = [
 ]
 
 const tree = [{
-  title: 'Org1', id: '1', sub: [
-    { title: 'Org1.1', id: '1-1', sub: [
-      { title: 'Org1.1.1', id: '1-1-1' },
+  title: 'Org1', id: '1', checked: false, sub: [
+    { title: 'Org1.1', id: '1-1', checked: false, sub: [
+      { title: 'Org1.1.1', id: '1-1-1', checked: false },
     ] },
   ] }, {
-  title: 'Org2', id: '2' }, {
-  title: 'Org3', id: '3', sub: [
-    { title: 'Org3.1', id: '3-1' },
-    { title: 'Org3.2', id: '3-2' },
-    { title: 'Org3.3', id: '3-3', sub: [
-      { title: 'Org3.3.1', id: '3-3-1' },
-      { title: 'Org3.3.2', id: '3-3-2' },
-      { title: 'Org3.3.3', id: '3-3-3' },
-      { title: 'Org3.3.4', id: '3-3-4' },
+  title: 'Org2', id: '2', checked: false }, {
+  title: 'Org3', id: '3', checked: false, sub: [
+    { title: 'Org3.1', id: '3-1', checked: false },
+    { title: 'Org3.2', id: '3-2', checked: false },
+    { title: 'Org3.3', id: '3-3', checked: false, sub: [ // TODO: Remove 'checked' here
+      { title: 'Org3.3.1', id: '3-3-1', checked: false },
+      { title: 'Org3.3.2', id: '3-3-2', checked: false },
+      { title: 'Org3.3.3', id: '3-3-3', checked: false },
+      { title: 'Org3.3.4', id: '3-3-4', checked: false },
     ] },
-    { title: 'Org3.4', id: '3-4' },
+    { title: 'Org3.4', id: '3-4', checked: false },
   ] },
 ]
 
