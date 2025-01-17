@@ -34,24 +34,22 @@ const items = [
 ]
 
 const tree = [{
-  title: 'Org1', sub: [
-    { title: 'Org1.1', sub: [
-      { title: 'Org1.1.1' },
+  title: 'Org1', id: '1', sub: [
+    { title: 'Org1.1', id: '1-1', sub: [
+      { title: 'Org1.1.1', id: '1-1-1' },
     ] },
   ] }, {
-  title: 'Org2', sub: [
-
-  ] }, {
-  title: 'Org3', sub: [
-    { title: 'Org3.1' },
-    { title: 'Org3.2' },
-    { title: 'Org3.3', sub: [
-      { title: 'Org3.3.1' },
-      { title: 'Org3.3.2' },
-      { title: 'Org3.3.3' },
-      { title: 'Org3.3.4' },
+  title: 'Org2', id: '2' }, {
+  title: 'Org3', id: '3', sub: [
+    { title: 'Org3.1', id: '3-1' },
+    { title: 'Org3.2', id: '3-2' },
+    { title: 'Org3.3', id: '3-3', sub: [
+      { title: 'Org3.3.1', id: '3-3-1' },
+      { title: 'Org3.3.2', id: '3-3-2' },
+      { title: 'Org3.3.3', id: '3-3-3' },
+      { title: 'Org3.3.4', id: '3-3-4' },
     ] },
-    { title: 'Org3.4' },
+    { title: 'Org3.4', id: '3-4' },
   ] },
 ]
 
