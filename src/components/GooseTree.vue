@@ -7,11 +7,10 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 export interface Leaf {
   title: string,
-  leaf: boolean,
   checked: boolean,
   toggled: boolean
   match: boolean,
-  sub?: Record<string, Leaf>
+  sub?: Leaf[]
 }
 
 const props = defineProps<{
@@ -20,7 +19,7 @@ const props = defineProps<{
   }>(),
   emit = defineEmits(['match', 'check'])
 
-const model = defineModel<Record<string, Leaf>>()
+const model = defineModel<Leaf[]>()
 
 if (!model.value)
   throw new Error('Major screwup')
