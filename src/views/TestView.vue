@@ -54,7 +54,6 @@ const tree = ref([{
 ])
 
 const s0 = ref('foo')
-const s = ref('ipsum')
 const cb = ref(null)
 
 const confirmModal = useTemplateRef('confirmModal')

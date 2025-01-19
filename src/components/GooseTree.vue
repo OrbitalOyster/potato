@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { watch } from 'vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import GooseCheckbox from '#components/GooseCheckbox.vue'
 import GooseMarkable from '#components/GooseMarkable.vue'
@@ -37,14 +37,16 @@ watch(() => Object.values(model.value).map(l => l.checked), (after) => {
     emit('check', null)
 });
 
-function onMatch(key: string, value: boolean) {
-  /* stfu, eslint */
-  // if (!props.tree[i])
-  //  throw new Error('Major screwup')
-  model.value[key].match = value
+function onMatch(i: number, value: boolean) {
+
+  /* TODO: Clunky */
+  if (!model.value?.[i])
+    throw new Error('Major screwup')
+
+  model.value[i].match = value
   /* Toggle leaf on match */
   if (props.searchString && value)
-    model.value[key].toggled = true
+    model.value[i].toggled = true
 
   emit('match', !!Object.values(model.value).filter(l => l.match).length)
 }
@@ -53,10 +55,14 @@ function onCheck(leaf: Leaf, value: boolean) {
   leaf.checked = value
 }
 
-watch(() => props.checked, (e) => {
-  if (e !== null)
-    for (const [key] of Object.entries(model.value))
-      model.value[key].checked = e
+watch(() => props.checked, (value: boolean) => {
+
+  /* TODO: Clunky */
+  if (!model.value)
+    throw new Error('Major screwup')
+
+  if (value !== null)
+    model.value.forEach(e => e.checked = value)
 })
 
 </script>
@@ -64,8 +70,8 @@ watch(() => props.checked, (e) => {
 <template>
   <ul>
     <li
-      v-for="(leaf, key, i) in model"
-      :key
+      v-for="(leaf, i) in model"
+      :key="i"
     >
       <div :style="{ display: leaf.match ? 'block' : 'none' }">
         <div class="title">
@@ -82,7 +88,7 @@ watch(() => props.checked, (e) => {
             v-if="leaf.sub"
             v-model="leaf.checked"
             name="branch"
-            @update="e => onCheck(leaf, e)"
+            @update="value => onCheck(leaf, value)"
           />
 
           <!-- Leaf -->
@@ -90,13 +96,13 @@ watch(() => props.checked, (e) => {
             v-if="!leaf.sub"
             v-model="leaf.checked"
             name="leaf.id"
-            @update="e => onCheck(leaf, e)"
+            @update="value => onCheck(leaf, value)"
           />
 
           <GooseMarkable
             :needle="searchString || ''"
             :title="leaf.title"
-            @update="e => onMatch(key, e)"
+            @update="value => onMatch(i, value)"
           />
         </div>
         <div :style="{ display: leaf.toggled ? 'block': 'none' }">
@@ -104,8 +110,8 @@ watch(() => props.checked, (e) => {
             v-if="leaf.sub"
             :search-string
             :checked="leaf.checked"
-            @match="e => onMatch(key, e)"
-            @check="e => onCheck(leaf, e)"
+            @match="e => onMatch(i, e)"
+            @check="value => onCheck(leaf, value)"
             v-model="leaf.sub"
           />
         </div>

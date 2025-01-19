@@ -3,9 +3,9 @@ import GooseInput from '#components/GooseInput.vue'
 import GooseTree from '#components/GooseTree.vue'
 import type { Leaf } from '#components/GooseTree.vue'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-import { ref, reactive, toRef, onBeforeMount } from 'vue'
+import { ref } from 'vue'
 
-const props = defineProps<{
+defineProps<{
   searchable?: boolean
 }>()
 
