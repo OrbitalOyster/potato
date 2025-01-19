@@ -6,6 +6,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { ref } from 'vue'
 
 defineProps<{
+  checkable?: boolean
   searchable?: boolean
 }>()
 
@@ -24,6 +25,7 @@ const checked = ref(false),
   />
   <GooseTree
     v-model="model"
+    :checkable
     :checked="checked || false"
     :search
   />

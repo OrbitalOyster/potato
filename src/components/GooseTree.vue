@@ -14,6 +14,7 @@ export interface Leaf {
 }
 
 const props = defineProps<{
+    checkable?: boolean
     checked: boolean | null
     search?: string
   }>(),
@@ -69,6 +70,7 @@ watch(() => props.checked, (value: boolean | null) => {
   <ul>
     <li
       v-for="(leaf, i) in model"
+      :key="i"
     >
       <div :style="{ display: leaf.match ? 'block' : 'none' }">
         <div class="title">
@@ -80,21 +82,23 @@ watch(() => props.checked, (value: boolean | null) => {
             @click="leaf.toggled = !leaf.toggled"
           />
 
-          <!-- Branch -->
-          <GooseCheckbox
-            v-if="leaf.sub"
-            v-model="leaf.checked"
-            name="branch"
-            @update="value => leaf.checked = value"
-          />
+          <div v-if="checkable">
+            <!-- Branch -->
+            <GooseCheckbox
+              v-if="leaf.sub"
+              v-model="leaf.checked"
+              name="branch"
+              @update="value => leaf.checked = value"
+            />
 
-          <!-- Leaf -->
-          <GooseCheckbox
-            v-if="!leaf.sub"
-            v-model="leaf.checked"
-            name="leaf.id"
-            @update="value => leaf.checked = value"
-          />
+            <!-- Leaf -->
+            <GooseCheckbox
+              v-if="!leaf.sub"
+              v-model="leaf.checked"
+              name="leaf.id"
+              @update="value => leaf.checked = value"
+            />
+          </div>
 
           <GooseMarkable
             :needle="search || ''"
@@ -107,8 +111,9 @@ watch(() => props.checked, (value: boolean | null) => {
             v-if="leaf.sub"
             v-model="leaf.sub"
             :search
+            checkable
             :checked="leaf.checked"
-            @match="e => onMatch(i, e)"
+            @match="value => onMatch(i, value)"
             @check="value => leaf.checked = value"
           />
         </div>
