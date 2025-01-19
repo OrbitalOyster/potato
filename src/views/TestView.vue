@@ -34,7 +34,7 @@ const items = [
 ]
 
 const tree = ref([{
-  title: 'Org1', id: '1', checked: false, sub: [
+  title: 'Org1', id: '1', checked: false, toggled: true, sub: [
     { title: 'Org1.1', id: '1-1', checked: false, sub: [
       { title: 'Org1.1.1', id: '1-1-1', checked: false },
     ] },

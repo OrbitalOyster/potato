@@ -10,7 +10,7 @@ defineProps<{
 }>()
 
 const checked = ref(false),
-  searchString = ref(''),
+  search = ref(''),
   model = defineModel<Leaf[]>()
 
 </script>
@@ -18,14 +18,14 @@ const checked = ref(false),
 <template>
   <GooseInput
     v-if="searchable"
-    v-model="searchString"
+    v-model="search"
     :icon="faMagnifyingGlass"
     style="padding-bottom: 1rem"
   />
   <GooseTree
     v-model="model"
     :checked="checked || false"
-    :search-string
+    :search
   />
   <pre>{{ model }}</pre>
 </template>

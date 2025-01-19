@@ -15,7 +15,7 @@ export interface Leaf {
 
 const props = defineProps<{
     checked: boolean | null
-    searchString?: string
+    search?: string
   }>(),
   emit = defineEmits(['match', 'check'])
 
@@ -25,7 +25,7 @@ if (!model.value)
   throw new Error('Major screwup')
 
 /* Emit up */
-watch(() => model.value!.map(l => l.checked), (after) => {
+watch(() => model.value?.map(l => l.checked), (after) => {
   /* TODO: Clunky */
   if (!after)
     throw new Error('Major screwup')
@@ -48,14 +48,10 @@ function onMatch(i: number, value: boolean) {
 
   model.value[i].match = value
   /* Toggle leaf on match */
-  if (props.searchString && value)
+  if (props.search && value)
     model.value[i].toggled = true
 
   emit('match', !!Object.values(model.value).filter(l => l.match).length)
-}
-
-function onCheck(leaf: Leaf, value: boolean) {
-  leaf.checked = value
 }
 
 watch(() => props.checked, (value: boolean | null) => {
@@ -73,7 +69,6 @@ watch(() => props.checked, (value: boolean | null) => {
   <ul>
     <li
       v-for="(leaf, i) in model"
-      :key="i"
     >
       <div :style="{ display: leaf.match ? 'block' : 'none' }">
         <div class="title">
@@ -90,7 +85,7 @@ watch(() => props.checked, (value: boolean | null) => {
             v-if="leaf.sub"
             v-model="leaf.checked"
             name="branch"
-            @update="value => onCheck(leaf, value)"
+            @update="value => leaf.checked = value"
           />
 
           <!-- Leaf -->
@@ -98,11 +93,11 @@ watch(() => props.checked, (value: boolean | null) => {
             v-if="!leaf.sub"
             v-model="leaf.checked"
             name="leaf.id"
-            @update="value => onCheck(leaf, value)"
+            @update="value => leaf.checked = value"
           />
 
           <GooseMarkable
-            :needle="searchString || ''"
+            :needle="search || ''"
             :title="leaf.title"
             @update="value => onMatch(i, value)"
           />
@@ -111,10 +106,10 @@ watch(() => props.checked, (value: boolean | null) => {
           <GooseTree
             v-if="leaf.sub"
             v-model="leaf.sub"
-            :search-string
+            :search
             :checked="leaf.checked"
             @match="e => onMatch(i, e)"
-            @check="value => onCheck(leaf, value)"
+            @check="value => leaf.checked = value"
           />
         </div>
       </div>
