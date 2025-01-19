@@ -33,7 +33,7 @@ const items = [
   '20 Morocco',
 ]
 
-const tree = [{
+const tree = ref([{
   title: 'Org1', id: '1', checked: false, sub: [
     { title: 'Org1.1', id: '1-1', checked: false, sub: [
       { title: 'Org1.1.1', id: '1-1-1', checked: false },
@@ -51,7 +51,7 @@ const tree = [{
     ] },
     { title: 'Org3.4', id: '3-4', checked: false },
   ] },
-]
+])
 
 const s0 = ref('foo')
 const s = ref('ipsum')
@@ -131,7 +131,7 @@ const confirmModal = useTemplateRef('confirmModal')
       >
         <GooseTreeRoot
           searchable
-          :tree
+          v-model="tree"
         />
       </div>
     </GooseForm>

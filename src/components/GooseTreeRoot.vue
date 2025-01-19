@@ -6,32 +6,12 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { ref, reactive, toRef, onBeforeMount } from 'vue'
 
 const props = defineProps<{
-  tree: Leaf[]
   searchable?: boolean
 }>()
 
-const searchString = ref('')
-const checked = ref(false)
-
-const masterModel = ref({})
-
-function parseMasterModel(tree, master) {
-  for (const [key, value] of Object.entries(tree)) {
-    if (!tree[key].sub?.length)
-      master[tree[key].id] = { title: tree[key].title, leaf: true, checked: false, toggled: false }
-    else {
-      master[tree[key].id] = { title: tree[key].title, leaf: false, checked: false, toggled: false, sub: {} }
-      parseMasterModel(tree[key].sub, master[tree[key].id].sub)
-    }
-  }
-}
-
-parseMasterModel(props.tree, masterModel.value)
-
-console.log(1, masterModel)
-const rt = toRef(props.tree)
-console.log(2, rt)
-
+const checked = ref(false),
+  searchString = ref(''),
+  model = defineModel<Leaf[]>()
 
 </script>
 
@@ -43,17 +23,11 @@ console.log(2, rt)
     style="padding-bottom: 1rem"
   />
   <GooseTree
-    :tree
     :checked="checked || false"
     :search-string
-    v-model="rt"
+    v-model="model"
   />
-  <!--
-  <p>{{ leafChecks }}</p>
-  <p>{{ branchChecks }}</p>
-  -->
-  <p>{{ rt }}</p>
-  <pre>{{ JSON.stringify(masterModel, 0, 1) }}</pre>
+  <pre>{{ model }}</pre>
 </template>
 
 <style lang="sass" scoped>

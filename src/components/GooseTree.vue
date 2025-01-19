@@ -20,13 +20,13 @@ const props = defineProps<{
   }>(),
   emit = defineEmits(['match', 'check'])
 
-const masterModel = defineModel<Record<string, Leaf>>()
+const model = defineModel<Record<string, Leaf>>()
 
-if (!masterModel.value)
+if (!model.value)
   throw new Error('Major screwup')
 
 /* Emit up */
-watch(() => Object.values(masterModel.value).map(l => l.checked), (after) => {
+watch(() => Object.values(model.value).map(l => l.checked), (after) => {
   /* Everything checked */
   if (after.every(e => e === true))
     emit('check', true)
@@ -42,40 +42,30 @@ function onMatch(key: string, value: boolean) {
   /* stfu, eslint */
   // if (!props.tree[i])
   //  throw new Error('Major screwup')
-  masterModel.value[key].match = value
+  model.value[key].match = value
   /* Toggle leaf on match */
   if (props.searchString && value)
-    masterModel.value[key].toggled = true
+    model.value[key].toggled = true
 
-  emit('match', !!Object.values(masterModel.value).filter(l => l.match).length)
+  emit('match', !!Object.values(model.value).filter(l => l.match).length)
 }
 
-function onLeafCheck(leaf: Leaf, value: boolean) {
-  // console.log(key, value)
-
-  //if (!masterModel.value)
-  //  throw new Error('Major screwup')
-
+function onCheck(leaf: Leaf, value: boolean) {
   leaf.checked = value
-
 }
 
 watch(() => props.checked, (e) => {
-  // console.log('watch fired')
   if (e !== null)
-    for (const [key] of Object.entries(masterModel.value))
-      masterModel.value[key].checked = e
+    for (const [key] of Object.entries(model.value))
+      model.value[key].checked = e
 })
-
-// console.log(props.tree)
-// console.log(masterModel.value)
 
 </script>
 
 <template>
   <ul>
     <li
-      v-for="(leaf, key, i) in masterModel"
+      v-for="(leaf, key, i) in model"
       :key
     >
       <div :style="{ display: leaf.match ? 'block' : 'none' }">
@@ -89,38 +79,19 @@ watch(() => props.checked, (e) => {
           />
 
           <!-- Branch -->
-
-          <!--
-          <GooseCheckbox
-            v-if="leaf.sub"
-            v-model="branchChecks[leaf.id]"
-            name="branch"
-            @update="e => onBranchCheck(i, e)"
-          />
-          -->
-
           <GooseCheckbox
             v-if="leaf.sub"
             v-model="leaf.checked"
             name="branch"
-            @update="e => onLeafCheck(leaf, e)"
+            @update="e => onCheck(leaf, e)"
           />
 
           <!-- Leaf -->
-          <!--
-          <GooseCheckbox
-            v-if="!leaf.sub"
-            v-model="leafChecks[leaf.id]"
-            name="leaf.id"
-            @update="e => onLeafCheck(i, e)"
-          />
-          -->
-
           <GooseCheckbox
             v-if="!leaf.sub"
             v-model="leaf.checked"
             name="leaf.id"
-            @update="e => onLeafCheck(leaf, e)"
+            @update="e => onCheck(leaf, e)"
           />
 
           <GooseMarkable
@@ -135,7 +106,7 @@ watch(() => props.checked, (e) => {
             :search-string
             :checked="leaf.checked"
             @match="e => onMatch(key, e)"
-            @check="e => onLeafCheck(leaf, e)"
+            @check="e => onCheck(leaf, e)"
             v-model="leaf.sub"
           />
         </div>
