@@ -23,9 +23,9 @@ const checked = ref(false),
     style="padding-bottom: 1rem"
   />
   <GooseTree
+    v-model="model"
     :checked="checked || false"
     :search-string
-    v-model="model"
   />
   <pre>{{ model }}</pre>
 </template>

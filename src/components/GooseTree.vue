@@ -6,10 +6,10 @@ import GooseMarkable from '#components/GooseMarkable.vue'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 export interface Leaf {
-  title: string,
-  checked: boolean,
-  toggled: boolean
-  match: boolean,
+  title: string
+  checked: boolean
+  toggled?: boolean
+  match?: boolean
   sub?: Leaf[]
 }
 
@@ -25,7 +25,11 @@ if (!model.value)
   throw new Error('Major screwup')
 
 /* Emit up */
-watch(() => Object.values(model.value).map(l => l.checked), (after) => {
+watch(() => model.value!.map(l => l.checked), (after) => {
+  /* TODO: Clunky */
+  if (!after)
+    throw new Error('Major screwup')
+
   /* Everything checked */
   if (after.every(e => e === true))
     emit('check', true)
@@ -35,10 +39,9 @@ watch(() => Object.values(model.value).map(l => l.checked), (after) => {
   /* So-so */
   else
     emit('check', null)
-});
+})
 
 function onMatch(i: number, value: boolean) {
-
   /* TODO: Clunky */
   if (!model.value?.[i])
     throw new Error('Major screwup')
@@ -55,8 +58,7 @@ function onCheck(leaf: Leaf, value: boolean) {
   leaf.checked = value
 }
 
-watch(() => props.checked, (value: boolean) => {
-
+watch(() => props.checked, (value: boolean | null) => {
   /* TODO: Clunky */
   if (!model.value)
     throw new Error('Major screwup')
@@ -108,11 +110,11 @@ watch(() => props.checked, (value: boolean) => {
         <div :style="{ display: leaf.toggled ? 'block': 'none' }">
           <GooseTree
             v-if="leaf.sub"
+            v-model="leaf.sub"
             :search-string
             :checked="leaf.checked"
             @match="e => onMatch(i, e)"
             @check="value => onCheck(leaf, value)"
-            v-model="leaf.sub"
           />
         </div>
       </div>

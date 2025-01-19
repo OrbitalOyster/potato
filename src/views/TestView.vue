@@ -129,8 +129,8 @@ const confirmModal = useTemplateRef('confirmModal')
         style="padding: 1rem"
       >
         <GooseTreeRoot
-          searchable
           v-model="tree"
+          searchable
         />
       </div>
     </GooseForm>
