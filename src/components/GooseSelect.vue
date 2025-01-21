@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { autoUpdate, flip, offset, size, useFloating } from '@floating-ui/vue'
+import { autoUpdate, flip, hide, offset, size, useFloating } from '@floating-ui/vue'
 import { ref, useTemplateRef, watch } from 'vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import type { FormCheck } from '#stores/useFormStore.ts'
@@ -31,6 +31,7 @@ const placement = 'bottom',
 const { floatingStyles, isPositioned } = useFloating(target, floating, {
   open: active,
   placement,
+  strategy: 'fixed',
   middleware: [
     offset({ mainAxis: offsetValue }),
     flip(),
@@ -44,6 +45,7 @@ const { floatingStyles, isPositioned } = useFloating(target, floating, {
         })
       },
     }),
+    hide({ strategy: 'referenceHidden' }),
   ],
   whileElementsMounted: autoUpdate,
 })
@@ -97,8 +99,8 @@ store.inputs[props.name] = ''
       :tabindex="disabled ? -1 : 0"
       @blur="e => active = active && e.relatedTarget === floating"
       @click="active = !active"
-      @keydown.up="keyScroll(-1)"
-      @keydown.down="keyScroll(1)"
+      @keydown.up.prevent="keyScroll(-1)"
+      @keydown.down.prevent="keyScroll(1)"
       @keydown.enter="active = !active"
       @keydown.esc="active = false"
     >

@@ -25,6 +25,19 @@ const model = defineModel<Leaf[]>()
 if (!model.value)
   throw new Error('Major screwup')
 
+function onMatch(i: number, value: boolean) {
+  /* TODO: Clunky */
+  if (!model.value?.[i])
+    throw new Error('Major screwup')
+
+  model.value[i].match = value
+  /* Toggle leaf on match */
+  if (props.search && value)
+    model.value[i].toggled = true
+
+  emit('match', !!Object.values(model.value).filter(l => l.match).length)
+}
+
 /* Emit up */
 watch(() => model.value?.map(l => l.checked), (after) => {
   /* TODO: Clunky */
@@ -42,19 +55,7 @@ watch(() => model.value?.map(l => l.checked), (after) => {
     emit('check', null)
 })
 
-function onMatch(i: number, value: boolean) {
-  /* TODO: Clunky */
-  if (!model.value?.[i])
-    throw new Error('Major screwup')
-
-  model.value[i].match = value
-  /* Toggle leaf on match */
-  if (props.search && value)
-    model.value[i].toggled = true
-
-  emit('match', !!Object.values(model.value).filter(l => l.match).length)
-}
-
+/* Emit down */
 watch(() => props.checked, (value: boolean | null) => {
   /* TODO: Clunky */
   if (!model.value)
@@ -111,7 +112,7 @@ watch(() => props.checked, (value: boolean | null) => {
             v-if="leaf.sub"
             v-model="leaf.sub"
             :search
-            checkable
+            :checkable
             :checked="leaf.checked"
             @match="value => onMatch(i, value)"
             @check="value => leaf.checked = value"

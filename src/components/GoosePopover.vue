@@ -112,7 +112,6 @@ defineExpose({ toggle, active })
 
   .target
     display: inline-block
-    cursor: help
 
   .arrow
     background-color: colors.$card
