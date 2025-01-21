@@ -28,7 +28,7 @@ const placement = 'bottom',
   offsetValue = 8
 
 /* Floating UI bollocks */
-const { floatingStyles, isPositioned } = useFloating(target, floating, {
+const { floatingStyles, isPositioned, middlewareData } = useFloating(target, floating, {
   open: active,
   placement,
   strategy: 'fixed',
@@ -45,7 +45,7 @@ const { floatingStyles, isPositioned } = useFloating(target, floating, {
         })
       },
     }),
-    hide({ strategy: 'referenceHidden' }),
+    hide(),
   ],
   whileElementsMounted: autoUpdate,
 })
@@ -121,7 +121,12 @@ store.inputs[props.name] = ''
         v-if="active"
         ref="floating"
         tabindex="0"
-        :style="floatingStyles"
+        :style="{
+          ...floatingStyles,
+          visibility: middlewareData.hide?.referenceHidden
+            ? 'hidden'
+            : 'visible'
+        }"
         @focus="target?.focus()"
       >
         <li
