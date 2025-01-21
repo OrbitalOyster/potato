@@ -190,6 +190,7 @@ store.inputs[props.name] = ''
   ul
     @extend .card
     overflow-y: auto
+    overscroll-behavior: none
     padding: 0
     margin: 0
     position: absolute
