@@ -28,6 +28,7 @@ const checked = ref(false),
     :checkable
     :checked="checked || false"
     :search
+    @select="e => console.log(`selected ${e}`)"
   />
   <pre>{{ model }}</pre>
 </template>

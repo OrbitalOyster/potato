@@ -18,7 +18,7 @@ const props = defineProps<{
     checked: boolean | null
     search?: string
   }>(),
-  emit = defineEmits(['match', 'check'])
+  emit = defineEmits(['match', 'check', 'select'])
 
 const model = defineModel<Leaf[]>()
 
@@ -36,6 +36,13 @@ function onMatch(i: number, value: boolean) {
     model.value[i].toggled = true
 
   emit('match', !!Object.values(model.value).filter(l => l.match).length)
+}
+
+function onSelect(leaf: Leaf) {
+  if (!leaf.sub)
+    emit('select', leaf.title) 
+  else
+    leaf.toggled = !leaf.toggled
 }
 
 /* Emit up */
@@ -74,7 +81,7 @@ watch(() => props.checked, (value: boolean | null) => {
       :key="i"
     >
       <div :style="{ display: leaf.match ? 'block' : 'none' }">
-        <div class="title">
+        <div class="title selectable-title">
           <FontAwesomeIcon
             v-if="leaf.sub"
             :class="{ chevron: true, toggled: leaf.toggled }"
@@ -105,6 +112,7 @@ watch(() => props.checked, (value: boolean | null) => {
             :needle="search || ''"
             :title="leaf.title"
             @update="value => onMatch(i, value)"
+            @click="onSelect(leaf)"
           />
         </div>
         <div :style="{ display: leaf.toggled ? 'block': 'none' }">
@@ -116,6 +124,7 @@ watch(() => props.checked, (value: boolean | null) => {
             :checked="leaf.checked"
             @match="value => onMatch(i, value)"
             @check="value => leaf.checked = value"
+            @select="title => emit('select', title)"
           />
         </div>
       </div>
@@ -124,6 +133,7 @@ watch(() => props.checked, (value: boolean | null) => {
 </template>
 
 <style lang="sass" scoped>
+  @use '../assets/borders'
   @use '../assets/style'
   @use '../assets/transitions'
 
@@ -143,6 +153,16 @@ watch(() => props.checked, (value: boolean | null) => {
     display: flex
     gap: .5rem
     height: 3rem
+    border-radius: borders.$radius
+
+  .selectable-title
+    cursor: pointer
+
+  .selectable-title:hover
+    background-color: #EAECEE
+
+  .selectable-title:selected
+    background-color: #D5D8DC
 
   .chevron
     cursor: pointer
