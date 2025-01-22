@@ -29,7 +29,7 @@ async function onClick() {
       :disabled
       class="focusable form-input"
       type="button"
-      @click="onClick"
+      @click.stop="onClick"
     >
       <span
         class="mark"

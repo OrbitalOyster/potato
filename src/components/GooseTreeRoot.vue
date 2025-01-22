@@ -8,6 +8,7 @@ import { ref } from 'vue'
 defineProps<{
   checkable?: boolean
   searchable?: boolean
+  selectable?: boolean
 }>()
 
 const checked = ref(false),
@@ -29,8 +30,8 @@ const checked = ref(false),
     :checked="checked || false"
     :search
     @select="e => console.log(`selected ${e}`)"
+    style="padding-left: 0"
   />
-  <pre>{{ model }}</pre>
 </template>
 
 <style lang="sass" scoped>

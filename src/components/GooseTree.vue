@@ -81,13 +81,16 @@ watch(() => props.checked, (value: boolean | null) => {
       :key="i"
     >
       <div :style="{ display: leaf.match ? 'block' : 'none' }">
-        <div class="title selectable-title">
+        <div
+          class="title selectable-title"
+          :style="{ 'padding-left': leaf.sub ? 0 : '2.5rem' }"
+          @click="onSelect(leaf)"
+        >
           <FontAwesomeIcon
             v-if="leaf.sub"
             :class="{ chevron: true, toggled: leaf.toggled }"
             :icon="faChevronRight"
-            size="sm"
-            @click="leaf.toggled = !leaf.toggled"
+            @click.stop="leaf.toggled = !leaf.toggled"
           />
 
           <div v-if="checkable">
@@ -108,11 +111,15 @@ watch(() => props.checked, (value: boolean | null) => {
             />
           </div>
 
+          <FontAwesomeIcon
+            icon="fa-umbrella"
+            size="lg"
+          />
+
           <GooseMarkable
             :needle="search || ''"
             :title="leaf.title"
             @update="value => onMatch(i, value)"
-            @click="onSelect(leaf)"
           />
         </div>
         <div :style="{ display: leaf.toggled ? 'block': 'none' }">
@@ -141,11 +148,11 @@ watch(() => props.checked, (value: boolean | null) => {
     position: relative
     margin: .0rem
     overflow-y: auto
-    padding: .0rem
+    padding: .0rem .0rem .0rem 1.75rem
 
   li
     display: block
-    padding: .0rem .0rem .0rem 1.75rem
+    padding: .0rem .0rem .0rem .0rem
     user-select: none
 
   .title
@@ -167,9 +174,9 @@ watch(() => props.checked, (value: boolean | null) => {
   .chevron
     cursor: pointer
     height: 1rem
-    left: .1rem
     padding: .0rem
-    position: absolute
+    margin-right: .5rem
+    margin-left: .5rem
     transition: transform 100ms
     width: 1rem
 
