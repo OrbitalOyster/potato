@@ -33,7 +33,7 @@ async function auth(formCheck: LoginFormCheck | null) {
 </script>
 
 <template>
-  <div class="fs">
+  <div class="fs-centered">
     <div>
       <GooseForm
         id="loginForm"

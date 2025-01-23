@@ -8,12 +8,15 @@ body
 
 /* Fullscreen div */
 .fs
-  align-items: center
   display: flex
   flex-direction: column
   height: 100vh
-  justify-content: center
   width: 100vw
+
+.fs-centered
+  @extend .fs
+  align-items: center
+  justify-content: center
 
 .backdrop
   background-color: rgb(255 255 255 / 80%)
