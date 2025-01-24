@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { ref, useTemplateRef } from 'vue'
 import GooseButton from '#components/GooseButton.vue'
+import GooseCheckbox from '#components/GooseCheckbox.vue'
 import GooseConfirm from '#components/GooseConfirm.vue'
 import GooseForm from '#components/GooseForm.vue'
 import GooseFormInput from '#components/GooseFormInput.vue'
 import GooseInput from '#components/GooseInput.vue'
-import GooseCheckbox from '#components/GooseCheckbox.vue'
 import GoosePopover from '#components/GoosePopover.vue'
 import GooseSelect from '#components/GooseSelect.vue'
 import GooseTreeRoot from '#components/GooseTreeRoot.vue'

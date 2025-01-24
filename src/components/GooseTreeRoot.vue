@@ -29,8 +29,8 @@ const checked = ref(false),
     :checkable
     :checked="checked || false"
     :search
-    @select="e => console.log(`selected ${e}`)"
     style="padding-left: 0"
+    @select="e => console.log(`selected ${e}`)"
   />
 </template>
 

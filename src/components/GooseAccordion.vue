@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import type { IconDefinition } from '@fortawesome/fontawesome-common-types'
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
-
 import { ref } from 'vue'
-
 
 defineProps<{
   slots: {
     title: string
-    icon: string
+    icon: IconDefinition
   }[]
 }>()
 const selected = ref('')
@@ -38,7 +37,7 @@ const selected = ref('')
           </h1>
         </div>
         <div
-            :style="{ transform: selected === slot.title ? 'rotate(180deg)' : 'none'}"
+          :style="{ transform: selected === slot.title ? 'rotate(180deg)' : 'none'}"
         >
           <FontAwesomeIcon
             :icon="faAngleDown"

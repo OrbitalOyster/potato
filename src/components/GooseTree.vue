@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { watch } from 'vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import GooseCheckbox from '#components/GooseCheckbox.vue'
 import GooseMarkable from '#components/GooseMarkable.vue'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import { watch } from 'vue'
 
 export interface Leaf {
   title: string
@@ -40,7 +40,7 @@ function onMatch(i: number, value: boolean) {
 
 function onSelect(leaf: Leaf) {
   if (!leaf.sub)
-    emit('select', leaf.title) 
+    emit('select', leaf.title)
   else
     leaf.toggled = !leaf.toggled
 }

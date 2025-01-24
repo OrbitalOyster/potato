@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import type { IconDefinition } from '@fortawesome/fontawesome-common-types'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 const props = defineProps<{
-    icon?: object
+    icon?: IconDefinition
     loading?: boolean
     submit?: boolean
     title: string

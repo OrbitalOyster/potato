@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { Splitpanes, Pane } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
-import { ref } from 'vue'
-import { faHospital, faRightToBracket, faClipboard, faPencil } from '@fortawesome/free-solid-svg-icons'
-import GooseAccordion from "#components/GooseAccordion.vue"
+import { Pane, Splitpanes } from 'splitpanes'
+import { faClipboard, faHospital, faPencil } from '@fortawesome/free-solid-svg-icons'
+import GooseAccordion from '#components/GooseAccordion.vue'
 
 const slots = [
   { title: 'Организации', icon: faHospital },
@@ -16,7 +15,11 @@ const slots = [
   <div class="fs">
     <p>Home</p>
     <Splitpanes vertical>
-      <Pane min-size="10" max-size="50" size="25">
+      <Pane
+        min-size="10"
+        max-size="50"
+        size="25"
+      >
         <aside>
           <GooseAccordion :slots>
             <template #Организации>
