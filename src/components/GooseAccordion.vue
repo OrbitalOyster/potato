@@ -1,61 +1,61 @@
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import type { IconDefinition } from '@fortawesome/fontawesome-common-types'
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { ref } from 'vue'
 
-defineProps<{
-  slots: {
-    title: string
-    icon: IconDefinition
-  }[]
-}>()
-const selected = ref('')
+interface AccordionItem {
+  id: string
+  title: string
+  icon: IconDefinition
+}
+
+const model = defineModel<AccordionItem[]>(),
+  toggled = ref('')
 </script>
 
 <template>
   <ul>
     <li
-      v-for="slot in slots"
-      :key="slot.title"
-      class="carddd"
-      :style="{ 'flex-grow': slot.title === selected ? 1 : 0 }"
+      v-for="item in model"
+      :key="item.id"
+      :class="{ toggled: toggled === item.id }"
     >
       <div
         class="title"
-        @click="selected = selected === slot.title ? '' : slot.title"
+        @click="toggled = toggled === item.id ? '' : item.id"
       >
         <div style="display: flex; align-items: center">
           <div class="icon">
             <FontAwesomeIcon
-              :icon="slot.icon"
-              size="xl"
+              :icon="item.icon"
+              size="lg"
             />
           </div>
           <h1>
-            {{ slot.title }}
+            {{ item.title }}
           </h1>
         </div>
-        <div
-          :style="{ transform: selected === slot.title ? 'rotate(180deg)' : 'none'}"
-        >
-          <FontAwesomeIcon
-            :icon="faAngleDown"
-            size="xl"
-          />
-        </div>
+        <FontAwesomeIcon
+          class="chevron"
+          :icon="faChevronDown"
+          size="xl"
+          :style="{ transform: toggled === item.id ? 'rotate(180deg)' : 'none'}"
+        />
       </div>
       <div
-        v-if="slot.title === selected"
-        class="slot-container"
+        v-if="item.title === toggled"
+        class="item-container"
       >
-        <slot :name="slot.title" />
+        <slot :name="item.id" />
       </div>
     </li>
   </ul>
 </template>
 
 <style lang="sass" scoped>
+  @use '../assets/transitions'
+
   ul
     padding: 0
     margin: 0
@@ -66,6 +66,10 @@ const selected = ref('')
   li
     overflow: hidden
     transition: 100ms flex-grow ease-in-out
+    flex-grow: 0
+
+  li.toggled
+    flex-grow: 1
 
   .title
     display: flex
@@ -75,9 +79,12 @@ const selected = ref('')
     user-select: none
     height: 3.5rem
 
+  .chevron
+    transition: transitions.$transform
+
   .icon
     display: inline-flex
-    width: 3rem
+    width: 2rem
     justify-content: center
 
   h1
@@ -86,9 +93,7 @@ const selected = ref('')
     font-weight: normal
     font-size: 1rem
 
-  .slot-container
-    /* Substract toggler height */
-    height: calc(100% - 3rem)
+  .item-container
     overflow: auto
     height: 100%
 </style>

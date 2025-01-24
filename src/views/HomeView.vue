@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import 'splitpanes/dist/splitpanes.css'
 import { Pane, Splitpanes } from 'splitpanes'
-import { faClipboard, faHospital, faPencil } from '@fortawesome/free-solid-svg-icons'
+import { faBuilding, faClipboard, faPencil } from '@fortawesome/free-solid-svg-icons'
 import GooseAccordion from '#components/GooseAccordion.vue'
+import { ref } from 'vue'
 
-const slots = [
-  { title: 'Организации', icon: faHospital },
-  { title: 'Формы', icon: faClipboard },
-  { title: 'Статусы', icon: faPencil },
-]
+const accordionModel = ref([
+  { id: 'orgs', title: 'Организации', icon: faBuilding },
+  { id: 'forms', title: 'Формы', icon: faClipboard },
+  { id: 'statuses', title: 'Статусы', icon: faPencil },
+])
 </script>
 
 <template>
@@ -16,12 +17,11 @@ const slots = [
     <p>Home</p>
     <Splitpanes vertical>
       <Pane
-        min-size="10"
         max-size="50"
         size="25"
       >
         <aside>
-          <GooseAccordion :slots>
+          <GooseAccordion v-model="accordionModel">
             <template #Организации>
               <p>LoremIpsum</p>
             </template>
@@ -54,7 +54,10 @@ main
   box-sizing: border-box
 
 :deep(.splitpanes__splitter)
-  background-color: transparent
-  width: 8px
+  background-color: gray
+  min-width: 8px
+
+:deep(.splitpanes__pane)
+  min-width: 16rem
 
 </style>
