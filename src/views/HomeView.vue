@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import 'splitpanes/dist/splitpanes.css'
 import { Pane, Splitpanes } from 'splitpanes'
-import { faBuilding, faClipboard, faPencil } from '@fortawesome/free-solid-svg-icons'
+import { faBuilding, faClipboard, faClipboardList, faFileExcel, faPencil } from '@fortawesome/free-solid-svg-icons'
 import GooseAccordion from '#components/GooseAccordion.vue'
+import GooseTabs from '#components/GooseTabs.vue'
 import { ref } from 'vue'
 
 const accordionModel = ref([
@@ -10,6 +11,12 @@ const accordionModel = ref([
   { id: 'forms', title: 'Формы', icon: faClipboard },
   { id: 'statuses', title: 'Статусы', icon: faPencil },
 ])
+
+const slots = [
+  { id: 'xlsx', title: 'Исходники', icon: faFileExcel },
+  { id: 'initial', title: 'Первичные отчёты', icon: faClipboard },
+  { id: 'complex', title: 'Сводные отчёты', icon: faClipboardList },
+]
 </script>
 
 <template>
@@ -33,7 +40,17 @@ const accordionModel = ref([
       </Pane>
       <Pane>
         <main>
-          Main
+          <GooseTabs :slots>
+            <template #xlsx>
+              <p>Foo</p>
+            </template>
+            <template #initial>
+              <p>Bar</p>
+            </template>
+            <template #complex>
+              <p>Baz</p>
+            </template>
+          </GooseTabs>
         </main>
       </Pane>
     </Splitpanes>
@@ -48,7 +65,6 @@ aside
   box-sizing: border-box
 
 main
-  background-color: orange
   height: 100%
   padding: .5rem
   box-sizing: border-box
