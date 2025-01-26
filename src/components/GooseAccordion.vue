@@ -19,7 +19,7 @@ const model = defineModel<AccordionItem[]>(),
     <li
       v-for="item in model"
       :key="item.id"
-      :class="{ toggled: toggled === item.id }"
+      :class="{ card: true, toggled: toggled === item.id }"
     >
       <div
         class="title"
@@ -67,6 +67,8 @@ const model = defineModel<AccordionItem[]>(),
     overflow: hidden
     transition: 100ms flex-grow ease-in-out
     flex-grow: 0
+    margin-top: .25rem
+    margin-bottom: .25rem
 
   li.toggled
     flex-grow: 1
@@ -78,6 +80,7 @@ const model = defineModel<AccordionItem[]>(),
     cursor: pointer
     user-select: none
     height: 3.5rem
+    padding-right: .5rem
 
   .chevron
     transition: transitions.$transform

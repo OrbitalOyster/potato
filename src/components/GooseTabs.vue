@@ -3,47 +3,45 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import type { IconDefinition } from '@fortawesome/fontawesome-common-types'
 import { ref } from 'vue'
 
-interface ISlot {
+interface TabSlot {
   id: string
   title: string
   icon: IconDefinition
 }
 
 const props = defineProps<{
-    slots: ISlot[]
+    slots: TabSlot[]
   }>(),
   selected = ref(props.slots[0].id)
 </script>
 
 <template>
-  <main>
-    <ul>
-      <li
-        v-for="slot in slots"
-        :key="slot.id"
-        class=""
-        :class="{'selected': slot.id === selected}"
-        @click="selected = slot.id"
-      >
-        <h1>
-          <FontAwesomeIcon
-            :icon="slot.icon"
-            size="lg"
-            style="width: 2rem"
-          />
-          <span>{{ slot.title }}</span>
-        </h1>
-      </li>
-    </ul>
-    <div
+  <ul>
+    <li
       v-for="slot in slots"
       :key="slot.id"
+      class=""
+      :class="{'selected': slot.id === selected}"
+      @click="selected = slot.id"
     >
-      <div v-if="slot.id === selected" class="tab-content">
-        <slot :name="slot.id" />
-      </div>
+      <h1>
+        <FontAwesomeIcon
+          :icon="slot.icon"
+          size="lg"
+          style="width: 2rem"
+        />
+        <span>{{ slot.title }}</span>
+      </h1>
+    </li>
+  </ul>
+  <div
+    v-for="slot in slots"
+    :key="slot.id"
+  >
+    <div v-if="slot.id === selected" class="tab-content">
+      <slot :name="slot.id" />
     </div>
-  </main>
+  </div>
 </template>
 
 <style lang="sass" scoped>
@@ -81,7 +79,7 @@ const props = defineProps<{
   li.selected
     margin-top: 0
     z-index: 99
-    transform: translate(0, 2px)
+    transform: translate(0, 3px)
 
   .tab-content
     background-color: colors.$card

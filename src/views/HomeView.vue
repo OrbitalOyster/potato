@@ -21,7 +21,14 @@ const slots = [
 
 <template>
   <div class="fs">
-    <p>Home</p>
+    <header>
+      <div class="logo">
+        <img src="/goose.png">
+        <h1>Gooseberry.js</h1>
+      </div>
+      <div>Главная - отчёты</div>
+      <div>Вы зашли как:</div>
+    </header>
     <Splitpanes vertical>
       <Pane
         max-size="50"
@@ -58,19 +65,42 @@ const slots = [
 </template>
 
 <style lang="sass" scoped>
+header
+  display: flex
+  align-items: center
+  justify-content: space-between
+  padding-left: .5rem
+  padding-right: .5rem
+
+.logo
+  display: flex
+  align-items: center
+  gap: 1rem
+
+img
+  border-radius: 100%
+  height: 4rem
+  width: 4rem
+
+h1
+  display: inline
+
 aside
   background-color: transparent
   height: 100%
-  padding: .5rem
+  padding-right: 0
   box-sizing: border-box
 
 main
   height: 100%
-  padding: .5rem
+  padding-left: 0
+
+.splitpanes
   box-sizing: border-box
+  padding: .5rem
 
 :deep(.splitpanes__splitter)
-  background-color: gray
+  /* background-color: gray */
   min-width: 8px
 
 :deep(.splitpanes__pane)
