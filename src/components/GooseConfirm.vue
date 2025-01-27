@@ -39,7 +39,7 @@ defineExpose({ show })
     <Transition name="fade">
       <div
         v-if="active"
-        class="fs backdrop"
+        class="fs-centered backdrop"
       >
         <div
           ref="dialog"

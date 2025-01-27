@@ -7,7 +7,8 @@ const props = defineProps<{
     icon?: IconDefinition
     loading?: boolean
     submit?: boolean
-    title: string
+    title?: string
+    warning?: boolean
   }>(),
   type = props.submit ? 'submit' : 'button'
 </script>
@@ -15,7 +16,7 @@ const props = defineProps<{
 <template>
   <button
     :type
-    class="focusable"
+      :class="{ focusable: true, primary: true, warning }"
   >
     {{ title }}
     <FontAwesomeIcon
@@ -32,14 +33,25 @@ const props = defineProps<{
   @use '../assets/colors'
   @use '../assets/transitions'
 
+  .primary
+    background-color: colors.$primary
+
+  .primary:active:enabled
+    background-color: colors.$active
+
+  .warning
+    background-color: colors.$warning
+
+  .warning:active:enabled
+    background-color: colors.$warning-active
+
   button
     align-items: center
-    background-color: colors.$primary
     border-radius: borders.$radius
     border: none
     color: colors.$button
     cursor: pointer
-    display: flex
+    display: inline-flex
     filter: drop-shadow(colors.$button-shadow 0 0 .1rem)
     font-size: 1.25rem
     gap: .75rem
@@ -58,7 +70,6 @@ const props = defineProps<{
     transform: translateY(-.1rem)
 
   button:active:enabled
-    background-color: colors.$active
     filter: drop-shadow(colors.$button-shadow 0 .16rem .1rem)
     transform: translateY(0)
 

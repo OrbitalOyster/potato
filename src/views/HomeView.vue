@@ -1,10 +1,17 @@
 <script setup lang="ts">
 import 'splitpanes/dist/splitpanes.css'
 import { Pane, Splitpanes } from 'splitpanes'
-import { faBuilding, faClipboard, faClipboardList, faFileExcel, faPencil } from '@fortawesome/free-solid-svg-icons'
+import { faBuilding, faClipboard, faClipboardList, faFileExcel, faPencil, faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import GooseAccordion from '#components/GooseAccordion.vue'
+import GooseButton from '#components/GooseButton.vue'
+import GooseConfirm from '#components/GooseConfirm.vue'
 import GooseTabs from '#components/GooseTabs.vue'
-import { ref } from 'vue'
+import { ref, useTemplateRef } from 'vue'
+import { useUserStore } from '#stores/useUserStore.ts'
+import { useRouter, RouterLink } from 'vue-router'
+
+const userStore = useUserStore(),
+  router = useRouter()
 
 const accordionModel = ref([
   { id: 'orgs', title: 'Организации', icon: faBuilding },
@@ -17,17 +24,41 @@ const slots = [
   { id: 'initial', title: 'Первичные отчёты', icon: faClipboard },
   { id: 'complex', title: 'Сводные отчёты', icon: faClipboardList },
 ]
+
+const logoutConfirm = useTemplateRef('logoutConfirm')
+
+async function logout() {
+  await userStore.logout()
+  await router.push('/login')
+}
 </script>
 
 <template>
+
+  <GooseConfirm
+    ref="logoutConfirm"
+    title="Выйти из системы?"
+    @submit="logout"
+  />
+
   <div class="fs">
     <header>
       <div class="logo">
         <img src="/goose.png">
-        <h1 class="logo">Gooseberry.js</h1>
+        <h1 class="logo">
+          <RouterLink to="/">
+            Gooseberry.js
+          </RouterLink>
+        </h1>
       </div>
-      <div>Главная - отчёты</div>
-      <div>Вы зашли как:</div>
+      <div style="font-size: 1.5rem">Главная</div>
+      <div style="align-items: center; display: flex; gap: 1rem">
+        <div>
+          Вы зашли как: 
+          <strong>{{userStore.username}}</strong>
+        </div>
+        <GooseButton title="Выйти" :icon="faRightFromBracket" warning @click="logoutConfirm.show()"/>
+      </div>
     </header>
     <Splitpanes vertical>
       <Pane
@@ -49,7 +80,9 @@ const slots = [
         <main>
           <GooseTabs :slots>
             <template #xlsx>
-              <p>Foo</p>
+            <RouterLink to="/test">
+              Form
+            </RouterLink>
             </template>
             <template #initial>
               <p>Bar</p>
@@ -65,6 +98,9 @@ const slots = [
 </template>
 
 <style lang="sass" scoped>
+a
+  color: inherit
+
 header
   display: flex
   align-items: center
@@ -102,9 +138,9 @@ main
 .splitpanes
   box-sizing: border-box
   padding: .5rem
+  padding-top: 0
 
 :deep(.splitpanes__splitter)
-  /* background-color: gray */
   min-width: 8px
 
 :deep(.splitpanes__pane)
