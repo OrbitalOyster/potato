@@ -24,7 +24,7 @@ const slots = [
     <header>
       <div class="logo">
         <img src="/goose.png">
-        <h1>Gooseberry.js</h1>
+        <h1 class="logo">Gooseberry.js</h1>
       </div>
       <div>Главная - отчёты</div>
       <div>Вы зашли как:</div>
@@ -77,6 +77,9 @@ header
   align-items: center
   gap: 1rem
 
+h1.logo
+  font-weight: 400
+
 img
   border-radius: 100%
   height: 4rem
@@ -89,11 +92,12 @@ aside
   background-color: transparent
   height: 100%
   padding-right: 0
-  box-sizing: border-box
 
 main
   height: 100%
   padding-left: 0
+  display: flex
+  flex-direction: column
 
 .splitpanes
   box-sizing: border-box

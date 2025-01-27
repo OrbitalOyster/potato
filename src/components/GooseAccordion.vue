@@ -79,7 +79,7 @@ const model = defineModel<AccordionItem[]>(),
     align-items: center
     cursor: pointer
     user-select: none
-    height: 3.5rem
+    height: 3rem
     padding-right: .5rem
 
   .chevron

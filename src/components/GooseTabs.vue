@@ -34,12 +34,16 @@ const props = defineProps<{
       </h1>
     </li>
   </ul>
-  <div
-    v-for="slot in slots"
-    :key="slot.id"
-  >
-    <div v-if="slot.id === selected" class="tab-content">
-      <slot :name="slot.id" />
+  <div class="card" style="height: 100%">
+    <div
+      v-for="slot in slots"
+      :key="slot.id"
+    >
+      <div
+        v-if="slot.id === selected"
+      >
+        <slot :name="slot.id" />
+      </div>
     </div>
   </div>
 </template>
@@ -57,34 +61,32 @@ const props = defineProps<{
   li
     background-color: white
     cursor: pointer
+    color: colors.$text-inactive
     user-select: none
     white-space: nowrap
     position: relative
     display: flex
     padding: .5rem
     margin-top: .5rem
-    border: borders.$card
+    border: borders.$card-inactive
     border-radius: borders.$radius
     border-bottom: none
     border-bottom-left-radius: 0
     border-bottom-right-radius: 0
-    transition: margin 100ms ease-in-out
+    transition: margin 100ms ease-in-out, transform 100ms ease-in-out
+
+  li.selected
+    border: borders.$card
+    border-bottom: none
+    color: colors.$text
+    margin-top: 0
+    z-index: 99
+    transform: translate(0, borders.$radius)
 
   h1
     padding: 0
     margin: 0
     font-weight: normal
     font-size: 1rem
-
-  li.selected
-    margin-top: 0
-    z-index: 99
-    transform: translate(0, 3px)
-
-  .tab-content
-    background-color: colors.$card
-    border-radius: borders.$radius
-    border: borders.$card
-    filter: drop-shadow(rgba(0,0,0,.25) 0 .1rem .1rem)
 
 </style>
