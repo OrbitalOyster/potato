@@ -4,7 +4,6 @@ import GoosePopover from '#components/GoosePopover.vue'
 import type { IconDefinition } from '@fortawesome/fontawesome-common-types'
 import type { Placement } from '@floating-ui/utils'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
-import { useTemplateRef } from 'vue'
 
 const props = defineProps<{
     disabled?: boolean
@@ -15,11 +14,11 @@ const props = defineProps<{
     title?: string
     tooltip?: string
     tooltipPlacement?: Placement
+    transparent?: boolean
     warning?: boolean
   }>(),
   type = props.submit ? 'submit' : 'button',
   emit = defineEmits(['click'])
-
 </script>
 
 <template>
@@ -31,8 +30,8 @@ const props = defineProps<{
     <button
       :disabled
       :type
-      class="focusable primary"
-      :class="{ warning, small }"
+      class="focusable"
+      :class="{ primary: !transparent, warning, small, transparent }"
       @click="emit('click')"
     >
       {{ title }}
@@ -56,6 +55,9 @@ const props = defineProps<{
   @use '../assets/colors'
   @use '../assets/transitions'
 
+  .two-d
+    filter: drop-shadow(colors.$button-shadow 0 0 .1rem)
+
   .primary
     background-color: colors.$primary
 
@@ -67,6 +69,11 @@ const props = defineProps<{
 
   .warning:active:enabled
     background-color: colors.$warning-active
+
+  .transparent:enabled, .transparent:active
+    color: colors.$text
+    background-color: transparent
+    outline: none
 
   .small
     height: 2.5rem
