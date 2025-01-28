@@ -21,7 +21,6 @@ const slots = [
   { id: 'initial', title: 'Первичные отчёты', icon: faClipboard },
   { id: 'complex', title: 'Сводные отчёты', icon: faClipboardList },
 ]
-
 </script>
 
 <template>
@@ -69,32 +68,31 @@ const slots = [
 </template>
 
 <style lang="sass" scoped>
-.layout
-  box-sizing: border-box
-  display: flex
-  flex-direction: column
-  gap: .5rem
-  padding: .5rem
+  .layout
+    box-sizing: border-box
+    display: flex
+    flex-direction: column
+    gap: .5rem
+    padding: .5rem
 
-aside
-  background-color: transparent
-  height: 100%
-  padding-right: 0
+  aside
+    background-color: transparent
+    height: 100%
+    padding-right: 0
 
-main
-  height: 100%
-  padding-left: 0
-  display: flex
-  flex-direction: column
+  main
+    height: 100%
+    padding-left: 0
+    display: flex
+    flex-direction: column
 
-.splitpanes
-  box-sizing: border-box
-  padding-top: 0
+  .splitpanes
+    box-sizing: border-box
+    padding-top: 0
 
-:deep(.splitpanes__splitter)
-  min-width: 8px
+  :deep(.splitpanes__splitter)
+    min-width: 8px
 
-:deep(.splitpanes__pane)
-  min-width: 16rem
-
+  :deep(.splitpanes__pane)
+    min-width: 16rem
 </style>

@@ -98,5 +98,4 @@ const selected = ref(props.slots[0].id)
     font-weight: normal
     margin: 0
     padding: 0
-
 </style>
