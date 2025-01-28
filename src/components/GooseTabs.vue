@@ -65,6 +65,7 @@ const selected = ref(props.slots[0].id)
     flex-direction: row
     margin: 0
     padding: 0
+    z-index: 1
 
   li
     background-color: white
@@ -91,7 +92,7 @@ const selected = ref(props.slots[0].id)
     color: colors.$text
     margin-top: 0
     transform: translate(0, borders.$radius)
-    z-index: 99
+    z-index: 2
 
   h1
     font-size: 1rem

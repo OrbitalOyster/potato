@@ -1,32 +1,53 @@
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import GoosePopover from '#components/GoosePopover.vue'
 import type { IconDefinition } from '@fortawesome/fontawesome-common-types'
+import type { Placement } from '@floating-ui/utils'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { useTemplateRef } from 'vue'
 
 const props = defineProps<{
+    disabled?: boolean
     icon?: IconDefinition
     loading?: boolean
+    small?: boolean
     submit?: boolean
     title?: string
+    tooltip?: string
+    tooltipPlacement?: Placement
     warning?: boolean
-    small?: boolean
   }>(),
-  type = props.submit ? 'submit' : 'button'
+  type = props.submit ? 'submit' : 'button',
+  emit = defineEmits(['click'])
+
 </script>
 
 <template>
-  <button
-    :type
-    :class="{ focusable: true, primary: true, warning, small }"
+  <GoosePopover
+    has-arrow
+    :hover-toggle="!!tooltip"
+    :placement="tooltipPlacement"
   >
-    {{ title }}
-    <FontAwesomeIcon
-      v-if="icon || loading"
-      :class="{ 'fa-pulse': loading }"
-      :icon="loading ? faSpinner : icon!"
-      size="lg"
-    />
-  </button>
+    <button
+      :disabled
+      :type
+      :class="{ focusable: true, primary: true, warning, small }"
+      @click="emit('click')"
+    >
+      {{ title }}
+      <FontAwesomeIcon
+        v-if="icon || loading"
+        :class="{ 'fa-pulse': loading }"
+        :icon="loading ? faSpinner : icon!"
+        size="lg"
+      />
+    </button>
+    <template #popover>
+      <div style="padding: 1rem">
+        {{ tooltip }}
+      </div>
+    </template>
+  </GoosePopover>
 </template>
 
 <style scoped lang="sass">

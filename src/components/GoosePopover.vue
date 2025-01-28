@@ -2,6 +2,7 @@
 import { arrow, autoPlacement, autoUpdate, hide, offset, shift, size, useFloating } from '@floating-ui/vue'
 import { computed, ref, useTemplateRef } from 'vue'
 import type { Placement } from '@floating-ui/utils'
+import { promiseTimeout, useMouseInElement } from '@vueuse/core'
 
 const props = defineProps<{
     hasArrow?: boolean
@@ -11,11 +12,15 @@ const props = defineProps<{
   }>(),
   active = ref(false),
   target = useTemplateRef('target'),
+  { isOutside } = useMouseInElement(target),
   floating = useTemplateRef('floating'),
   arrowRef = useTemplateRef('arrowRef')
 
 const minSize = 256,
-  offsetValue = props.hasArrow ? 14 : 2
+  offsetValue = props.hasArrow ? 14 : 2,
+  autoPlacementOptions = props.placement ? { allowedPlacements: [props.placement] } : {},
+  shiftOptions = { padding: 16 },
+  arrowOptions = { element: arrowRef, padding: 16 }
 
 /* Floating UI */
 const { floatingStyles, middlewareData } = useFloating(target, floating, {
@@ -23,9 +28,9 @@ const { floatingStyles, middlewareData } = useFloating(target, floating, {
   placement: props.placement,
   middleware: [
     offset({ mainAxis: offsetValue }),
-    autoPlacement({ allowedPlacements: [props.placement ?? 'top'] }),
-    shift(),
-    arrow({ element: arrowRef, padding: 16 }),
+    autoPlacement(autoPlacementOptions),
+    shift(shiftOptions),
+    arrow(arrowOptions),
     size({
       apply({ availableWidth, availableHeight, elements }) {
         Object.assign(elements.floating.style, {
@@ -66,6 +71,15 @@ function toggle() {
   active.value = !active.value
 }
 
+async function onMouseOver() {
+  // TODO: Janky
+  if (props.hoverToggle) {
+    await promiseTimeout(500)
+    if (!isOutside.value)
+      active.value = true
+  }
+}
+
 defineExpose({ toggle, active })
 </script>
 
@@ -74,8 +88,8 @@ defineExpose({ toggle, active })
     ref="target"
     class="target"
     @click="clickToggle && toggle()"
-    @mouseover="active = hoverToggle ? true : active"
-    @mouseleave="active = hoverToggle ? false : active"
+    @mouseover="onMouseOver"
+    @mouseleave="hoverToggle && (active = false)"
   >
     <slot />
   </div>

@@ -26,7 +26,10 @@ async function logout() {
     <div class="logo">
       <img src="/goose.png">
       <h1>
-        <RouterLink to="/" style="color: inherit">
+        <RouterLink
+          to="/"
+          style="color: inherit"
+        >
           Gooseberry.js
         </RouterLink>
       </h1>
@@ -47,8 +50,10 @@ async function logout() {
       <GooseButton
         title="Выйти"
         :icon="faRightFromBracket"
-        warning
+        tooltip="Выход из системы"
+        tooltip-placement="bottom"
         small
+        warning
         @click="logoutConfirm?.show()"
       />
     </div>

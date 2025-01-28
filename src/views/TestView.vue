@@ -116,6 +116,10 @@ const confirmModal = useTemplateRef('confirmModal')
           title="Alert"
           @click="confirmModal?.show"
         />
+        <GooseButton
+          title="Hover me"
+          tooltip="This is tooltip"
+        />
       </div>
       <hr>
       <GooseCheckbox

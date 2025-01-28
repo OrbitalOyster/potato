@@ -51,7 +51,6 @@ const slots = [
                   Form
                 </RouterLink>
                 <GooseButton :icon="faUpload" />
-                <GooseTable style="width: 100%" />
               </div>
             </template>
             <template #initial>
@@ -78,17 +77,14 @@ const slots = [
   aside
     background-color: transparent
     height: 100%
-    padding-right: 0
 
   main
     height: 100%
-    padding-left: 0
     display: flex
     flex-direction: column
 
   .splitpanes
     box-sizing: border-box
-    padding-top: 0
 
   :deep(.splitpanes__splitter)
     min-width: 8px
