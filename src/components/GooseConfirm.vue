@@ -39,12 +39,11 @@ defineExpose({ show })
     <Transition name="fade">
       <div
         v-if="active"
-        class="fs-centered backdrop"
+        class="fs centered backdrop"
       >
         <div
           ref="dialog"
-          class="card"
-          style="padding: 1rem"
+          class="card dialog"
         >
           <div class="message">
             <FontAwesomeIcon
@@ -75,12 +74,17 @@ defineExpose({ show })
   @use '../assets/colors'
   @use '../assets/transitions'
 
+  .dialog
+    display: flex
+    flex-direction: column
+    gap: 1rem
+    padding: 1rem
+
   .message
     align-items: center
     display: flex
     flex-direction: row
     gap: 2rem
-    padding: 1rem
 
   .fa-triangle-exclamation
     color: colors.$warning

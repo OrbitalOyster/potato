@@ -1,17 +1,14 @@
 <script setup lang="ts">
 import 'splitpanes/dist/splitpanes.css'
 import { Pane, Splitpanes } from 'splitpanes'
-import { faBuilding, faClipboard, faClipboardList, faFileExcel, faPencil, faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
+import { faBuilding, faClipboard, faClipboardList, faFileExcel, faPencil, faUpload } from '@fortawesome/free-solid-svg-icons'
 import GooseAccordion from '#components/GooseAccordion.vue'
 import GooseButton from '#components/GooseButton.vue'
-import GooseConfirm from '#components/GooseConfirm.vue'
 import GooseTabs from '#components/GooseTabs.vue'
-import { ref, useTemplateRef } from 'vue'
-import { useUserStore } from '#stores/useUserStore.ts'
-import { useRouter, RouterLink } from 'vue-router'
-
-const userStore = useUserStore(),
-  router = useRouter()
+import GooseTable from '#components/GooseTable.vue'
+import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
+import TopBar from '#shared/TopBar.vue'
 
 const accordionModel = ref([
   { id: 'orgs', title: 'Организации', icon: faBuilding },
@@ -25,41 +22,11 @@ const slots = [
   { id: 'complex', title: 'Сводные отчёты', icon: faClipboardList },
 ]
 
-const logoutConfirm = useTemplateRef('logoutConfirm')
-
-async function logout() {
-  await userStore.logout()
-  await router.push('/login')
-}
 </script>
 
 <template>
-
-  <GooseConfirm
-    ref="logoutConfirm"
-    title="Выйти из системы?"
-    @submit="logout"
-  />
-
-  <div class="fs">
-    <header>
-      <div class="logo">
-        <img src="/goose.png">
-        <h1 class="logo">
-          <RouterLink to="/">
-            Gooseberry.js
-          </RouterLink>
-        </h1>
-      </div>
-      <div style="font-size: 1.5rem">Главная</div>
-      <div style="align-items: center; display: flex; gap: 1rem">
-        <div>
-          Вы зашли как: 
-          <strong>{{userStore.username}}</strong>
-        </div>
-        <GooseButton title="Выйти" :icon="faRightFromBracket" warning @click="logoutConfirm.show()"/>
-      </div>
-    </header>
+  <div class="fs layout">
+    <TopBar />
     <Splitpanes vertical>
       <Pane
         max-size="50"
@@ -80,9 +47,13 @@ async function logout() {
         <main>
           <GooseTabs :slots>
             <template #xlsx>
-            <RouterLink to="/test">
-              Form
-            </RouterLink>
+              <div style="padding: 1rem">
+                <RouterLink to="/test">
+                  Form
+                </RouterLink>
+                <GooseButton :icon="faUpload" />
+                <GooseTable style="width: 100%" />
+              </div>
             </template>
             <template #initial>
               <p>Bar</p>
@@ -98,31 +69,12 @@ async function logout() {
 </template>
 
 <style lang="sass" scoped>
-a
-  color: inherit
-
-header
+.layout
+  box-sizing: border-box
   display: flex
-  align-items: center
-  justify-content: space-between
-  padding-left: .5rem
-  padding-right: .5rem
-
-.logo
-  display: flex
-  align-items: center
-  gap: 1rem
-
-h1.logo
-  font-weight: 400
-
-img
-  border-radius: 100%
-  height: 4rem
-  width: 4rem
-
-h1
-  display: inline
+  flex-direction: column
+  gap: .5rem
+  padding: .5rem
 
 aside
   background-color: transparent
@@ -137,7 +89,6 @@ main
 
 .splitpanes
   box-sizing: border-box
-  padding: .5rem
   padding-top: 0
 
 :deep(.splitpanes__splitter)

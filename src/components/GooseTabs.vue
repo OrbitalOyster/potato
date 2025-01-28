@@ -10,9 +10,14 @@ interface TabSlot {
 }
 
 const props = defineProps<{
-    slots: TabSlot[]
-  }>(),
-  selected = ref(props.slots[0].id)
+  slots: TabSlot[]
+}>()
+
+/* No slots? */
+if (!props.slots[0])
+  throw new Error('Major screwup')
+
+const selected = ref(props.slots[0].id)
 </script>
 
 <template>
@@ -34,7 +39,10 @@ const props = defineProps<{
       </h1>
     </li>
   </ul>
-  <div class="card" style="height: 100%">
+  <div
+    class="card"
+    style="height: 100%"
+  >
     <div
       v-for="slot in slots"
       :key="slot.id"
@@ -53,40 +61,42 @@ const props = defineProps<{
   @use '../assets/borders'
 
   ul
-    padding: 0
-    margin: 0
     display: flex
     flex-direction: row
+    margin: 0
+    padding: 0
 
   li
     background-color: white
-    cursor: pointer
-    color: colors.$text-inactive
-    user-select: none
-    white-space: nowrap
-    position: relative
-    display: flex
-    padding: .5rem
-    margin-top: .5rem
-    border: borders.$card-inactive
     border-radius: borders.$radius
+    border: borders.$card-inactive
+
     border-bottom: none
     border-bottom-left-radius: 0
     border-bottom-right-radius: 0
+
+    color: colors.$text-inactive
+    cursor: pointer
+    display: flex
+    margin-top: .5rem
+    padding: .5rem
+    position: relative
     transition: margin 100ms ease-in-out, transform 100ms ease-in-out
+    user-select: none
+    white-space: nowrap
 
   li.selected
     border: borders.$card
     border-bottom: none
     color: colors.$text
     margin-top: 0
-    z-index: 99
     transform: translate(0, borders.$radius)
+    z-index: 99
 
   h1
-    padding: 0
-    margin: 0
-    font-weight: normal
     font-size: 1rem
+    font-weight: normal
+    margin: 0
+    padding: 0
 
 </style>

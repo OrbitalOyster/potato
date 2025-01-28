@@ -8,19 +8,17 @@ body
 
 /* Fullscreen div */
 .fs
-  display: flex
-  flex-direction: column
   height: 100vh
+  position: fixed
   width: 100vw
 
-.fs-centered
-  @extend .fs
+.centered
   align-items: center
+  display: flex
   justify-content: center
 
 .backdrop
   background-color: rgb(255 255 255 / 80%)
-  position: fixed
   z-index: 100
 
 /* Cards */

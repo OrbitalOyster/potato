@@ -9,6 +9,7 @@ const props = defineProps<{
     submit?: boolean
     title?: string
     warning?: boolean
+    small?: boolean
   }>(),
   type = props.submit ? 'submit' : 'button'
 </script>
@@ -16,7 +17,7 @@ const props = defineProps<{
 <template>
   <button
     :type
-      :class="{ focusable: true, primary: true, warning }"
+    :class="{ focusable: true, primary: true, warning, small }"
   >
     {{ title }}
     <FontAwesomeIcon
@@ -44,6 +45,11 @@ const props = defineProps<{
 
   .warning:active:enabled
     background-color: colors.$warning-active
+
+  .small
+    height: 2.5rem
+    padding-left: .5rem
+    padding-right: .5rem
 
   button
     align-items: center
