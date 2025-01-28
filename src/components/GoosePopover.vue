@@ -2,7 +2,6 @@
 import { arrow, autoPlacement, autoUpdate, hide, offset, shift, size, useFloating } from '@floating-ui/vue'
 import { computed, ref, useTemplateRef } from 'vue'
 import type { Placement } from '@floating-ui/utils'
-import { promiseTimeout, useMouseInElement } from '@vueuse/core'
 
 const props = defineProps<{
     hasArrow?: boolean
@@ -12,7 +11,6 @@ const props = defineProps<{
   }>(),
   active = ref(false),
   target = useTemplateRef('target'),
-  { isOutside } = useMouseInElement(target),
   floating = useTemplateRef('floating'),
   arrowRef = useTemplateRef('arrowRef')
 
@@ -71,15 +69,6 @@ function toggle() {
   active.value = !active.value
 }
 
-async function onMouseOver() {
-  // TODO: Janky
-  if (props.hoverToggle) {
-    await promiseTimeout(500)
-    if (!isOutside.value)
-      active.value = true
-  }
-}
-
 defineExpose({ toggle, active })
 </script>
 
@@ -88,7 +77,7 @@ defineExpose({ toggle, active })
     ref="target"
     class="target"
     @click="clickToggle && toggle()"
-    @mouseover="onMouseOver"
+    @mouseover="hoverToggle && (active = true)"
     @mouseleave="hoverToggle && (active = false)"
   >
     <slot />

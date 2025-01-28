@@ -31,7 +31,8 @@ const props = defineProps<{
     <button
       :disabled
       :type
-      :class="{ focusable: true, primary: true, warning, small }"
+      class="focusable primary"
+      :class="{ warning, small }"
       @click="emit('click')"
     >
       {{ title }}

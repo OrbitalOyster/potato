@@ -55,6 +55,7 @@ const slots = [
             </template>
             <template #initial>
               <p>Bar</p>
+              <GooseTable style="width: 100%" />
             </template>
             <template #complex>
               <p>Baz</p>
