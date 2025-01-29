@@ -48,9 +48,8 @@ async function logout() {
         <strong>{{ userStore.username }}</strong>
       </div>
       <GooseButton
-        title="Выйти"
         :icon="faRightFromBracket"
-        tooltip="Выход из системы"
+        tooltip="Выйти из системы"
         tooltip-placement="bottom"
         small
         warning

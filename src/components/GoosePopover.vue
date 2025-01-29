@@ -17,8 +17,8 @@ const props = defineProps<{
 const minSize = 256,
   offsetValue = props.hasArrow ? 14 : 2,
   autoPlacementOptions = props.placement ? { allowedPlacements: [props.placement] } : {},
-  shiftOptions = { padding: 16 },
-  arrowOptions = { element: arrowRef, padding: 16 }
+  shiftOptions = { padding: 8 },
+  arrowOptions = { element: arrowRef, padding: 8 }
 
 /* Floating UI */
 const { floatingStyles, middlewareData } = useFloating(target, floating, {
@@ -45,7 +45,7 @@ const { floatingStyles, middlewareData } = useFloating(target, floating, {
 /* Arrow */
 const arrowStyle = computed(
   () => {
-    const side = middlewareData.value.offset?.placement.split('-')[0] ?? 'bottom',
+    const side = middlewareData.value.offset?.placement.split('-')[0] ?? 'top',
       /* Rotate rectangle, shape it into an arrow */
       rotation = { top: -135, right: -45, bottom: 45, left: 135 }[side] ?? 0,
       floatingWidth = floating.value?.offsetWidth ?? 0,
@@ -53,7 +53,7 @@ const arrowStyle = computed(
       leftOffset = side === 'left' ? 1 : 0,
       topOffset = side === 'top' ? 1 : 0,
       middlewareArrow = middlewareData.value.arrow,
-      arrowOffset = side === 'right' || side === 'bottom' ? 8 : 11 
+      arrowOffset = side === 'right' || side === 'bottom' ? 9 : 11 
     return {
       transform: `rotate(${rotation.toString()}deg)`,
       left: middlewareArrow?.x || middlewareArrow?.x === 0
@@ -75,7 +75,7 @@ defineExpose({ toggle, active })
 <template>
   <div
     ref="target"
-    class="target"
+    style="display: inline"
     @click="clickToggle && toggle()"
     @mouseover="hoverToggle && (active = true)"
     @mouseleave="hoverToggle && (active = false)"
@@ -98,7 +98,7 @@ defineExpose({ toggle, active })
         v-if="hasArrow"
         ref="arrowRef"
         :style="arrowStyle"
-        class="arrow"
+        class="arrow info"
       />
       <div class="popover">
         <slot name="popover" />
@@ -113,19 +113,11 @@ defineExpose({ toggle, active })
   @use '../assets/style.sass'
   @use '../assets/transitions.sass'
 
-  .target
-    display: inline-block
-
   .arrow
-    border: 0
-    background-color: colors.$info
-    border-top: 1px solid colors.$info-border
-    border-left: 1px solid colors.$info-border
     clip-path: polygon(0% 0%, 100% 0%, 0% 100%, 0% 0%)
     height: 16px
     position: absolute
     width: 16px
-    z-index: 98
 
   .floating
     left: 0

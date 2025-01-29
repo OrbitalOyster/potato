@@ -55,9 +55,6 @@ const props = defineProps<{
   @use '../assets/colors'
   @use '../assets/transitions'
 
-  .two-d
-    filter: drop-shadow(colors.$button-shadow 0 0 .1rem)
-
   .primary
     background-color: colors.$primary
 
@@ -89,6 +86,7 @@ const props = defineProps<{
     display: inline-flex
     filter: drop-shadow(colors.$button-shadow 0 0 .1rem)
     font-size: 1.25rem
+    font-weight: 500
     gap: .75rem
     height: 3.5rem
     padding-left: 1rem
