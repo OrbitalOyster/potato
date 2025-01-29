@@ -53,7 +53,7 @@ const arrowStyle = computed(
       leftOffset = side === 'left' ? 1 : 0,
       topOffset = side === 'top' ? 1 : 0,
       middlewareArrow = middlewareData.value.arrow,
-      arrowOffset = 7
+      arrowOffset = side === 'right' || side === 'bottom' ? 8 : 11 
     return {
       transform: `rotate(${rotation.toString()}deg)`,
       left: middlewareArrow?.x || middlewareArrow?.x === 0
@@ -86,7 +86,7 @@ defineExpose({ toggle, active })
     <div
       v-if="active"
       ref="floating"
-      class="card floating"
+      class="card floating info"
       :style="{
         ...floatingStyles,
         visibility: middlewareData.hide?.referenceHidden
@@ -117,13 +117,15 @@ defineExpose({ toggle, active })
     display: inline-block
 
   .arrow
-    background-color: colors.$card
-    border-left: borders.$card
-    border-top: borders.$card
-    clip-path: polygon(0% 0%, 125% 0%, 0% 125%, 0% 0%)
-    height: 12px
+    border: 0
+    background-color: colors.$info
+    border-top: 1px solid colors.$info-border
+    border-left: 1px solid colors.$info-border
+    clip-path: polygon(0% 0%, 100% 0%, 0% 100%, 0% 0%)
+    height: 16px
     position: absolute
-    width: 12px
+    width: 16px
+    z-index: 98
 
   .floating
     left: 0
