@@ -50,7 +50,11 @@ const slots = [
                 <RouterLink to="/test">
                   Form
                 </RouterLink>
-                <GooseButton :icon="faUpload" transparent tooltip="Загрузить .xlsx файл"/>
+                <GooseButton
+                  :icon="faUpload"
+                  transparent
+                  tooltip="Загрузить .xlsx файл"
+                />
               </div>
             </template>
             <template #initial>

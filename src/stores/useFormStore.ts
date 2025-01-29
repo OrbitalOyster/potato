@@ -53,5 +53,8 @@ export const useFormStore = (id: string) => defineStore(id, {
     isValid() {
       return Object.values(this.errors).every(e => e === '')
     },
+    reset() {
+      Object.keys(this.inputs).forEach(key => this.inputs[key] = null)
+    },
   },
 })()

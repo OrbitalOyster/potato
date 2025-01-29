@@ -53,7 +53,7 @@ const arrowStyle = computed(
       leftOffset = side === 'left' ? 1 : 0,
       topOffset = side === 'top' ? 1 : 0,
       middlewareArrow = middlewareData.value.arrow,
-      arrowOffset = side === 'right' || side === 'bottom' ? 9 : 11 
+      arrowOffset = side === 'right' || side === 'bottom' ? 9 : 11
     return {
       transform: `rotate(${rotation.toString()}deg)`,
       left: middlewareArrow?.x || middlewareArrow?.x === 0
