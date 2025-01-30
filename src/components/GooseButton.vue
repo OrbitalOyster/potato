@@ -67,6 +67,12 @@ const props = defineProps<{
   .warning:active:enabled
     background-color: colors.$warning-active
 
+  .alert
+    background-color: colors.$alert
+
+  .alert:active:enabled
+    background-color: colors.$alert
+
   .transparent:enabled, .transparent:active
     color: colors.$text
     background-color: transparent
