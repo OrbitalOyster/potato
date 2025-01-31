@@ -32,6 +32,7 @@ const props = defineProps<{
       :type
       class="focusable"
       :class="{ primary: !transparent, warning, small, transparent }"
+      :tabindex="transparent ? -1 : 0"
       @click="emit('click')"
     >
       {{ title }}
@@ -40,11 +41,11 @@ const props = defineProps<{
         style="width: 2rem"
         :class="{ 'fa-pulse': loading }"
         :icon="loading ? faSpinner : icon!"
-        size="lg"
+        size="xl"
       />
     </button>
     <template #popover>
-      <div style="padding: 1rem">
+      <div style="padding: 1rem; white-space: nowrap">
         {{ tooltip }}
       </div>
     </template>
@@ -82,7 +83,7 @@ const props = defineProps<{
     padding-right: 0rem
 
   .small
-    height: 2.5rem
+    height: 3rem
     padding-left: .5rem
     padding-right: .5rem
 
@@ -96,10 +97,10 @@ const props = defineProps<{
     filter: drop-shadow(colors.$button-shadow 0 0 .1rem)
     font-size: 1.25rem
     font-weight: 500
-    gap: .75rem
+    gap: .8rem
     height: 3.5rem
-    padding-left: 1rem
-    padding-right: 1rem
+    padding-left: .8rem
+    padding-right: .8rem
     transform: translateY(0)
     transition: transitions.$focusable, transitions.$colors, transitions.$filter, transitions.$transform
     user-select: none

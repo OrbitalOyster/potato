@@ -126,6 +126,7 @@ const model = defineModel<string>({ default: '' }),
     transform: translateY(calc(-70%)) scale(.9)
 
   .icons
+    align-items: center
     display: flex
     position: absolute
     right: .5rem
@@ -133,9 +134,4 @@ const model = defineModel<string>({ default: '' }),
   .validation-message
     padding: .5rem
     margin: .5rem
-
-  .eye
-    cursor: pointer
-    height: 1.5rem
-    width: 2rem
 </style>
