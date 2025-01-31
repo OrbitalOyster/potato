@@ -4,11 +4,11 @@ import { Pane, Splitpanes } from 'splitpanes'
 import { faBuilding, faClipboard, faClipboardList, faFileExcel, faPencil, faUpload } from '@fortawesome/free-solid-svg-icons'
 import GooseAccordion from '#components/GooseAccordion.vue'
 import GooseButton from '#components/GooseButton.vue'
-import GooseTabs from '#components/GooseTabs.vue'
 import GooseTable from '#components/GooseTable.vue'
-import { ref } from 'vue'
+import GooseTabs from '#components/GooseTabs.vue'
 import { RouterLink } from 'vue-router'
 import TopBar from '#shared/TopBar.vue'
+import { ref } from 'vue'
 
 const accordionModel = ref([
   { id: 'orgs', title: 'Организации', icon: faBuilding },

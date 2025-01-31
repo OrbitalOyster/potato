@@ -15,9 +15,8 @@ const props = defineProps<{
   }>(),
   store = useFormStore(props.form)
 
-if (!store.inputs[props.name])
-  store.inputs[props.name] = ''
-
+/* Init store */
+store.inputs[props.name] = store.inputs[props.name] ?? ''
 store.checks[props.name] = props.checks ?? []
 </script>
 

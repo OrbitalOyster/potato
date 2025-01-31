@@ -37,6 +37,7 @@ const props = defineProps<{
       {{ title }}
       <FontAwesomeIcon
         v-if="icon || loading"
+        style="width: 2rem"
         :class="{ 'fa-pulse': loading }"
         :icon="loading ? faSpinner : icon!"
         size="lg"
@@ -77,6 +78,8 @@ const props = defineProps<{
     color: colors.$text
     background-color: transparent
     outline: none
+    padding-left: 0rem
+    padding-right: 0rem
 
   .small
     height: 2.5rem

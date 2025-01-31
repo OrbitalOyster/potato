@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { faEye, faEyeSlash, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import GooseButton from '#components/GooseButton.vue'
 import GoosePopover from '#components/GoosePopover.vue'
 import { ref } from 'vue'
 
@@ -65,6 +66,14 @@ const model = defineModel<string>({ default: '' }),
         size="lg"
       />
       <!-- Password show/hide icon -->
+      <GooseButton
+        v-if="password"
+        transparent
+        tooltip="Показать/скрыть пароль"
+        :icon="passwordHidden ? faEye : faEyeSlash"
+        @click="passwordHidden = !passwordHidden"
+      />
+      <!--
       <FontAwesomeIcon
         v-if="password"
         :icon="passwordHidden ? faEye : faEyeSlash"
@@ -72,6 +81,7 @@ const model = defineModel<string>({ default: '' }),
         class="eye"
         @click="passwordHidden = !passwordHidden"
       />
+      -->
     </div>
   </div>
 </template>

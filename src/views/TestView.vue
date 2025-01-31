@@ -80,6 +80,7 @@ const confirmModal = useTemplateRef('confirmModal')
       <GooseFormInput
         name="sampleInput2"
         form="mySampleForm"
+        password
       />
       <hr>
       <div class="validated">
