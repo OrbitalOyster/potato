@@ -6,7 +6,7 @@ import GooseFormCheckbox from '#components/GooseFormCheckbox.vue'
 import GooseFormInput from '#components/GooseFormInput.vue'
 import { faCopyright } from '@fortawesome/free-regular-svg-icons'
 import { faRightToBracket } from '@fortawesome/free-solid-svg-icons'
-import { ref } from 'vue'
+import { ref, onMounted, useTemplateRef } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '#stores/useUserStore.ts'
 
@@ -18,7 +18,8 @@ interface LoginFormCheck {
 
 const router = useRouter(),
   userStore = useUserStore(),
-  disabled = ref(false)
+  disabled = ref(false),
+  loginFormRef = useTemplateRef('loginForm')
 
 async function auth(formCheck: LoginFormCheck | null) {
   if (!formCheck)
@@ -30,6 +31,8 @@ async function auth(formCheck: LoginFormCheck | null) {
     console.log('failed')
   disabled.value = false
 }
+
+onMounted(() => { loginFormRef.value.reset() })
 </script>
 
 <template>
@@ -37,6 +40,7 @@ async function auth(formCheck: LoginFormCheck | null) {
     <div>
       <GooseForm
         id="loginForm"
+        ref="loginForm"
         @submit="auth"
       >
         <main class="card">

@@ -10,11 +10,6 @@ const props = defineProps<{
   store = useFormStore(props.id),
   validated = ref(false)
 
-function onSubmit() {
-  emits('submit', store.isValid() ? store.inputs : null)
-  validated.value = true
-}
-
 function setInputs(inputs: Inputs) {
   for (const [key, value] of Object.entries(inputs))
     store.inputs[key] = value
@@ -24,8 +19,12 @@ function reset() {
   store.reset()
 }
 
-onMounted(() => store.validate())
+function onSubmit() {
+  emits('submit', store.isValid() ? store.inputs : null)
+  validated.value = true
+}
 
+onMounted(() => store.validate())
 defineExpose({ setInputs, reset })
 </script>
 
