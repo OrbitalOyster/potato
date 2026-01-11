@@ -17,8 +17,8 @@ cat src/catppuccin/init.lua >> ~/.config/nvim/init.lua
 cp src/nvim-tree/nvim-tree.lua ~/.config/nvim/lua/plugins
 cat src/nvim-tree/init.lua >> ~/.config/nvim/init.lua
 
-# Snacks
-cp src/snaks/snaks.lua ~/.config/nvim/lua/plugins
+# Notify
+cp src/notify/notify.lua ~/.config/nvim/lua/plugins
 
 # Buffer tools
 cp src/buffers/bufferline.lua ~/.config/nvim/lua/plugins
@@ -31,9 +31,12 @@ cat src/lualine/init.lua >> ~/.config/nvim/init.lua
 
 # Noice
 cp src/noice/noice.lua ~/.config/nvim/lua/plugins
-cat src/noice/init.lua >> ~/.config/nvim/init.lua
 
 # gitsigns
 cp src/gitsigns/gitsigns.lua ~/.config/nvim/lua/plugins
+cat src/gitsigns/init.lua >> ~/.config/nvim/init.lua
+
+# Indents
+cp src/ibl/ibl.lua ~/.config/nvim/lua/plugins
 
 echo "Done"
