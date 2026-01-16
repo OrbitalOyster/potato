@@ -12,7 +12,7 @@ return {
       color_icons = true,
       themable = false,
       offsets = {{
-        filetype = "NvimTree",
+        filetype = "neo-tree",
         separator = false
       }},
     },
