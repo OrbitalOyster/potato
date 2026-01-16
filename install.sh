@@ -37,6 +37,7 @@ cp src/gitsigns/gitsigns.lua ~/.config/nvim/lua/plugins
 cat src/gitsigns/init.lua >> ~/.config/nvim/init.lua
 
 # Indents
-cp src/ibl/ibl.lua ~/.config/nvim/lua/plugins
+cp src/mini.indentscope/mini.indentscope.lua ~/.config/nvim/lua/plugins
+cat src/mini.indentscope/init.lua >> ~/.config/nvim/init.lua
 
 echo "Done"
