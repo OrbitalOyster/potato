@@ -14,8 +14,8 @@ cp src/catppuccin/catppuccin.lua ~/.config/nvim/lua/plugins
 cat src/catppuccin/init.lua >> ~/.config/nvim/init.lua
 
 # NvimTree
-cp src/nvim-tree/nvim-tree.lua ~/.config/nvim/lua/plugins
-cat src/nvim-tree/init.lua >> ~/.config/nvim/init.lua
+cp src/neo-tree/neo-tree.lua ~/.config/nvim/lua/plugins
+cat src/neo-tree/init.lua >> ~/.config/nvim/init.lua
 
 # Notify
 cp src/notify/notify.lua ~/.config/nvim/lua/plugins

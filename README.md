@@ -1,1 +1,3 @@
 # potato
+
+NeoVim config installer
