@@ -17,6 +17,8 @@ vim.g.mapleader = ' '           -- Space as leader key
 vim.keymap.set("n", "<C-l>", "<C-w>l")
 vim.keymap.set("n", "<C-h>", "<C-w>h")
 
+vim.keymap.set('n', '<leader>o', '<cmd>Neotree toggle<cr>')
+
 vim.diagnostic.config({         -- Funky diagnostic icons
   signs = {
     text = {
@@ -27,4 +29,3 @@ vim.diagnostic.config({         -- Funky diagnostic icons
     },
   },
 })
-

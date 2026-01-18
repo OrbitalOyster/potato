@@ -1,13 +1,8 @@
 return { 
+  -- Catppuccin color theme
   {
     "catppuccin/nvim",
     priority = 1000,
-    integrations = {
-      gitsigns = true,
-      neotree = true,
-      notify = true,
-      noice = true,
-    },
     config = function()
       vim.cmd([[colorscheme catppuccin-frappe]])
     end,
