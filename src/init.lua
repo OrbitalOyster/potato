@@ -1,5 +1,3 @@
-require("config.lazy")
-
 vim.o.number = true             -- Line numbers
 vim.o.relativenumber = true     -- Relative line numbers
 vim.o.cursorline = true         -- Highlight line number
@@ -29,3 +27,14 @@ vim.diagnostic.config({         -- Funky diagnostic icons
     },
   },
 })
+
+vim.o.laststatus = 3        -- Set lualine width to 100%
+
+vim.keymap.set('n', '<Tab>', '<Cmd>BufferLineCycleNext<CR>')      -- Next buffer
+vim.keymap.set('n', '<S-Tab>', '<Cmd>BufferLineCyclePrev<CR>')    -- Previous buffer
+vim.keymap.set('n', '<leader>c', '<Cmd>Bdelete<CR>')              -- Close buffer
+
+vim.o.signcolumn = "yes:1"      -- Always show sign column
+vim.o.statuscolumn = "%l %s"    -- Line number, then sign
+
+require("config.lazy")
