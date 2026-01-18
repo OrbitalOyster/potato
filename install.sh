@@ -2,11 +2,13 @@
 
 echo "Installing..."
 
-# Lazy plugin manager
+# Base files
 mkdir ~/.config/nvim/lua/config -p
 cp src/init.lua ~/.config/nvim 
-cp src/lazy.lua ~/.config/nvim/lua/config
 mkdir ~/.config/nvim/lua/plugins
+
+# Lazy plugin manager
+cp src/lazy.lua ~/.config/nvim/lua/config
 echo "return {}" > ~/.config/nvim/lua/plugins/plugins.lua
 
 # Catppuccin theme
@@ -39,5 +41,10 @@ cat src/gitsigns/init.lua >> ~/.config/nvim/init.lua
 # Indents
 cp src/mini.indentscope/mini.indentscope.lua ~/.config/nvim/lua/plugins
 cat src/mini.indentscope/init.lua >> ~/.config/nvim/init.lua
+
+# LSP config
+cp src/lsp-config/lsp-config.lua ~/.config/nvim/lua/plugins
+echo "vim.lsp.enable(\"ts_ls\")" >> ~/.config/nvim/init.lua
+
 
 echo "Done"
