@@ -17,14 +17,13 @@ vim.g.mapleader = ' '           -- Space as leader key
 vim.keymap.set("n", "<C-l>", "<C-w>l")
 vim.keymap.set("n", "<C-h>", "<C-w>h")
 
-vim.diagnostic.config({
-  virtual_text = true,
+vim.diagnostic.config({         -- Funky diagnostic icons
   signs = {
     text = {
-      [vim.diagnostic.severity.ERROR] = "❗",
-      [vim.diagnostic.severity.WARN]  = "⚠️",
-      [vim.diagnostic.severity.INFO]  = "💡",
-      [vim.diagnostic.severity.HINT]  = "💡",
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN]  = "",
+      [vim.diagnostic.severity.INFO]  = "",
+      [vim.diagnostic.severity.HINT]  = "",
     },
   },
 })

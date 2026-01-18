@@ -38,13 +38,15 @@ cp src/noice/noice.lua ~/.config/nvim/lua/plugins
 cp src/gitsigns/gitsigns.lua ~/.config/nvim/lua/plugins
 cat src/gitsigns/init.lua >> ~/.config/nvim/init.lua
 
+# Tiny inline diagnostics
+cp src/tid/tid.lua ~/.config/nvim/lua/plugins
+
 # Indents
 cp src/mini.indentscope/mini.indentscope.lua ~/.config/nvim/lua/plugins
 cat src/mini.indentscope/init.lua >> ~/.config/nvim/init.lua
 
 # LSP config
 cp src/lsp-config/lsp-config.lua ~/.config/nvim/lua/plugins
-echo "vim.lsp.enable(\"ts_ls\")" >> ~/.config/nvim/init.lua
-
+echo "vim.lsp.enable(\"ts_ls\")" >> ~/.config/nvim/init.lua # TypeScript
 
 echo "Done"
