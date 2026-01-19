@@ -9,3 +9,4 @@ cp nvim ~/.config -r
 cp plugins ~/.config/nvim/lua -r
 
 echo "Done"
+
