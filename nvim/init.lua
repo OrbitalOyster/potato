@@ -9,6 +9,7 @@ vim.o.wrap = false              -- No line wrapping
 vim.o.termguicolors = true      -- Enable 24-bit RGB colors
 vim.o.undofile = true           -- Enable persistent undo
 vim.o.showmode = false          -- Don't show mode
+vim.o.colorcolumn = "80"
 
 vim.g.mapleader = ' '           -- Space as leader key
 
@@ -16,10 +17,10 @@ vim.keymap.set("n", "<C-l>", "<C-w>l")
 vim.keymap.set("n", "<C-h>", "<C-w>h")
 vim.keymap.set("n", "<C-j>", "<C-w>j")
 vim.keymap.set("n", "<C-k>", "<C-w>k")
-vim.keymap.set('n', '<leader>o', '<cmd>Neotree toggle<cr>')
-vim.keymap.set('n', '<Tab>', '<Cmd>BufferLineCycleNext<CR>')      -- Next buffer
-vim.keymap.set('n', '<S-Tab>', '<Cmd>BufferLineCyclePrev<CR>')    -- Previous buffer
-vim.keymap.set('n', '<leader>c', '<Cmd>Bdelete<CR>')              -- Close buffer
+vim.keymap.set("n", "<leader>o", "<cmd>Neotree toggle<cr>")
+vim.keymap.set("n", "<Tab>", "<Cmd>BufferLineCycleNext<CR>")      -- Next buffer
+vim.keymap.set("n", "<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>")    -- Previous buffer
+vim.keymap.set("n", "<leader>c", "<Cmd>Bdelete<CR>")              -- Close buffer
 
 vim.o.laststatus = 3  -- Set lualine width to 100%
 
