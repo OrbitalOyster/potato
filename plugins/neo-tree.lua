@@ -7,6 +7,21 @@ return {
       filtered_items = {
         visible = true             -- Don't hide anything
       }
-    }
-  }
+    },
+    default_component_configs = {
+      git_status = {
+        symbols = {
+          added = "+",
+          modified = "",
+          deleted = "D",
+          renamed = "󰁕",
+          untracked = "",
+          ignored = "",
+          unstaged = "󰄱",
+          staged = "",
+          conflict = "",
+        },
+      },
+    },
+  },
 }

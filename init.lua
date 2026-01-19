@@ -36,7 +36,7 @@ vim.keymap.set('n', '<Tab>', '<Cmd>BufferLineCycleNext<CR>')      -- Next buffer
 vim.keymap.set('n', '<S-Tab>', '<Cmd>BufferLineCyclePrev<CR>')    -- Previous buffer
 vim.keymap.set('n', '<leader>c', '<Cmd>Bdelete<CR>')              -- Close buffer
 
-vim.o.signcolumn = "yes:1"      -- Always show sign column
-vim.o.statuscolumn = "%l %s"    -- Line number, then sign
-
 require("config.lazy")
+
+vim.cmd("colorscheme catppuccin-frappe")
+vim.lsp.enable("ts_ls")
