@@ -16,10 +16,14 @@ vim.keymap.set("n", "<C-l>", "<C-w>l")
 vim.keymap.set("n", "<C-h>", "<C-w>h")
 vim.keymap.set("n", "<C-j>", "<C-w>j")
 vim.keymap.set("n", "<C-k>", "<C-w>k")
-
 vim.keymap.set('n', '<leader>o', '<cmd>Neotree toggle<cr>')
+vim.keymap.set('n', '<Tab>', '<Cmd>BufferLineCycleNext<CR>')      -- Next buffer
+vim.keymap.set('n', '<S-Tab>', '<Cmd>BufferLineCyclePrev<CR>')    -- Previous buffer
+vim.keymap.set('n', '<leader>c', '<Cmd>Bdelete<CR>')              -- Close buffer
 
-vim.diagnostic.config({         -- Funky diagnostic icons
+vim.o.laststatus = 3  -- Set lualine width to 100%
+
+vim.diagnostic.config({  -- Funky diagnostic icons
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = "",
@@ -30,13 +34,8 @@ vim.diagnostic.config({         -- Funky diagnostic icons
   },
 })
 
-vim.o.laststatus = 3        -- Set lualine width to 100%
+require("config.lazy") -- Load plugins
 
-vim.keymap.set('n', '<Tab>', '<Cmd>BufferLineCycleNext<CR>')      -- Next buffer
-vim.keymap.set('n', '<S-Tab>', '<Cmd>BufferLineCyclePrev<CR>')    -- Previous buffer
-vim.keymap.set('n', '<leader>c', '<Cmd>Bdelete<CR>')              -- Close buffer
+vim.cmd("colorscheme catppuccin-frappe") -- Set color theme
 
-vim.o.signcolumn = "yes:1"      -- Always show sign column
-vim.o.statuscolumn = "%l %s"    -- Line number, then sign
-
-require("config.lazy")
+vim.lsp.enable("ts_ls")  -- Enable LSP
