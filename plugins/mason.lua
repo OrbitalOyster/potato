@@ -3,3 +3,4 @@ return {
   build = ":MasonInstall typescript-language-server",
   opts = {}
 }
+
