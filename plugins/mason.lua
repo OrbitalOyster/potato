@@ -1,6 +1,6 @@
 return {
   "mason-org/mason.nvim",
-  build = ":MasonInstall typescript-language-server vue-language-server",
+  build = ":MasonInstall typescript-language-server vue-language-server eslint-lsp",
   opts = {}
 }
 
