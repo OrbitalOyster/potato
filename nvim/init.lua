@@ -36,7 +36,7 @@ vim.diagnostic.config({  -- Funky diagnostic icons
 })
 
 require("config.lazy") -- Load plugins
+require("lsp") -- Enable LSP
 
 vim.cmd("colorscheme catppuccin-frappe") -- Set color theme
 
-vim.lsp.enable("ts_ls")  -- Enable LSP
