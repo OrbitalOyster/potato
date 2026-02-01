@@ -1,3 +1,7 @@
+-- JSON
+vim.lsp.config('jsonls', {})
+vim.lsp.enable('jsonls')
+
 vim.lsp.enable('eslint')
 
 -- Vue + TS LSP from https://github.com/vuejs/language-tools/wiki/Neovim
